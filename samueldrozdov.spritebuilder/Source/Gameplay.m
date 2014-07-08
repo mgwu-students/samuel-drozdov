@@ -19,7 +19,7 @@
     CCLabelTTF *_timeLabel;
     int time;
     
-    CCNode* ball;
+    Ball *ball;
     
 }
 
@@ -51,17 +51,18 @@
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
     
-    time = 900;
-    
-    // loads the Ball.ccb we have set up in Spritebuilder
-    ball = [CCBReader load:@"Ball"];
-    // position the Ball in the screen
+    //spawns a ball randomly on the screen
+    ball = (Ball*)[CCBReader load:@"Ball"];
+    // find the size of the gameplay scene
     CGSize bbsize = [[UIScreen mainScreen] bounds].size;
-    NSLog(@"%f %f",bbsize.width*2,bbsize.height*2);
-    ball.position = ccp((bbsize.width * 2 * arc4random()),(bbsize.height * 2 * arc4random()));
-    // add the Ball to the Gameplay scene
+    // position the ball randomly in the gameplay scene
+    ball.position = ccp(arc4random_uniform(bbsize.width-70),arc4random_uniform(bbsize.height-70));
+    // add the ball to the Gameplay scene
     [self addChild:ball];
+    
+    time = 900;
 }
+
 
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
