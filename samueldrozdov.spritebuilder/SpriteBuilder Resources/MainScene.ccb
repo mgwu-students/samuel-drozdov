@@ -226,7 +226,7 @@
 						<string>Block</string>
 						<key>value</key>
 						<array>
-							<string>Play</string>
+							<string>play</string>
 							<integer>1</integer>
 						</array>
 					</dict>
@@ -481,6 +481,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

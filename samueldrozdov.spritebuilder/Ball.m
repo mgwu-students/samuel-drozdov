@@ -8,6 +8,8 @@
 
 #import "Ball.h"
 
-@implementation Ball
+@implementation Ball {
+    CCLabelTTF *_scoreLabel;
+}
 
 @end

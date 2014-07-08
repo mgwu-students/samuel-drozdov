@@ -8,6 +8,20 @@
 
 #import "MainScene.h"
 
-@implementation MainScene
+@implementation MainScene {
+    
+}
+
+// is called when CCB file has completed loading
+- (void)didLoadFromCCB {
+    // tell this scene to accept touches
+    self.userInteractionEnabled = TRUE;
+}
+
+//When the play button is clicked the Gameplay scene is loaded
+- (void)play {
+    CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
+    [[CCDirector sharedDirector] replaceScene:gameplayScene];
+}
 
 @end

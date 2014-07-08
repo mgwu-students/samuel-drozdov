@@ -10,4 +10,8 @@
 
 @interface Ball : CCNode
 
+@property (assign, nonatomic) int power;
+@property (assign, nonatomic) int direction;
+
+
 @end
