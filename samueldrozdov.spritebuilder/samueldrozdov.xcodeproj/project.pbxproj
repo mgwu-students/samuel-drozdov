@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		411074A4196C5A9F00BD7CE5 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074A3196C5A9F00BD7CE5 /* Gameplay.m */; };
-		411074A8196C5AB300BD7CE5 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074A7196C5AB300BD7CE5 /* Ball.m */; };
-		411074AB196C5AC300BD7CE5 /* Crosshair.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074AA196C5AC300BD7CE5 /* Crosshair.m */; };
-		411074B6196C623100BD7CE5 /* Recap.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074B5196C623100BD7CE5 /* Recap.m */; };
+		411074C2196C65DD00BD7CE5 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074BB196C65DD00BD7CE5 /* Ball.m */; };
+		411074C3196C65DD00BD7CE5 /* Crosshair.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074BD196C65DD00BD7CE5 /* Crosshair.m */; };
+		411074C4196C65DD00BD7CE5 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074BF196C65DD00BD7CE5 /* Gameplay.m */; };
+		411074C5196C65DD00BD7CE5 /* Recap.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074C1196C65DD00BD7CE5 /* Recap.m */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
@@ -60,14 +60,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		411074A2196C5A9F00BD7CE5 /* Gameplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gameplay.h; sourceTree = "<group>"; };
-		411074A3196C5A9F00BD7CE5 /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gameplay.m; sourceTree = "<group>"; };
-		411074A6196C5AB300BD7CE5 /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
-		411074A7196C5AB300BD7CE5 /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
-		411074A9196C5AC300BD7CE5 /* Crosshair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crosshair.h; sourceTree = "<group>"; };
-		411074AA196C5AC300BD7CE5 /* Crosshair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crosshair.m; sourceTree = "<group>"; };
-		411074B4196C623100BD7CE5 /* Recap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recap.h; sourceTree = "<group>"; };
-		411074B5196C623100BD7CE5 /* Recap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recap.m; sourceTree = "<group>"; };
+		411074BA196C65DD00BD7CE5 /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ball.h; path = Source/Ball.h; sourceTree = "<group>"; };
+		411074BB196C65DD00BD7CE5 /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Ball.m; path = Source/Ball.m; sourceTree = "<group>"; };
+		411074BC196C65DD00BD7CE5 /* Crosshair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Crosshair.h; path = Source/Crosshair.h; sourceTree = "<group>"; };
+		411074BD196C65DD00BD7CE5 /* Crosshair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Crosshair.m; path = Source/Crosshair.m; sourceTree = "<group>"; };
+		411074BE196C65DD00BD7CE5 /* Gameplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gameplay.h; path = Source/Gameplay.h; sourceTree = "<group>"; };
+		411074BF196C65DD00BD7CE5 /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gameplay.m; path = Source/Gameplay.m; sourceTree = "<group>"; };
+		411074C0196C65DD00BD7CE5 /* Recap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Recap.h; path = Source/Recap.h; sourceTree = "<group>"; };
+		411074C1196C65DD00BD7CE5 /* Recap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Recap.m; path = Source/Recap.m; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
@@ -137,18 +137,18 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				411074BA196C65DD00BD7CE5 /* Ball.h */,
+				411074BB196C65DD00BD7CE5 /* Ball.m */,
+				411074BC196C65DD00BD7CE5 /* Crosshair.h */,
+				411074BD196C65DD00BD7CE5 /* Crosshair.m */,
+				411074BE196C65DD00BD7CE5 /* Gameplay.h */,
+				411074BF196C65DD00BD7CE5 /* Gameplay.m */,
+				411074C0196C65DD00BD7CE5 /* Recap.h */,
+				411074C1196C65DD00BD7CE5 /* Recap.m */,
 				B737893D1807617C0076A88C /* AppDelegate.h */,
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
-				411074A2196C5A9F00BD7CE5 /* Gameplay.h */,
-				411074A3196C5A9F00BD7CE5 /* Gameplay.m */,
-				411074A6196C5AB300BD7CE5 /* Ball.h */,
-				411074A7196C5AB300BD7CE5 /* Ball.m */,
-				411074B4196C623100BD7CE5 /* Recap.h */,
-				411074B5196C623100BD7CE5 /* Recap.m */,
-				411074A9196C5AC300BD7CE5 /* Crosshair.h */,
-				411074AA196C5AC300BD7CE5 /* Crosshair.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -360,13 +360,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				411074A8196C5AB300BD7CE5 /* Ball.m in Sources */,
+				411074C2196C65DD00BD7CE5 /* Ball.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
-				411074A4196C5A9F00BD7CE5 /* Gameplay.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
-				411074B6196C623100BD7CE5 /* Recap.m in Sources */,
-				411074AB196C5AC300BD7CE5 /* Crosshair.m in Sources */,
+				411074C3196C65DD00BD7CE5 /* Crosshair.m in Sources */,
+				411074C5196C65DD00BD7CE5 /* Recap.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				411074C4196C65DD00BD7CE5 /* Gameplay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
