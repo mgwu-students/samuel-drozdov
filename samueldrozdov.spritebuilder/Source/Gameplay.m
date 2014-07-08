@@ -7,6 +7,7 @@
 //
 
 #import "Gameplay.h"
+#import "Ball.h"
 #import <CoreMotion/CoreMotion.h>
 
 @implementation Gameplay {
@@ -17,6 +18,9 @@
     
     CCLabelTTF *_timeLabel;
     int time;
+    
+    CCNode* ball;
+    
 }
 
 - (id)init
@@ -48,6 +52,15 @@
     self.userInteractionEnabled = TRUE;
     
     time = 900;
+    
+    // loads the Ball.ccb we have set up in Spritebuilder
+    ball = [CCBReader load:@"Ball"];
+    // position the Ball in the screen
+    CGSize bbsize = [[UIScreen mainScreen] bounds].size;
+    NSLog(@"%f %f",bbsize.width*2,bbsize.height*2);
+    ball.position = ccp((bbsize.width * 2 * arc4random()),(bbsize.height * 2 * arc4random()));
+    // add the Ball to the Gameplay scene
+    [self addChild:ball];
 }
 
 // called on every touch in this scene

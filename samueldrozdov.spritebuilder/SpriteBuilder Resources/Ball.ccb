@@ -56,7 +56,7 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>CCLabelTTF</string>
+						<string>ScoreLabel</string>
 						<key>memberVarAssignmentName</key>
 						<string>_scoreLabel</string>
 						<key>memberVarAssignmentType</key>
@@ -252,6 +252,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -351,16 +353,6 @@
 				<key>value</key>
 				<string>0</string>
 			</dict>
-			<dict>
-				<key>name</key>
-				<string>direction</string>
-				<key>optimized</key>
-				<false/>
-				<key>type</key>
-				<integer>0</integer>
-				<key>value</key>
-				<string>0</string>
-			</dict>
 		</array>
 		<key>displayName</key>
 		<string>CCNode</string>
@@ -430,8 +422,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
