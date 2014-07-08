@@ -30,6 +30,11 @@
 - (void)update:(CCTime)delta {
     time -= .1;
     _timeLabel.string = [NSString stringWithFormat:@"%d", time];
+    
+    if(time == 0) {
+        CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
+        [[CCDirector sharedDirector] replaceScene:recapScene];
+    }
 }
 
 @end

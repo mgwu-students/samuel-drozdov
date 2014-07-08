@@ -10,6 +10,13 @@
 
 @implementation Ball {
     CCLabelTTF *_scoreLabel;
+    int score;
+}
+
+// is called when CCB file has completed loading
+-(void)didLoadFromCCB {
+    score = 10;
+    _scoreLabel.string = [NSString stringWithFormat:@"%d", score];
 }
 
 @end
