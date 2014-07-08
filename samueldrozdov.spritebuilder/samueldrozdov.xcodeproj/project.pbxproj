@@ -11,6 +11,7 @@
 		411074C3196C65DD00BD7CE5 /* Crosshair.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074BD196C65DD00BD7CE5 /* Crosshair.m */; };
 		411074C4196C65DD00BD7CE5 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074BF196C65DD00BD7CE5 /* Gameplay.m */; };
 		411074C5196C65DD00BD7CE5 /* Recap.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074C1196C65DD00BD7CE5 /* Recap.m */; };
+		411074C7196C674500BD7CE5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411074C6196C674500BD7CE5 /* CoreMotion.framework */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
@@ -68,6 +69,7 @@
 		411074BF196C65DD00BD7CE5 /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gameplay.m; path = Source/Gameplay.m; sourceTree = "<group>"; };
 		411074C0196C65DD00BD7CE5 /* Recap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Recap.h; path = Source/Recap.h; sourceTree = "<group>"; };
 		411074C1196C65DD00BD7CE5 /* Recap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Recap.m; path = Source/Recap.m; sourceTree = "<group>"; };
+		411074C6196C674500BD7CE5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				411074C7196C674500BD7CE5 /* CoreMotion.framework in Frameworks */,
 				8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */,
 				B737898A1807642B0076A88C /* libcocos2d.a in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
@@ -205,6 +208,7 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				411074C6196C674500BD7CE5 /* CoreMotion.framework */,
 				8392007918EE8E3300B6C429 /* GLKit.framework */,
 				B7B3713D180358F1007369CC /* libObjectiveChipmunk.a */,
 				B77F1B3117B978D7009739AE /* QuartzCore.framework */,
