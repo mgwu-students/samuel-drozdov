@@ -91,11 +91,12 @@
     CGFloat newXPosition = crosshair.position.x + acceleration.x * 1000 * delta;
     CGFloat newYPosition = crosshair.position.y + acceleration.y * 1000 * delta;
     
-    newXPosition = clampf(newXPosition, 0, bbsize.width*2);
-    newYPosition = clampf(newYPosition, 0, bbsize.height*2);
+    newXPosition = clampf(newXPosition, 0, bbsize.width);
+    newYPosition = clampf(newYPosition, 0, bbsize.height);
     crosshair.position = CGPointMake(newXPosition, newYPosition);
     
     
+    // when time runs out the Recap scene is loaded
     if(time == 0) {
         CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
         [[CCDirector sharedDirector] replaceScene:recapScene];
