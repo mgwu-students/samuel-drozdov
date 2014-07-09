@@ -74,7 +74,13 @@
 
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    //
+    
+    // outcomes if the crosshair overlaps the ball when the scene is touched
+    if(CGRectContainsPoint(ball.boundingBox, crosshair.position)) {
+        NSLog(@"YAAS");
+    } else {
+        NSLog(@"NOO");
+    }
 }
 
 // updates that happen in time
