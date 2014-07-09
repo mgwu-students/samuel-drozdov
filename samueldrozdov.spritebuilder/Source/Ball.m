@@ -18,4 +18,8 @@
     _scoreLabel.string = [NSString stringWithFormat:@"%d", self.score];
 }
 
+-(void)updateScore {
+     _scoreLabel.string = [NSString stringWithFormat:@"%d", self.score];
+}
+
 @end

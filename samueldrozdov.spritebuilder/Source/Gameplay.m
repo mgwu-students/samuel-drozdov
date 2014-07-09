@@ -85,10 +85,11 @@
         int d1 = -1;//pos or neg for a random direction. make better
         int d2 = 1;
         [ball.physicsBody applyForce:ccp(12000*d1,12000*d2)];
+        
         ball.score++;
-        NSLog(@"YAAS");
+        [ball updateScore];
+        
     } else {
-        NSLog(@"NOO");
         // background turns red for a moment when the ball is not clicked
         CCColor *origColor = _background.color;
         _background.color = [CCColor redColor];

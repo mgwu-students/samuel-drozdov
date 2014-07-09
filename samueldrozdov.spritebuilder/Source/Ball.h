@@ -13,4 +13,6 @@
 @property (assign, nonatomic) int power;
 @property (assign, nonatomic) int score;
 
+-(void)updateScore;
+
 @end
