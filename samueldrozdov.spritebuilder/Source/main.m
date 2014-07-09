@@ -5,7 +5,7 @@
 //  Created by Viktor on 8/12/13.
 //  Copyright Apportable 2013. All rights reserved.
 //
-
+//Johnny rulez!!
 #import <UIKit/UIKit.h>
 
 int main(int argc, char *argv[]) {

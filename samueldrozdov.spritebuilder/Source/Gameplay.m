@@ -18,7 +18,7 @@
     
     // time variables
     CCLabelTTF *_timeLabel;
-    int time;
+    float time;
     
     // size of the bounding box
     CGSize bbsize;
@@ -41,6 +41,8 @@
         
         // find the size of the gameplay scene
         bbsize = [[UIScreen mainScreen] bounds].size;
+        
+        [self schedule:@selector(timer:) interval:0.5f];
     }
     return self;
 }
@@ -73,7 +75,7 @@
     
     
     ballRadius = 30;
-    time = 900;
+    time = 30;
 }
 
 
@@ -88,7 +90,7 @@
         
         ball.score++;
         [ball updateScore];
-        
+
     } else {
         // background turns red for a moment when the ball is not clicked
         CCColor *origColor = _background.color;
@@ -102,13 +104,8 @@
     //
 }
 
-// updates that happen in time
-- (void)update:(CCTime)delta {
-    
-    // updates the time counter
-    time -= .01;
-    _timeLabel.string = [NSString stringWithFormat:@"%d", time];
-    
+// updates that happen in 1/60th of a frame 
+-(void)update:(CCTime)delta {
     
     // accelerometer data to be updated
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
@@ -126,7 +123,13 @@
         CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
         [[CCDirector sharedDirector] replaceScene:recapScene];
     }
-    
+}
+
+// updates that happen every 1 second
+-(void)timer:(CCTime)delta {
+    // updates the time counter
+    time --;
+    _timeLabel.string = [NSString stringWithFormat:@"%d", (int)time];
 }
 
 @end
