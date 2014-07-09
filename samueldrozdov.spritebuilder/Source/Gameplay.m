@@ -20,6 +20,9 @@
     CCLabelTTF *_timeLabel;
     int time;
     
+    // size of the bounding box
+    CGSize bbsize;
+    
     // moving nodes
     Ball *ball;
     Crosshair *crosshair;
@@ -32,6 +35,9 @@
         crosshair = (Crosshair*)[CCBReader load:@"Crosshair"];
         [self addChild:crosshair z:5]; // high 'z' value so its visible and over the other nodes
         _motionManager = [[CMMotionManager alloc] init];
+        
+        // find the size of the gameplay scene
+        bbsize = [[UIScreen mainScreen] bounds].size;
     }
     return self;
 }
@@ -39,7 +45,7 @@
 - (void)onEnter
 {
     [super onEnter];
-    crosshair.position = ccp(self.contentSize.width/2, self.contentSize.height/2);
+    crosshair.position = ccp(bbsize.width, bbsize.height);
     [_motionManager startAccelerometerUpdates];
 }
 - (void)onExit
@@ -55,8 +61,6 @@
     
     //spawns a ball randomly on the screen
     ball = (Ball*)[CCBReader load:@"Ball"];
-    // find the size of the gameplay scene
-    CGSize bbsize = [[UIScreen mainScreen] bounds].size;
     // position the ball randomly in the gameplay scene
     ball.position = ccp(arc4random_uniform(bbsize.width - 70),arc4random_uniform(bbsize.height - 70));
     // add the ball to the Gameplay scene
@@ -84,10 +88,12 @@
     // accelerometer data to be updated
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = crosshair.position.x + acceleration.y * 1000 * delta;
+    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1000 * delta;
+    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1000 * delta;
     
-    newXPosition = clampf(newXPosition, 0, self.contentSize.width);
-    crosshair.position = CGPointMake(newXPosition, crosshair.position.y);
+    newXPosition = clampf(newXPosition, 0, bbsize.width*2);
+    newYPosition = clampf(newYPosition, 0, bbsize.height*2);
+    crosshair.position = CGPointMake(newXPosition, newYPosition);
     
     
     if(time == 0) {
