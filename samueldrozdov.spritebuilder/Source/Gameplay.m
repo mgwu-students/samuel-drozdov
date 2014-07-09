@@ -23,8 +23,11 @@
     // size of the bounding box
     CGSize bbsize;
     
-    // moving nodes
+    CCPhysicsNode *_physicsNode;
+    CCNode *_background;
+    
     Ball *ball;
+    int ballRadius;
     Crosshair *crosshair;
 }
 
@@ -33,7 +36,7 @@
     if (self = [super init])
     {
         crosshair = (Crosshair*)[CCBReader load:@"Crosshair"];
-        [self addChild:crosshair z:5]; // high 'z' value so its visible and over the other nodes
+        [self addChild:crosshair z:10]; // high 'z' value so its visible and over the other nodes
         _motionManager = [[CMMotionManager alloc] init];
         
         // find the size of the gameplay scene
@@ -45,7 +48,7 @@
 - (void)onEnter
 {
     [super onEnter];
-    crosshair.position = ccp(bbsize.width, bbsize.height);
+    crosshair.position = ccp(bbsize.width/2, bbsize.height/2);
     [_motionManager startAccelerometerUpdates];
 }
 - (void)onExit
@@ -62,14 +65,16 @@
     //spawns a ball randomly on the screen
     ball = (Ball*)[CCBReader load:@"Ball"];
     // position the ball randomly in the gameplay scene
-    ball.position = ccp(arc4random_uniform(bbsize.width - 70),arc4random_uniform(bbsize.height - 70));
-    // add the ball to the Gameplay scene
-    [self addChild:ball];
+    ball.position = ccp(arc4random_uniform(bbsize.width - 60),arc4random_uniform(bbsize.height - 60));
+    // add the ball to the Gameplay scene in the physicsNode
+    [_physicsNode addChild:ball];
     
-    time = 600;
+    [ball.physicsBody applyForce:ccp(12000,12000)];
+    
+    
+    ballRadius = 30;
+    time = 900;
 }
-
-
 
 
 // called on every touch in this scene
@@ -77,17 +82,30 @@
     
     // outcomes if the crosshair overlaps the ball when the scene is touched
     if(CGRectContainsPoint(ball.boundingBox, crosshair.position)) {
+        int d1 = -1;//pos or neg for a random direction. make better
+        int d2 = 1;
+        [ball.physicsBody applyForce:ccp(12000*d1,12000*d2)];
+        ball.score++;
         NSLog(@"YAAS");
     } else {
         NSLog(@"NOO");
+        // background turns red for a moment when the ball is not clicked
+        CCColor *origColor = _background.color;
+        _background.color = [CCColor redColor];
+        _background.color = origColor;
     }
+}
+
+// call at the end of every touch
+-(void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    //
 }
 
 // updates that happen in time
 - (void)update:(CCTime)delta {
     
     // updates the time counter
-    time -= .1;
+    time -= .01;
     _timeLabel.string = [NSString stringWithFormat:@"%d", time];
     
     
