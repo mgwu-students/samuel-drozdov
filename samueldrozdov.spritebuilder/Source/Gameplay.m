@@ -35,6 +35,7 @@
 {
     if (self = [super init])
     {
+        // sets up crosshair along with the accelerometer
         crosshair = (Crosshair*)[CCBReader load:@"Crosshair"];
         [self addChild:crosshair z:10]; // high 'z' value so its visible and over the other nodes
         _motionManager = [[CMMotionManager alloc] init];
@@ -42,6 +43,7 @@
         // find the size of the gameplay scene
         bbsize = [[UIScreen mainScreen] bounds].size;
         
+        // sets up the timer: method that updates every 1 second
         [self schedule:@selector(timer:) interval:0.5f];
     }
     return self;
@@ -64,15 +66,16 @@
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
     
-    //spawns a ball randomly on the screen
+    // spawns a ball randomly on the screen
     ball = (Ball*)[CCBReader load:@"Ball"];
-    // position the ball randomly in the gameplay scene
-    ball.position = ccp(arc4random_uniform(bbsize.width - 60),arc4random_uniform(bbsize.height - 60));
+    // position the ball randomly in the gameplay scene, makes sure it does not laod with part of the ball of the screen
+    ball.position = ccp(arc4random_uniform(bbsize.width - 60) + 30,
+                        arc4random_uniform(bbsize.height - 60) + 30);
     // add the ball to the Gameplay scene in the physicsNode
     [_physicsNode addChild:ball];
     
+    //initial force applied to ball
     [ball.physicsBody applyForce:ccp(12000,12000)];
-    
     
     ballRadius = 30;
     time = 30;
@@ -82,21 +85,24 @@
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     
-    // outcomes if the crosshair overlaps the ball when the scene is touched
-    if(CGRectContainsPoint(ball.boundingBox, crosshair.position)) {
-        int d1 = -1;//pos or neg for a random direction. make better
-        int d2 = 1;
-        [ball.physicsBody applyForce:ccp(12000*d1,12000*d2)];
+    int ballX = ball.position.x;
+    int ballY = ball.position.y;
+    int crosshairX = crosshair.position.x;
+    int crosshairY = crosshair.position.y;
+    // check if the ball contains the crosshair
+    if( powf(ballRadius, 2) >= powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2) ) {
+        
+        
+        [ball.physicsBody applyForce:ccp(12000,12000)];
+        
         
         ball.score++;
         [ball updateScore];
-
     } else {
-        // background turns red for a moment when the ball is not clicked
-        CCColor *origColor = _background.color;
-        _background.color = [CCColor redColor];
-        _background.color = origColor;
+        
     }
+     
+     
 }
 
 // call at the end of every touch
@@ -104,9 +110,8 @@
     //
 }
 
-// updates that happen in 1/60th of a frame 
+// updates that happen in 1/60th of a frame
 -(void)update:(CCTime)delta {
-    
     // accelerometer data to be updated
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
@@ -117,11 +122,14 @@
     newYPosition = clampf(newYPosition, 0, bbsize.height);
     crosshair.position = CGPointMake(newXPosition, newYPosition);
     
-    
     // when time runs out the Recap scene is loaded
     if(time == 0) {
         CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
         [[CCDirector sharedDirector] replaceScene:recapScene];
+    }
+    // counter turns red when it is close to running out
+    if(time <= 5) {
+        _timeLabel.color = [CCColor redColor];
     }
 }
 
