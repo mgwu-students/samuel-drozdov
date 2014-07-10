@@ -17,6 +17,7 @@
 		412A4394196F0150006D9EB8 /* Zen.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4393196F0150006D9EB8 /* Zen.m */; };
 		412A4397196F0181006D9EB8 /* Marathon.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4396196F0181006D9EB8 /* Marathon.m */; };
 		412A439A196F018D006D9EB8 /* Insanity.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4399196F018D006D9EB8 /* Insanity.m */; };
+		412A439E196F11AE006D9EB8 /* GameMechanics.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A439D196F11AE006D9EB8 /* GameMechanics.m */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
@@ -85,6 +86,8 @@
 		412A4396196F0181006D9EB8 /* Marathon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Marathon.m; path = Source/Marathon.m; sourceTree = "<group>"; };
 		412A4398196F018D006D9EB8 /* Insanity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Insanity.h; path = Source/Insanity.h; sourceTree = "<group>"; };
 		412A4399196F018D006D9EB8 /* Insanity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Insanity.m; path = Source/Insanity.m; sourceTree = "<group>"; };
+		412A439C196F11AE006D9EB8 /* GameMechanics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameMechanics.h; path = Source/GameMechanics.h; sourceTree = "<group>"; };
+		412A439D196F11AE006D9EB8 /* GameMechanics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameMechanics.m; path = Source/GameMechanics.m; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
@@ -176,6 +179,8 @@
 				411074BD196C65DD00BD7CE5 /* Crosshair.m */,
 				411074BE196C65DD00BD7CE5 /* Gameplay.h */,
 				411074BF196C65DD00BD7CE5 /* Gameplay.m */,
+				412A439C196F11AE006D9EB8 /* GameMechanics.h */,
+				412A439D196F11AE006D9EB8 /* GameMechanics.m */,
 				412A438C196F004D006D9EB8 /* GameModes.h */,
 				412A438D196F004D006D9EB8 /* GameModes.m */,
 				411074C0196C65DD00BD7CE5 /* Recap.h */,
@@ -400,6 +405,7 @@
 				412A4397196F0181006D9EB8 /* Marathon.m in Sources */,
 				412A438E196F004D006D9EB8 /* GameModes.m in Sources */,
 				411074C2196C65DD00BD7CE5 /* Ball.m in Sources */,
+				412A439E196F11AE006D9EB8 /* GameMechanics.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				411074C3196C65DD00BD7CE5 /* Crosshair.m in Sources */,

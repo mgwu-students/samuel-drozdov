@@ -20,8 +20,8 @@
 
 //When the play button is clicked the Gameplay scene is loaded
 - (void)play {
-    CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
-    [[CCDirector sharedDirector] replaceScene:gameplayScene];
+    CCScene *gameModesScene = [CCBReader loadAsScene:@"GameModes"];
+    [[CCDirector sharedDirector] replaceScene:gameModesScene];
 }
 
 @end

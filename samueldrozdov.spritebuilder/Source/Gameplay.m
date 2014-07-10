@@ -129,8 +129,6 @@
     } else {
         
     }
-     
-     
 }
 
 // call at the end of every touch
