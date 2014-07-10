@@ -11,6 +11,8 @@
 #import "Crosshair.h"
 #import <CoreMotion/CoreMotion.h>
 
+#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
+
 @implementation Gameplay {
     
     // motion manager (cannot make more than one)
@@ -91,8 +93,10 @@
     int crosshairY = crosshair.position.y;
     // check if the ball contains the crosshair
     if( powf(ballRadius, 2) >= powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2) ) {
-        
-        
+        // gets a positive angle in degrees
+        float hitAngle = ((int)RADIANS_TO_DEGREES(atan2f(crosshairY - ballY,
+                                                         ballX - crosshairX) + 360)) % 360;
+        NSLog(@"%f", hitAngle);
         [ball.physicsBody applyForce:ccp(12000,12000)];
         
         
@@ -126,9 +130,7 @@
     if(time == 0) {
         CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
         [[CCDirector sharedDirector] replaceScene:recapScene];
-    }
-    // counter turns red when it is close to running out
-    if(time <= 5) {
+    } else if(time <= 5) { // counter turns red when it is close to running out
         _timeLabel.color = [CCColor redColor];
     }
 }
