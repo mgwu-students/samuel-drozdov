@@ -7,7 +7,7 @@
 //
 
 #import "Recap.h"
-#import "Ball.h"
+#import "GameMechanics.h"
 
 @implementation Recap {
     CCLabelTTF *_finalScoreLabel;
@@ -18,12 +18,12 @@
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
     
-    //_finalScoreLabel.string = [NSString stringWithFormat:@"%d", score];
+    _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];
 }
 
 //When the restart button is clicked the Gameplay scene is loaded
 - (void)restart {
-    CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
+    CCScene *gameplayScene = [CCBReader loadAsScene:@"GameModes"];
     [[CCDirector sharedDirector] replaceScene:gameplayScene];
 }
 

@@ -77,7 +77,12 @@
     
     ballRadius = 30;
     start = false;
+    
     [GameMechanics sharedInstance].time = 0;
+    [GameMechanics sharedInstance].score = 10;
+    ball.score = 10;
+    [ball updateScore];
+    _timeLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].time];
 }
 
 // called on every touch in this scene
@@ -117,8 +122,9 @@
         [ball.physicsBody applyImpulse:ccp(xDirection * (power * 40 + 50),
                                            yDirection * (power * 40 + 50))];
         
-        // increases and updates the score on the ball
-        ball.score++;
+        // decrease and updates the score on the ball
+        ball.score--;
+        [GameMechanics sharedInstance].score --;
         [ball updateScore];
     } else {
         
@@ -138,12 +144,12 @@
     newYPosition = clampf(newYPosition, 0, bbsize.height);
     crosshair.position = CGPointMake(newXPosition, newYPosition);
     
-    // when time runs out the Recap scene is loaded
-    if([GameMechanics sharedInstance].time == 0) {
+    // when score gets to 0 the round ends
+    if(ball.score == 0) {
+        // time is 'score' for recap
+        [GameMechanics sharedInstance].score = [GameMechanics sharedInstance].time;
         CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
         [[CCDirector sharedDirector] replaceScene:recapScene];
-    } else if([GameMechanics sharedInstance].time <= 5) { // counter turns red when at 5 seconds
-        _timeLabel.color = [CCColor redColor];
     }
 }
 
@@ -151,7 +157,7 @@
 -(void)timer:(CCTime)delta {
     // updates the time counter
     if(start) {
-        [GameMechanics sharedInstance].time--;
+        [GameMechanics sharedInstance].time++;
     }
     
     _timeLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].time];

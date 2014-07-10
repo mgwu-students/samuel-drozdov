@@ -77,9 +77,11 @@
     //initial force applied to ball
     //[ball.physicsBody applyForce:ccp(110000,11000)];
     
+    [GameMechanics sharedInstance].time = 30;
+    [GameMechanics sharedInstance].score = 0;
+    
     ballRadius = 30;
     start = false;
-    [GameMechanics sharedInstance].time = 30;
 }
 
 // called on every touch in this scene
@@ -119,8 +121,9 @@
         [ball.physicsBody applyImpulse:ccp(xDirection * (power * 40 + 50),
                                            yDirection * (power * 40 + 50))];
         
-        // increases and updates the score on the ball
+        // increases and updates the score
         ball.score++;
+        [GameMechanics sharedInstance].score++;
         [ball updateScore];
     } else {
         
@@ -141,7 +144,7 @@
     crosshair.position = CGPointMake(newXPosition, newYPosition);
     
     // when time runs out the Recap scene is loaded
-    if(time == 0) {
+    if([GameMechanics sharedInstance].time == 0) {
         CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
         [[CCDirector sharedDirector] replaceScene:recapScene];
     } else if([GameMechanics sharedInstance].time <= 5) { // counter turns red when at 5 seconds
