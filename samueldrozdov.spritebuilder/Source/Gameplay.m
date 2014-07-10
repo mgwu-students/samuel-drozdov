@@ -99,7 +99,8 @@
                                                          ballX - crosshairX) + 360)) % 360;
         // hitting the ball further from the center applies more force
         int power = ((int)distFromBallCenter / 100) + 1;
-        //[ball.physicsBody applyForce:ccp(power * 100 + 100, power * 100 + 100)]
+        [ball.physicsBody applyImpulse:ccp(power * 50 + 100, power * 50 + 100)];
+        //[ball.physicsBody applyForce:<#(CGPoint)#> atWorldPoint:<#(CGPoint)#>]
         NSLog(@"%d", power);
         
         
@@ -127,8 +128,8 @@
     // accelerometer data to be updated
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1000 * delta;
-    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1000 * delta;
+    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1100 * delta;
+    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1100 * delta;
     
     newXPosition = clampf(newXPosition, 0, bbsize.width);
     newYPosition = clampf(newYPosition, 0, bbsize.height);
