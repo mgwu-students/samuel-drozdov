@@ -47,7 +47,7 @@
         bbsize = [[UIScreen mainScreen] bounds].size;
         
         // sets up the timer: method that updates every 1 second
-        [self schedule:@selector(timer:) interval:0.5f];
+        [self schedule:@selector(timer:) interval:1.0f];
     }
     return self;
 }
@@ -105,7 +105,21 @@
         int power = ((int)distFromBallCenter / 100) + 1;
         if(power > 5) power = 5; //power does not exceed 5
         
-        [ball.physicsBody applyImpulse:ccp(power * 40 + 50, power * 40 + 50)];
+        // ball moves in direction depending on where it is hit
+        int xDirection = 1;
+        int yDirection = 1;
+        if(hitAngle >= 90 && hitAngle < 180) {
+            yDirection = -1;
+        } else if(hitAngle >= 180 && hitAngle <= 180) {
+            yDirection = -1;
+            xDirection = -1;
+        } else if(hitAngle >= 270 && hitAngle < 360) {
+            xDirection = -1;
+        }
+        
+        
+        [ball.physicsBody applyImpulse:ccp(xDirection * (power * 40 + 50),
+                                           yDirection * (power * 40 + 50))];
 
         // increases and updates the score on the ball
         ball.score++;
