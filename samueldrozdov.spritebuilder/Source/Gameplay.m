@@ -77,7 +77,7 @@
     [_physicsNode addChild:ball];
     
     //initial force applied to ball
-    [ball.physicsBody applyForce:ccp(12000,12000)];
+    //[ball.physicsBody applyForce:ccp(110000,11000)];
     
     ballRadius = 30;
     time = 30;
@@ -91,13 +91,21 @@
     int ballY = ball.position.y;
     int crosshairX = crosshair.position.x;
     int crosshairY = crosshair.position.y;
+    float distFromBallCenter = powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2);
     // check if the ball contains the crosshair
-    if( powf(ballRadius, 2) >= powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2) ) {
+    if( powf(ballRadius, 2) >= distFromBallCenter) {
         // gets a positive angle in degrees
         float hitAngle = ((int)RADIANS_TO_DEGREES(atan2f(crosshairY - ballY,
                                                          ballX - crosshairX) + 360)) % 360;
-        NSLog(@"%f", hitAngle);
-        [ball.physicsBody applyForce:ccp(12000,12000)];
+        // hitting the ball further from the center applies more force
+        int power = ((int)distFromBallCenter / 100) + 1;
+        //[ball.physicsBody applyForce:ccp(power * 100 + 100, power * 100 + 100)]
+        NSLog(@"%d", power);
+        
+        
+        
+        
+        //[ball.physicsBody applyForce:ccp(12000,12000)];
         
         
         ball.score++;
