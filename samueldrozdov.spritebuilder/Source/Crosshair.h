@@ -10,4 +10,5 @@
 
 @interface Crosshair : CCNode
 
+
 @end

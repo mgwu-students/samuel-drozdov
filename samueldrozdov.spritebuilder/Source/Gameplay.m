@@ -108,6 +108,7 @@
         // ball moves in direction depending on where it is hit
         int xDirection = 0;
         int yDirection = 0;
+            //**this works for now but it should be better and use the angle
         if(hitAngle > 85 && hitAngle < 265) {
             yDirection = -1;
         } else if(hitAngle < 85 || hitAngle > 275) {
@@ -121,7 +122,7 @@
         
         [ball.physicsBody applyImpulse:ccp(xDirection * (power * 40 + 50),
                                            yDirection * (power * 40 + 50))];
-
+        
         // increases and updates the score on the ball
         ball.score++;
         [ball updateScore];
@@ -164,6 +165,7 @@
     if(start) {
         time--;
     }
+    
     _timeLabel.string = [NSString stringWithFormat:@"%d", (int)time];
 }
 
