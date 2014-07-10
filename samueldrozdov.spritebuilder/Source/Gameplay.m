@@ -106,17 +106,18 @@
         if(power > 5) power = 5; //power does not exceed 5
         
         // ball moves in direction depending on where it is hit
-        int xDirection = 1;
-        int yDirection = 1;
-        if(hitAngle >= 90 && hitAngle < 180) {
+        int xDirection = 0;
+        int yDirection = 0;
+        if(hitAngle > 85 && hitAngle < 265) {
             yDirection = -1;
-        } else if(hitAngle >= 180 && hitAngle <= 180) {
-            yDirection = -1;
-            xDirection = -1;
-        } else if(hitAngle >= 270 && hitAngle < 360) {
-            xDirection = -1;
+        } else if(hitAngle < 85 || hitAngle > 275) {
+            yDirection = 1;
         }
-        
+        if(hitAngle > 185 && hitAngle < 355) {
+            xDirection = -1;
+        } else if(hitAngle > 5 || hitAngle < 175) {
+            xDirection = 1;
+        }
         
         [ball.physicsBody applyImpulse:ccp(xDirection * (power * 40 + 50),
                                            yDirection * (power * 40 + 50))];
