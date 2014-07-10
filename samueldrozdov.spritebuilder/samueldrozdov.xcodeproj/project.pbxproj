@@ -12,6 +12,11 @@
 		411074C4196C65DD00BD7CE5 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074BF196C65DD00BD7CE5 /* Gameplay.m */; };
 		411074C5196C65DD00BD7CE5 /* Recap.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074C1196C65DD00BD7CE5 /* Recap.m */; };
 		411074C7196C674500BD7CE5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411074C6196C674500BD7CE5 /* CoreMotion.framework */; };
+		412A438E196F004D006D9EB8 /* GameModes.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A438D196F004D006D9EB8 /* GameModes.m */; };
+		412A4391196F0141006D9EB8 /* Classic.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4390196F0141006D9EB8 /* Classic.m */; };
+		412A4394196F0150006D9EB8 /* Zen.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4393196F0150006D9EB8 /* Zen.m */; };
+		412A4397196F0181006D9EB8 /* Marathon.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4396196F0181006D9EB8 /* Marathon.m */; };
+		412A439A196F018D006D9EB8 /* Insanity.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4399196F018D006D9EB8 /* Insanity.m */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
@@ -70,6 +75,16 @@
 		411074C0196C65DD00BD7CE5 /* Recap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Recap.h; path = Source/Recap.h; sourceTree = "<group>"; };
 		411074C1196C65DD00BD7CE5 /* Recap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Recap.m; path = Source/Recap.m; sourceTree = "<group>"; };
 		411074C6196C674500BD7CE5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		412A438C196F004D006D9EB8 /* GameModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameModes.h; path = Source/GameModes.h; sourceTree = "<group>"; };
+		412A438D196F004D006D9EB8 /* GameModes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameModes.m; path = Source/GameModes.m; sourceTree = "<group>"; };
+		412A438F196F0141006D9EB8 /* Classic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Classic.h; path = Source/Classic.h; sourceTree = "<group>"; };
+		412A4390196F0141006D9EB8 /* Classic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Classic.m; path = Source/Classic.m; sourceTree = "<group>"; };
+		412A4392196F0150006D9EB8 /* Zen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Zen.h; path = Source/Zen.h; sourceTree = "<group>"; };
+		412A4393196F0150006D9EB8 /* Zen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Zen.m; path = Source/Zen.m; sourceTree = "<group>"; };
+		412A4395196F0181006D9EB8 /* Marathon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Marathon.h; path = Source/Marathon.h; sourceTree = "<group>"; };
+		412A4396196F0181006D9EB8 /* Marathon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Marathon.m; path = Source/Marathon.m; sourceTree = "<group>"; };
+		412A4398196F018D006D9EB8 /* Insanity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Insanity.h; path = Source/Insanity.h; sourceTree = "<group>"; };
+		412A4399196F018D006D9EB8 /* Insanity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Insanity.m; path = Source/Insanity.m; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
@@ -129,6 +144,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		412A439B196F019D006D9EB8 /* Game Modes */ = {
+			isa = PBXGroup;
+			children = (
+				412A438F196F0141006D9EB8 /* Classic.h */,
+				412A4390196F0141006D9EB8 /* Classic.m */,
+				412A4392196F0150006D9EB8 /* Zen.h */,
+				412A4393196F0150006D9EB8 /* Zen.m */,
+				412A4395196F0181006D9EB8 /* Marathon.h */,
+				412A4396196F0181006D9EB8 /* Marathon.m */,
+				412A4398196F018D006D9EB8 /* Insanity.h */,
+				412A4399196F018D006D9EB8 /* Insanity.m */,
+			);
+			name = "Game Modes";
+			sourceTree = "<group>";
+		};
 		9222E2B918734FF800A246C7 /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,12 +176,15 @@
 				411074BD196C65DD00BD7CE5 /* Crosshair.m */,
 				411074BE196C65DD00BD7CE5 /* Gameplay.h */,
 				411074BF196C65DD00BD7CE5 /* Gameplay.m */,
+				412A438C196F004D006D9EB8 /* GameModes.h */,
+				412A438D196F004D006D9EB8 /* GameModes.m */,
 				411074C0196C65DD00BD7CE5 /* Recap.h */,
 				411074C1196C65DD00BD7CE5 /* Recap.m */,
 				B737893D1807617C0076A88C /* AppDelegate.h */,
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
+				412A439B196F019D006D9EB8 /* Game Modes */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -364,12 +397,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				412A4397196F0181006D9EB8 /* Marathon.m in Sources */,
+				412A438E196F004D006D9EB8 /* GameModes.m in Sources */,
 				411074C2196C65DD00BD7CE5 /* Ball.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				411074C3196C65DD00BD7CE5 /* Crosshair.m in Sources */,
 				411074C5196C65DD00BD7CE5 /* Recap.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				412A439A196F018D006D9EB8 /* Insanity.m in Sources */,
+				412A4394196F0150006D9EB8 /* Zen.m in Sources */,
+				412A4391196F0141006D9EB8 /* Classic.m in Sources */,
 				411074C4196C65DD00BD7CE5 /* Gameplay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
