@@ -18,7 +18,7 @@
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
     
-    //_finalScoreLabel.string = [NSString stringWithFormat:@"%d", ball.score];
+    //_finalScoreLabel.string = [NSString stringWithFormat:@"%d", score];
 }
 
 //When the restart button is clicked the Gameplay scene is loaded

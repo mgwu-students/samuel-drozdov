@@ -21,6 +21,7 @@
     // time variables
     CCLabelTTF *_timeLabel;
     float time;
+    bool start;
     
     // size of the bounding box
     CGSize bbsize;
@@ -80,6 +81,7 @@
     //[ball.physicsBody applyForce:ccp(110000,11000)];
     
     ballRadius = 30;
+    start = false;
     time = 30;
 }
 
@@ -94,21 +96,18 @@
     float distFromBallCenter = powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2);
     // check if the ball contains the crosshair
     if( powf(ballRadius, 2) >= distFromBallCenter) {
+        // starts the timer;
+        start = true;
         // gets a positive angle in degrees
         float hitAngle = ((int)RADIANS_TO_DEGREES(atan2f(crosshairY - ballY,
                                                          ballX - crosshairX) + 360)) % 360;
         // hitting the ball further from the center applies more force
         int power = ((int)distFromBallCenter / 100) + 1;
-        [ball.physicsBody applyImpulse:ccp(power * 50 + 100, power * 50 + 100)];
-        //[ball.physicsBody applyForce:<#(CGPoint)#> atWorldPoint:<#(CGPoint)#>]
-        NSLog(@"%d", power);
+        if(power > 5) power = 5; //power does not exceed 5
         
-        
-        
-        
-        //[ball.physicsBody applyForce:ccp(12000,12000)];
-        
-        
+        [ball.physicsBody applyImpulse:ccp(power * 40 + 50, power * 40 + 50)];
+
+        // increases and updates the score on the ball
         ball.score++;
         [ball updateScore];
     } else {
@@ -128,8 +127,8 @@
     // accelerometer data to be updated
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1100 * delta;
-    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1100 * delta;
+    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1200 * delta;
+    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1200 * delta;
     
     newXPosition = clampf(newXPosition, 0, bbsize.width);
     newYPosition = clampf(newYPosition, 0, bbsize.height);
@@ -147,7 +146,9 @@
 // updates that happen every 1 second
 -(void)timer:(CCTime)delta {
     // updates the time counter
-    time --;
+    if(start) {
+        time--;
+    }
     _timeLabel.string = [NSString stringWithFormat:@"%d", (int)time];
 }
 
