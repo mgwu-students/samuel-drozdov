@@ -22,4 +22,14 @@
     [[CCDirector sharedDirector] replaceScene:gameModesScene];
 }
 
+//When the highScores button is clicked the Scores scene is loaded
+- (void)highScores {
+    CCScene *scoresScene = [CCBReader loadAsScene:@"HighScores"];
+    [[CCDirector sharedDirector] replaceScene:scoresScene];
+}
+
+//When the play button is clicked the Gameplay scene is loaded
+- (void)setting {
+}
+
 @end
