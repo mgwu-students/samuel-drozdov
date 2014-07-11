@@ -119,8 +119,8 @@
             xDirection = 1;
         }
         
-        [ball.physicsBody applyImpulse:ccp(xDirection * (power * 40 + 50),
-                                           yDirection * (power * 40 + 50))];
+        [ball.physicsBody applyImpulse:ccp(xDirection * (power * 20 + 50),
+                                           yDirection * (power * 20 + 50))];
         
         // decrease and updates the score on the ball
         ball.score--;
@@ -137,8 +137,8 @@
     CMAccelerometerData *accelerometerData = [GameMechanics
                                               sharedInstance].motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1200 * delta;
-    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1200 * delta;
+    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1300 * delta;
+    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1300 * delta;
     
     newXPosition = clampf(newXPosition, 0, bbsize.width);
     newYPosition = clampf(newYPosition, 0, bbsize.height);

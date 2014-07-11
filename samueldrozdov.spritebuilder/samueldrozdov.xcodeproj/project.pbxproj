@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		411074C2196C65DD00BD7CE5 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074BB196C65DD00BD7CE5 /* Ball.m */; };
 		411074C3196C65DD00BD7CE5 /* Crosshair.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074BD196C65DD00BD7CE5 /* Crosshair.m */; };
-		411074C4196C65DD00BD7CE5 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074BF196C65DD00BD7CE5 /* Gameplay.m */; };
 		411074C5196C65DD00BD7CE5 /* Recap.m in Sources */ = {isa = PBXBuildFile; fileRef = 411074C1196C65DD00BD7CE5 /* Recap.m */; };
 		411074C7196C674500BD7CE5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411074C6196C674500BD7CE5 /* CoreMotion.framework */; };
 		412A438E196F004D006D9EB8 /* GameModes.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A438D196F004D006D9EB8 /* GameModes.m */; };
@@ -71,8 +70,6 @@
 		411074BB196C65DD00BD7CE5 /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Ball.m; path = Source/Ball.m; sourceTree = "<group>"; };
 		411074BC196C65DD00BD7CE5 /* Crosshair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Crosshair.h; path = Source/Crosshair.h; sourceTree = "<group>"; };
 		411074BD196C65DD00BD7CE5 /* Crosshair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Crosshair.m; path = Source/Crosshair.m; sourceTree = "<group>"; };
-		411074BE196C65DD00BD7CE5 /* Gameplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gameplay.h; path = Source/Gameplay.h; sourceTree = "<group>"; };
-		411074BF196C65DD00BD7CE5 /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gameplay.m; path = Source/Gameplay.m; sourceTree = "<group>"; };
 		411074C0196C65DD00BD7CE5 /* Recap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Recap.h; path = Source/Recap.h; sourceTree = "<group>"; };
 		411074C1196C65DD00BD7CE5 /* Recap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Recap.m; path = Source/Recap.m; sourceTree = "<group>"; };
 		411074C6196C674500BD7CE5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -177,8 +174,6 @@
 				411074BB196C65DD00BD7CE5 /* Ball.m */,
 				411074BC196C65DD00BD7CE5 /* Crosshair.h */,
 				411074BD196C65DD00BD7CE5 /* Crosshair.m */,
-				411074BE196C65DD00BD7CE5 /* Gameplay.h */,
-				411074BF196C65DD00BD7CE5 /* Gameplay.m */,
 				412A439C196F11AE006D9EB8 /* GameMechanics.h */,
 				412A439D196F11AE006D9EB8 /* GameMechanics.m */,
 				412A438C196F004D006D9EB8 /* GameModes.h */,
@@ -414,7 +409,6 @@
 				412A439A196F018D006D9EB8 /* Insanity.m in Sources */,
 				412A4394196F0150006D9EB8 /* Zen.m in Sources */,
 				412A4391196F0141006D9EB8 /* Classic.m in Sources */,
-				411074C4196C65DD00BD7CE5 /* Gameplay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

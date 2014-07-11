@@ -76,7 +76,6 @@
     //[ball.physicsBody applyForce:ccp(110000,11000)];
     
     [GameMechanics sharedInstance].time = 0;
-    [GameMechanics sharedInstance].score = 0;
     
     ballRadius = 30;
     start = false;
@@ -116,8 +115,8 @@
             xDirection = 1;
         }
         
-        [ball.physicsBody applyImpulse:ccp(xDirection * (power * 40 + 50),
-                                           yDirection * (power * 40 + 50))];
+        [ball.physicsBody applyImpulse:ccp(xDirection * (power * 20 + 50),
+                                           yDirection * (power * 20 + 50))];
         
         // increases and updates the score on the ball
         ball.score++;
@@ -135,8 +134,8 @@
     CMAccelerometerData *accelerometerData = [GameMechanics
                                               sharedInstance].motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1200 * delta;
-    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1200 * delta;
+    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1300 * delta;
+    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1300 * delta;
     
     newXPosition = clampf(newXPosition, 0, bbsize.width);
     newYPosition = clampf(newYPosition, 0, bbsize.height);
@@ -145,12 +144,7 @@
 
 // updates that happen every 1 second
 -(void)timer:(CCTime)delta {
-    // updates the time counter
-    if(start) {
-        //[GameMechanics sharedInstance].time++;
-    }
-    
-    _timeLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].time];
+
 }
 
 @end
