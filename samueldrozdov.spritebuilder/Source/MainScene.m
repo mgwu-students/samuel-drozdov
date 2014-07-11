@@ -8,9 +8,7 @@
 
 #import "MainScene.h"
 
-@implementation MainScene {
-    
-}
+@implementation MainScene
 
 // is called when CCB file has completed loading
 - (void)didLoadFromCCB {

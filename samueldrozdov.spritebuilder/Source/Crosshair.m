@@ -8,13 +8,6 @@
 
 #import "Crosshair.h"
 
-@implementation Crosshair {
-    
-}
-
-// is called when CCB file has completed loading
--(void)didLoadFromCCB {
-
-}
+@implementation Crosshair 
 
 @end

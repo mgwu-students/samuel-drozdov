@@ -103,17 +103,11 @@
     if( powf(ballRadius, 2) >= distFromBallCenter) {
         // starts the timer;
         start = true;
-        /* gets a positive angle in degrees
-        float hitAngle = ((int)RADIANS_TO_DEGREES(atan2f(crosshairY - ballY,
-                                                         ballX - crosshairX) + 360)) % 360;
-        */
-        
         
         // hitting the ball further from the center applies more force
         int power = ((int)distFromBallCenter / 100) + 5;
         if((int)distFromBallCenter / 100 <= 4) power = 4;
         else if(power > 9) power = 9; //power does not exceed 9
-        
         [ball.physicsBody applyImpulse:ccp((ballX-crosshairX)*power,(ballY-crosshairY)*power)];
         
         // decrease and updates the score on the ball

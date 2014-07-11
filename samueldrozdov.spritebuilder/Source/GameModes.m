@@ -28,7 +28,6 @@
     [[CCDirector sharedDirector] replaceScene:marathonScene];
 }
 
-
 ///INSANITY Mode is going to have to be unlocked by getting gold medals on all levels
 ////When the play button is clicked the Insanity scene is loaded
 - (void)insanity {
