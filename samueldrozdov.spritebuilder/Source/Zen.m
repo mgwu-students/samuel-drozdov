@@ -25,6 +25,7 @@
     CGSize bbsize;
     
     CCPhysicsNode *_physicsNode;
+    CCLabelTTF *_instructionLabel;
     CCNode *_background;
     
     Ball *ball;
@@ -86,6 +87,7 @@
 
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    _instructionLabel.visible = false;
     
     int ballX = ball.position.x;
     int ballY = ball.position.y;
