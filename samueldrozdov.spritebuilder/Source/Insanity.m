@@ -7,6 +7,7 @@
 //
 
 #import "Insanity.h"
+
 #import <CoreMotion/CoreMotion.h>
 #import "GameMechanics.h"
 #import "Ball.h"
@@ -25,6 +26,11 @@
     CCPhysicsNode *_physicsNode;
     CCLabelTTF *_instructionLabel;
     CCNode *_background;
+    
+    CCNode *_leftWall;
+    CCNode *_rightWall;
+    CCNode *_topWall;
+    CCNode *_bottomWall;
     
     Ball *ball;
     int ballRadius;
@@ -171,6 +177,11 @@
     
     _background.color = [CCColor colorWithRed:(random()%100)/(float)100 green:(random()%100)/(float)100 blue:(random()%100)/(float)100 alpha:1];
     ball.color = [CCColor colorWithRed:(random()%100)/(float)100 green:(random()%100)/(float)100 blue:(random()%100)/(float)100 alpha:1];
+    
+    _leftWall.color = [CCColor colorWithRed:(random()%100)/(float)100 green:(random()%100)/(float)100 blue:(random()%100)/(float)100 alpha:1];
+    _rightWall.color = [CCColor colorWithRed:(random()%100)/(float)100 green:(random()%100)/(float)100 blue:(random()%100)/(float)100 alpha:1];
+    _topWall.color = [CCColor colorWithRed:(random()%100)/(float)100 green:(random()%100)/(float)100 blue:(random()%100)/(float)100 alpha:1];
+    _bottomWall.color = [CCColor colorWithRed:(random()%100)/(float)100 green:(random()%100)/(float)100 blue:(random()%100)/(float)100 alpha:1];
 }
 
 @end

@@ -135,7 +135,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>90</real>
+									<real>95</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -454,8 +454,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

@@ -57,6 +57,14 @@
     return YES;
 }
 
+
+// I added this to make sure the orientation is always portrait up
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationPortrait;
+}
+
+
 - (CCScene*) startScene
 {
     return [CCBReader loadAsScene:@"MainScene"];

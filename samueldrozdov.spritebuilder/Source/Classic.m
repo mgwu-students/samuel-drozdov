@@ -7,6 +7,7 @@
 //
 
 #import "Classic.h"
+
 #import <CoreMotion/CoreMotion.h>
 #import "GameMechanics.h"
 #import "Ball.h"
@@ -127,7 +128,7 @@
         
         // decrease and updates the score on the ball
         ball.score--;
-        [GameMechanics sharedInstance].score --;
+        [GameMechanics sharedInstance].score--;
         [ball updateScore];
     } else {
         
