@@ -22,9 +22,14 @@
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
 
+- (void)onEnter
+{
+    [super onEnter];
+    [self updateScores];
+}
 
 -(void)updateScores {
-    _classicScore.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].classicScore];
+    _classicScore.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicScore];
     _zenScore.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].zenScore];
     _marathonScore.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].marathonScore];
     _insanityScore.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].insanityScore];

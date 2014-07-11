@@ -24,7 +24,7 @@ static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
 @property (nonatomic, assign) float classicTime;
 
 @property (nonatomic, assign) bool highScoreSet;
-@property (nonatomic, assign) int classicScore;
+@property (nonatomic, assign) float classicScore;
 @property (nonatomic, assign) int zenScore;
 @property (nonatomic, assign) int marathonScore;
 @property (nonatomic, assign) int insanityScore;
