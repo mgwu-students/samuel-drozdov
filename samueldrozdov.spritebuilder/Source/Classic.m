@@ -43,8 +43,8 @@
         // find the size of the gameplay scene
         bbsize = [[UIScreen mainScreen] bounds].size;
         
-        // sets up the timer: method that updates every 1 second
-        [self schedule:@selector(timer:) interval:1.0f];
+        // sets up the timer: method that updates every 0.01 second
+        [self schedule:@selector(timer:) interval:0.01f];
     }
     return self;
 }
@@ -78,7 +78,7 @@
     start = false;
     
     // reset shared counters
-    [GameMechanics sharedInstance].time = 0;
+    [GameMechanics sharedInstance].classicTime = 0;
     [GameMechanics sharedInstance].score = 10;
     [GameMechanics sharedInstance].previousGameMode = @"GameModes/Classic";
     
@@ -150,20 +150,21 @@
     // when score gets to 0 the round ends
     if(ball.score == 0) {
         // time is 'score' for recap
-        [GameMechanics sharedInstance].score = [GameMechanics sharedInstance].time;
+        [GameMechanics sharedInstance].score = [GameMechanics sharedInstance].classicTime;
         CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
         [[CCDirector sharedDirector] replaceScene:recapScene];
     }
 }
 
-// updates that happen every 1 second
+// updates that happen every 0.01 second
 -(void)timer:(CCTime)delta {
     // updates the time counter
     if(start) {
-        [GameMechanics sharedInstance].time++;
+        [GameMechanics sharedInstance].classicTime += 0.01;
     }
     
-    _timeLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].time];
+    _timeLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
 }
+
 
 @end

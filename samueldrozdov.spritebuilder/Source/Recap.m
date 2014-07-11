@@ -18,7 +18,13 @@
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
     
-    _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];
+    if([[GameMechanics sharedInstance].previousGameMode  isEqual: @"GameModes/Classic"]) {
+        NSLog(@"classic");
+        _finalScoreLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
+    } else {
+        _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];
+    }
+    
 }
 
 //When the restart button is clicked the same Game Mode scene is loaded
