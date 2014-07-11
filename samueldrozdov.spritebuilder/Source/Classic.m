@@ -88,6 +88,8 @@
     _timeLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].time];
 }
 
+#pragma mark - Touch Updates
+
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     _instructionLabel.visible = false;
@@ -101,30 +103,18 @@
     if( powf(ballRadius, 2) >= distFromBallCenter) {
         // starts the timer;
         start = true;
-        // gets a positive angle in degrees
+        /* gets a positive angle in degrees
         float hitAngle = ((int)RADIANS_TO_DEGREES(atan2f(crosshairY - ballY,
                                                          ballX - crosshairX) + 360)) % 360;
+        */
+        
+        
         // hitting the ball further from the center applies more force
-        int power = ((int)distFromBallCenter / 100) + 1;
-        if(power > 5) power = 5; //power does not exceed 5
+        int power = ((int)distFromBallCenter / 100) + 5;
+        if((int)distFromBallCenter / 100 <= 4) power = 4;
+        else if(power > 9) power = 9; //power does not exceed 9
         
-        // ball moves in direction depending on where it is hit
-        int xDirection = 0;
-        int yDirection = 0;
-        //**this works for now but it should be better and use the angle
-        if(hitAngle > 92 && hitAngle < 268) {
-            yDirection = -1;
-        } else if((hitAngle < 88 && hitAngle > 2) || (hitAngle > 272 && hitAngle < 358)) {
-            yDirection = 1;
-        }
-        if(hitAngle > 182 && hitAngle < 358) {
-            xDirection = -1;
-        } else if(hitAngle > 2 && hitAngle < 178) {
-            xDirection = 1;
-        }
-        
-        [ball.physicsBody applyImpulse:ccp(xDirection * (power * 20 + 50),
-                                           yDirection * (power * 20 + 50))];
+        [ball.physicsBody applyImpulse:ccp((ballX-crosshairX)*power,(ballY-crosshairY)*power)];
         
         // decrease and updates the score on the ball
         ball.score--;
@@ -134,6 +124,8 @@
         
     }
 }
+
+#pragma mark - Time Updates
 
 // updates that happen in 1/60th of a frame
 -(void)update:(CCTime)delta {
