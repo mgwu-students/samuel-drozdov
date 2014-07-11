@@ -67,6 +67,8 @@
     
     // spawns a ball randomly on the screen
     ball = (Ball*)[CCBReader load:@"Ball"];
+    // elasticity is set to one so it does not slow down
+    ball.physicsBody.elasticity = 1;
     // position the ball randomly in the gameplay scene, makes sure it does not laod with part of the ball of the screen
     ball.position = ccp(arc4random_uniform(bbsize.width - 60) + 30,
                         arc4random_uniform(bbsize.height - 60) + 30);
@@ -100,7 +102,7 @@
                                                          ballX - crosshairX) + 360)) % 360;
         // hitting the ball further from the center applies more force
         int power = ((int)distFromBallCenter / 100) + 1;
-        if(power > 5) power = 5; //power does not exceed 5
+        if(power > 3) power = 3; //power does not exceed 4
         
         // ball moves in direction depending on where it is hit
         int xDirection = 0;
