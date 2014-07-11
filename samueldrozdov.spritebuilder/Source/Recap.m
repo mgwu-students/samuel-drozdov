@@ -15,6 +15,17 @@
     CCLabelTTF *_newHighScore;
 }
 
+- (void)onEnter
+{
+    [super onEnter];
+
+}
+- (void)onExit
+{
+    [super onExit];
+    [GameMechanics sharedInstance].highScoreSet = false;
+}
+
 // is called when CCB file has completed loading
 -(void)didLoadFromCCB {
     // tell this scene to accept touches
@@ -31,7 +42,6 @@
     if([GameMechanics sharedInstance].highScoreSet) {
         _newHighScore.visible = true;
     }
-    [GameMechanics sharedInstance].highScoreSet = false;
 }
 
 //When the restart button is clicked the same Game Mode scene is loaded

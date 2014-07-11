@@ -137,11 +137,11 @@
     // when score gets to 0 the round ends
     if(ball.score == 0) {
         // time is 'score' for recap
-        [GameMechanics sharedInstance].score = [GameMechanics sharedInstance].classicTime;
+        float scoreHolder = [GameMechanics sharedInstance].classicTime;
         // update high score 
-        if([GameMechanics sharedInstance].score > [GameMechanics sharedInstance].classicScore) {
+        if(scoreHolder < [GameMechanics sharedInstance].classicScore) {
             [GameMechanics sharedInstance].highScoreSet = true;
-            [GameMechanics sharedInstance].classicScore = [GameMechanics sharedInstance].score;
+            [GameMechanics sharedInstance].classicScore = scoreHolder;
         }
         CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
         [[CCDirector sharedDirector] replaceScene:recapScene];

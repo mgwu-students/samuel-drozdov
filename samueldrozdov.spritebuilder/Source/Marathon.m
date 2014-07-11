@@ -112,7 +112,7 @@
         // update high score
         if([GameMechanics sharedInstance].score > [GameMechanics sharedInstance].classicScore) {
             [GameMechanics sharedInstance].highScoreSet = true;
-            [GameMechanics sharedInstance].classicScore = [GameMechanics sharedInstance].score;
+            [GameMechanics sharedInstance].marathonScore = [GameMechanics sharedInstance].score;
         }
         CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
         [[CCDirector sharedDirector] replaceScene:recapScene];
