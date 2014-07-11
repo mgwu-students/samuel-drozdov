@@ -116,6 +116,11 @@
         [GameMechanics sharedInstance].score++;
         [ball updateScore];
     } else {
+        // update high score
+        if([GameMechanics sharedInstance].score > [GameMechanics sharedInstance].classicScore) {
+            [GameMechanics sharedInstance].highScoreSet = true;
+            [GameMechanics sharedInstance].classicScore = [GameMechanics sharedInstance].score;
+        }
         CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
         [[CCDirector sharedDirector] replaceScene:recapScene];
     }
@@ -138,6 +143,11 @@
     
     // when time runs out the Recap scene is loaded
     if([GameMechanics sharedInstance].time == 0) {
+        // update high score
+        if([GameMechanics sharedInstance].score > [GameMechanics sharedInstance].classicScore) {
+            [GameMechanics sharedInstance].highScoreSet = true;
+            [GameMechanics sharedInstance].classicScore = [GameMechanics sharedInstance].score;
+        }
         CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
         [[CCDirector sharedDirector] replaceScene:recapScene];
     } else if([GameMechanics sharedInstance].time <= 5) { // counter turns red when at 5 seconds

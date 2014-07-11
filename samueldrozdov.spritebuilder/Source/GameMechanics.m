@@ -29,6 +29,12 @@ static GameMechanics *sharedInstance = nil;
     if (self = [super init])
     {
         _motionManager = [[CMMotionManager alloc] init];
+        
+        self.highScoreSet = false;
+        self.classicScore = 0;
+        self.zenScore = 0;
+        self.marathonScore = 0;
+        self.insanityScore = 0;
     }
     return self;
 }

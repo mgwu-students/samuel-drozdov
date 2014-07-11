@@ -8,15 +8,18 @@
 
 #import "Recap.h"
 #import "GameMechanics.h"
+#import "HighScores.h"
 
 @implementation Recap {
     CCLabelTTF *_finalScoreLabel;
+    CCLabelTTF *_newHighScore;
 }
 
 // is called when CCB file has completed loading
 -(void)didLoadFromCCB {
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
+    _newHighScore.visible = false;
     
     if([[GameMechanics sharedInstance].previousGameMode  isEqual: @"GameModes/Classic"]) {
         NSLog(@"classic");
@@ -25,6 +28,10 @@
         _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];
     }
     
+    if([GameMechanics sharedInstance].highScoreSet) {
+        _newHighScore.visible = true;
+    }
+    [GameMechanics sharedInstance].highScoreSet = false;
 }
 
 //When the restart button is clicked the same Game Mode scene is loaded

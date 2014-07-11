@@ -29,7 +29,7 @@
 }
 
 //When the play button is clicked the Gameplay scene is loaded
-- (void)setting {
+- (void)settings {
 }
 
 @end

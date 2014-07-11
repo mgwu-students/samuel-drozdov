@@ -7,6 +7,7 @@
 //
 
 #import "HighScores.h"
+#import "GameMechanics.h"
 
 @implementation HighScores {
     CCLabelTTF *_classicScore;
@@ -19,6 +20,14 @@
 - (void)back {
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
+}
+
+
+-(void)updateScores {
+    _classicScore.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].classicScore];
+    _zenScore.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].zenScore];
+    _marathonScore.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].marathonScore];
+    _insanityScore.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].insanityScore];
 }
 
 @end
