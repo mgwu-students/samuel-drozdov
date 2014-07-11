@@ -108,14 +108,14 @@
         int xDirection = 0;
         int yDirection = 0;
         //**this works for now but it should be better and use the angle
-        if(hitAngle > 85 && hitAngle < 265) {
+        if(hitAngle > 92 && hitAngle < 268) {
             yDirection = -1;
-        } else if(hitAngle < 85 || hitAngle > 275) {
+        } else if((hitAngle < 88 && hitAngle > 2) || (hitAngle > 272 && hitAngle < 358)) {
             yDirection = 1;
         }
-        if(hitAngle > 185 && hitAngle < 355) {
+        if(hitAngle > 182 && hitAngle < 358) {
             xDirection = -1;
-        } else if(hitAngle > 5 || hitAngle < 175) {
+        } else if(hitAngle > 2 && hitAngle < 178) {
             xDirection = 1;
         }
         
