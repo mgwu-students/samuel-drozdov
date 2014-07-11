@@ -17,6 +17,7 @@ static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
 + (instancetype)sharedInstance;
 
 @property (nonatomic, strong) CMMotionManager *motionManager;
+@property (nonatomic, assign) NSString *previousGameMode;
 @property (nonatomic, assign) NSInteger score;
 @property (nonatomic, assign) NSInteger time;
 @property (nonatomic, assign) NSString *gameMode;

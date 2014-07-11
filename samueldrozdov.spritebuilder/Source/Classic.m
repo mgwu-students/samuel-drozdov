@@ -74,14 +74,14 @@
     // add the ball to the Gameplay scene in the physicsNode
     [_physicsNode addChild:ball];
     
-    //initial force applied to ball
-    //[ball.physicsBody applyForce:ccp(110000,11000)];
-    
     ballRadius = 30;
     start = false;
     
+    // reset shared counters
     [GameMechanics sharedInstance].time = 0;
     [GameMechanics sharedInstance].score = 10;
+    [GameMechanics sharedInstance].previousGameMode = @"GameModes/Classic";
+    
     ball.score = 10;
     [ball updateScore];
     _timeLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].time];

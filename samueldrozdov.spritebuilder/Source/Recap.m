@@ -21,9 +21,9 @@
     _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];
 }
 
-//When the restart button is clicked the Gameplay scene is loaded
+//When the restart button is clicked the same Game Mode scene is loaded
 - (void)restart {
-    CCScene *gameplayScene = [CCBReader loadAsScene:@"GameModes"];
+    CCScene *gameplayScene = [CCBReader loadAsScene:[GameMechanics sharedInstance].previousGameMode];
     [[CCDirector sharedDirector] replaceScene:gameplayScene];
 }
 

@@ -75,11 +75,10 @@
     // add the ball to the Gameplay scene in the physicsNode
     [_physicsNode addChild:ball];
     
-    //initial force applied to ball
-    //[ball.physicsBody applyForce:ccp(110000,11000)];
-    
+    // reset shared counters
     [GameMechanics sharedInstance].time = 30;
     [GameMechanics sharedInstance].score = 0;
+    [GameMechanics sharedInstance].previousGameMode = @"GameModes/Zen";
     
     ballRadius = 30;
     start = false;
