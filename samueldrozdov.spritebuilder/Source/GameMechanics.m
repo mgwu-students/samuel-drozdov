@@ -39,6 +39,7 @@ static GameMechanics *sharedInstance = nil;
     return self;
 }
 
+
 #pragma mark - Setter Override
 
 //- (void)setScore:(NSInteger)score {

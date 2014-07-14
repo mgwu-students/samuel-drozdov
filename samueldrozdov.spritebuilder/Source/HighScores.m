@@ -29,10 +29,10 @@
 }
 
 -(void)updateScores {
-    _classicScore.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicScore];
-    _zenScore.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].zenScore];
-    _marathonScore.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].marathonScore];
-    _insanityScore.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].insanityScore];
+    _classicScore.string = [NSString stringWithFormat:@"%.2lf", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"]).floatValue];
+    _zenScore.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ZenHighScore"]).intValue];
+    _marathonScore.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).intValue];
+    _insanityScore.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"InsanityHighScore"]).intValue];
 }
 
 @end

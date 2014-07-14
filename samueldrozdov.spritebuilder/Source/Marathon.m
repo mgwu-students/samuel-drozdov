@@ -23,6 +23,8 @@
     
     CCPhysicsNode *_physicsNode;
     CCLabelTTF *_instructionLabel;
+    CCLabelTTF *_instructionLabel2;
+    CCLabelTTF *_instructionScoreLabel;
     CCNode *_background;
     
     Ball *ball;
@@ -81,6 +83,8 @@
     
     ballRadius = 30;
     start = false;
+    
+    _instructionScoreLabel.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).intValue];
 }
 
 #pragma mark - Touch Events
@@ -88,6 +92,8 @@
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     _instructionLabel.visible = false;
+    _instructionLabel2.visible = false;
+    _instructionScoreLabel = false;
     
     int ballX = ball.position.x;
     int ballY = ball.position.y;
@@ -118,13 +124,7 @@
         [GameMechanics sharedInstance].score++;
         [ball updateScore];
     } else {
-        // update high score
-        if([GameMechanics sharedInstance].score > [GameMechanics sharedInstance].classicScore) {
-            [GameMechanics sharedInstance].highScoreSet = true;
-            [GameMechanics sharedInstance].marathonScore = [GameMechanics sharedInstance].score;
-        }
-        CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
-        [[CCDirector sharedDirector] replaceScene:recapScene];
+        [self endGame];
     }
 }
 
@@ -147,6 +147,19 @@
 // updates that happen every 1 second
 -(void)timer:(CCTime)delta {
 
+}
+
+-(void)endGame {
+    NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"];
+    if(highScore.intValue < [GameMechanics sharedInstance].score) {
+        // new highscore!
+        [GameMechanics sharedInstance].highScoreSet = true;
+        highScore = [NSNumber numberWithInt:[GameMechanics sharedInstance].score];
+        [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"MarathonHighScore"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
+    [[CCDirector sharedDirector] replaceScene:recapScene];
 }
 
 @end

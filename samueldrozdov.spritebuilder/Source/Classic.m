@@ -25,6 +25,8 @@
     
     CCPhysicsNode *_physicsNode;
     CCLabelTTF *_instructionLabel;
+    CCLabelTTF *_instructionLabel2;
+    CCLabelTTF *_instructionScoreLabel;
     CCNode *_background;
     
     
@@ -86,6 +88,8 @@
     ball.score = 10;
     [ball updateScore];
     _timeLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].time];
+    
+    _instructionScoreLabel.string = [NSString stringWithFormat:@"%.2lf", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"]).floatValue];
 }
 
 #pragma mark - Touch Updates
@@ -93,6 +97,8 @@
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     _instructionLabel.visible = false;
+    _instructionLabel2.visible = false;
+    _instructionScoreLabel = false;
     
     int ballX = ball.position.x;
     int ballY = ball.position.y;
@@ -145,15 +151,7 @@
     
     // when score gets to 0 the round ends
     if(ball.score == 0) {
-        // time is 'score' for recap
-        float scoreHolder = [GameMechanics sharedInstance].classicTime;
-        // update high score, high score is lowest time
-        if(scoreHolder < [GameMechanics sharedInstance].classicScore) {
-            [GameMechanics sharedInstance].highScoreSet = true;
-            [GameMechanics sharedInstance].classicScore = scoreHolder;
-        }
-        CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
-        [[CCDirector sharedDirector] replaceScene:recapScene];
+        [self endGame];
     }
 }
 
@@ -165,6 +163,20 @@
     }
     
     _timeLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
+}
+
+
+-(void)endGame {
+    NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"];
+    if(highScore.floatValue > [GameMechanics sharedInstance].classicTime) {
+        // new highscore!
+        [GameMechanics sharedInstance].highScoreSet = true;
+        highScore = [NSNumber numberWithFloat:[GameMechanics sharedInstance].classicTime];
+        [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"ClassicHighScore"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
+    [[CCDirector sharedDirector] replaceScene:recapScene];
 }
 
 

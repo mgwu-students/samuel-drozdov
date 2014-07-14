@@ -30,16 +30,16 @@
 -(void)didLoadFromCCB {
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
-    _newHighScore.visible = false;
+    _newHighScore.visible = NO;
     
-    if([[GameMechanics sharedInstance].previousGameMode  isEqual: @"GameModes/Classic"]) {
+    if([[GameMechanics sharedInstance].previousGameMode isEqual: @"GameModes/Classic"]) {
         _finalScoreLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
     } else { //next line was changed to %ld (long), check if this works!
-        _finalScoreLabel.string = [NSString stringWithFormat:@"%ld", (long)[GameMechanics sharedInstance].score];
+        _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];
     }
     
     if([GameMechanics sharedInstance].highScoreSet) {
-        _newHighScore.visible = true;
+        _newHighScore.visible = YES;
     }
 }
 
