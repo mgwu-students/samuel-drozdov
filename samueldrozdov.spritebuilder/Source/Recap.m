@@ -34,8 +34,8 @@
     
     if([[GameMechanics sharedInstance].previousGameMode  isEqual: @"GameModes/Classic"]) {
         _finalScoreLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
-    } else {
-        _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];
+    } else { //next line was changed to %ld (long), check if this works!
+        _finalScoreLabel.string = [NSString stringWithFormat:@"%ld", (long)[GameMechanics sharedInstance].score];
     }
     
     if([GameMechanics sharedInstance].highScoreSet) {

@@ -104,6 +104,13 @@
         // starts the timer;
         start = true;
         
+        // load particle effect
+        CCParticleSystem *hit = (CCParticleSystem *)[CCBReader load:@"Hit"];
+        // make the particle effect clean itself up, once it is completed
+        hit.autoRemoveOnFinish = TRUE;
+        // place the particle effect on the seals position
+        hit.position = ball.position;
+        
         // hitting the ball further from the center applies more force
         int power = ((int)distFromBallCenter / 100) + 5;
         if((int)distFromBallCenter / 100 <= 4) power = 4;
@@ -138,7 +145,7 @@
     if(ball.score == 0) {
         // time is 'score' for recap
         float scoreHolder = [GameMechanics sharedInstance].classicTime;
-        // update high score 
+        // update high score, high score is lowest time
         if(scoreHolder < [GameMechanics sharedInstance].classicScore) {
             [GameMechanics sharedInstance].highScoreSet = true;
             [GameMechanics sharedInstance].classicScore = scoreHolder;
