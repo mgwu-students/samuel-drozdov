@@ -98,6 +98,15 @@
     if( powf(ballRadius, 2) >= distFromBallCenter) {
         // starts the timer;
         start = true;
+        
+        // load particle effect
+        CCParticleSystem *hit = (CCParticleSystem *)[CCBReader load:@"Hit"];
+        // make the particle effect clean itself up, once it is completed
+        hit.autoRemoveOnFinish = TRUE;
+        // place the particle effect on the balls position
+        hit.position = ball.position;
+        // add the particle effect to the same node the ball is on
+        [ball.parent addChild:hit z:-1];
 
         // hitting the ball further from the center applies more force
         int power = ((int)distFromBallCenter / 100) + 5;
