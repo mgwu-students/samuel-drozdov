@@ -271,7 +271,7 @@
 						<string>String</string>
 						<key>value</key>
 						<array>
-							<string>ORBIS</string>
+							<string>Tilt 'n Shoot</string>
 							<false/>
 						</array>
 					</dict>
@@ -354,7 +354,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Futura-Medium</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -363,7 +363,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>32</real>
+							<real>20</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -680,7 +680,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Futura-Medium</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1006,7 +1006,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Futura-Medium</string>
 					</dict>
 					<dict>
 						<key>name</key>

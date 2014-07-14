@@ -98,7 +98,7 @@
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     _instructionLabel.visible = false;
     _instructionLabel2.visible = false;
-    _instructionScoreLabel = false;
+    _instructionScoreLabel.visible = false;
     
     int ballX = ball.position.x;
     int ballY = ball.position.y;

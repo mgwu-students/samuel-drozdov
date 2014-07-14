@@ -100,7 +100,7 @@
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     _instructionLabel.visible = false;
     _instructionLabel2.visible = false;
-    _instructionScoreLabel = false;
+    _instructionScoreLabel.visible = false;
     
     int ballX = ball.position.x;
     int ballY = ball.position.y;
@@ -131,13 +131,7 @@
         [GameMechanics sharedInstance].score++;
         [ball updateScore];
     } else {
-        // update high score
-        if([GameMechanics sharedInstance].score > [GameMechanics sharedInstance].classicScore) {
-            [GameMechanics sharedInstance].highScoreSet = true;
-            [GameMechanics sharedInstance].insanityScore = [GameMechanics sharedInstance].score;
-        }
-        CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
-        [[CCDirector sharedDirector] replaceScene:recapScene];
+        [self endGame];
     }
 }
 
