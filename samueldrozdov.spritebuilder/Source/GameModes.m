@@ -10,6 +10,12 @@
 
 @implementation GameModes
 
+//When the back button is clicked the MainScene scene is loaded
+- (void)back {
+    CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
+    [[CCDirector sharedDirector] replaceScene:mainScene];
+}
+
 //When the play button is clicked the Classic scene is loaded
 - (void)classic {
     CCScene *classicScene = [CCBReader loadAsScene:@"GameModes/Classic"];
