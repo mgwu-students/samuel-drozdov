@@ -130,7 +130,7 @@
         [GameMechanics sharedInstance].score--;
         [ball updateScore];
     } else {
-        
+        //changed
     }
 }
 
