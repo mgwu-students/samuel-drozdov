@@ -140,7 +140,7 @@
     CGFloat newYPosition = crosshair.position.y + acceleration.y * 1300 * delta;
     
     newXPosition = clampf(newXPosition, 0, bbsize.width);
-    newYPosition = clampf(newYPosition, 0, bbsize.height);
+    newYPosition = 7 + clampf(newYPosition, 0, bbsize.height);
     crosshair.position = CGPointMake(newXPosition, newYPosition);
 }
 
@@ -154,7 +154,7 @@
     if(highScore.intValue < [GameMechanics sharedInstance].score) {
         // new highscore!
         [GameMechanics sharedInstance].highScoreSet = true;
-        highScore = [NSNumber numberWithInt:[GameMechanics sharedInstance].score];
+        highScore = [NSNumber numberWithInt:(int)[GameMechanics sharedInstance].score];
         [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"MarathonHighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }

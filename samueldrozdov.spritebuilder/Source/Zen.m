@@ -141,7 +141,7 @@
     CGFloat newYPosition = crosshair.position.y + acceleration.y * 1300 * delta;
     
     newXPosition = clampf(newXPosition, 0, bbsize.width);
-    newYPosition = clampf(newYPosition, 0, bbsize.height);
+    newYPosition = 7 + clampf(newYPosition, 0, bbsize.height);
     crosshair.position = CGPointMake(newXPosition, newYPosition);
     
     // when time runs out the Recap scene is loaded

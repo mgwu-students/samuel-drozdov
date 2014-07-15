@@ -83,7 +83,7 @@
     int marathonScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).intValue;
     int insanityScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"InsanityHighScore"]).intValue;
     
-    if(classicScore < 10) {
+    if(classicScore < 12) {
         _classicBronze.visible = true;
     } if(classicScore < 20) {
         _classicSilver.visible = true;

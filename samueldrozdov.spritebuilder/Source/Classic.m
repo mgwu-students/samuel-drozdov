@@ -29,6 +29,7 @@
     CCLabelTTF *_instructionScoreLabel;
     CCNode *_background;
     
+    float calibration;
     
     Ball *ball;
     int ballRadius;
@@ -48,6 +49,8 @@
         
         // sets up the timer: method that updates every 0.01 second
         [self schedule:@selector(timer:) interval:0.01f];
+        
+        calibration = 0;
     }
     return self;
 }
@@ -138,16 +141,7 @@
 
 // updates that happen in 1/60th of a frame
 -(void)update:(CCTime)delta {
-    // accelerometer data to be updated
-    CMAccelerometerData *accelerometerData = [GameMechanics
-                                              sharedInstance].motionManager.accelerometerData;
-    CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
-    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
     
-    newXPosition = clampf(newXPosition, 0, bbsize.width);
-    newYPosition = 9 + clampf(newYPosition, 0, bbsize.height);
-    crosshair.position = CGPointMake(newXPosition, newYPosition);
     
     // when score gets to 0 the round ends
     if(ball.score == 0) {
@@ -157,6 +151,17 @@
 
 // updates that happen every 0.01 second
 -(void)timer:(CCTime)delta {
+    // accelerometer data to be updated
+    CMAccelerometerData *accelerometerData = [GameMechanics
+                                              sharedInstance].motionManager.accelerometerData;
+    CMAcceleration acceleration = accelerometerData.acceleration;
+    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
+    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
+    
+    newXPosition = clampf(newXPosition, 0, bbsize.width);
+    newYPosition = 7 + clampf(newYPosition, 0, bbsize.height);
+    crosshair.position = CGPointMake(newXPosition, newYPosition);
+    
     // updates the time counter
     if(start) {
         [GameMechanics sharedInstance].classicTime += 0.01;
@@ -164,7 +169,6 @@
     
     _timeLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
 }
-
 
 -(void)endGame {
     NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"];
