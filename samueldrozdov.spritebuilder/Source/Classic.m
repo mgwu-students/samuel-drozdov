@@ -131,6 +131,7 @@
         [ball updateScore];
     } else {
         //changed
+        //changed again
     }
 }
 
