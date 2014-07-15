@@ -142,11 +142,11 @@
     CMAccelerometerData *accelerometerData = [GameMechanics
                                               sharedInstance].motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1300 * delta;
-    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1300 * delta;
+    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
+    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
     
     newXPosition = clampf(newXPosition, 0, bbsize.width);
-    newYPosition = clampf(newYPosition, 0, bbsize.height);
+    newYPosition = 9 + clampf(newYPosition, 0, bbsize.height);
     crosshair.position = CGPointMake(newXPosition, newYPosition);
     
     // when score gets to 0 the round ends

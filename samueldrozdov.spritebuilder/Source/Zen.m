@@ -159,7 +159,7 @@
         [GameMechanics sharedInstance].time--;
     }
     
-    _timeLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].time];
+    _timeLabel.string = [NSString stringWithFormat:@"%ld", (long)[GameMechanics sharedInstance].time];
 }
 
 -(void)endGame {
@@ -167,7 +167,7 @@
     if(highScore.intValue < [GameMechanics sharedInstance].score) {
         // new highscore!
         [GameMechanics sharedInstance].highScoreSet = true;
-        highScore = [NSNumber numberWithInt:[GameMechanics sharedInstance].score];
+        highScore = [NSNumber numberWithInt:(int)[GameMechanics sharedInstance].score];
         [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"ZenHighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
