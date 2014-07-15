@@ -31,7 +31,23 @@
 
 -(id)init {
     if(self = [super init]) {
-
+        // classic medals
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"cB"];
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"cS"];
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"cG"];
+        // zen medals
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"zB"];
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"zS"];
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"zG"];
+        // marathon medals
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"mB"];
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"mS"];
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"mG"];
+        // insanity medals
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"iB"];
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"iS"];
+        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"iG"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     return self;
 }
@@ -45,18 +61,18 @@
 - (void)onEnter
 {
     [super onEnter];
-    _classicBronze.visible = false;
-    _classicSilver.visible = false;
-    _classicGold.visible = false;
-    _marathonBronze.visible = false;
-    _marathonSilver.visible = false;
-    _marathonGold.visible = false;
-    _zenBronze.visible = false;
-    _zenSilver.visible = false;
-    _zenGold.visible = false;
-    _insanityBronze.visible = false;
-    _insanitySilver.visible = false;
-    _insanityGold.visible = false;
+    _classicBronze.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"cB"];
+    _classicSilver.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"cB"];
+    _classicGold.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"cB"];
+    _marathonBronze.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"mB"];
+    _marathonSilver.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"mS"];
+    _marathonGold.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"mG"];
+    _zenBronze.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"zB"];
+    _zenSilver.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"zS"];
+    _zenGold.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"zG"];
+    _insanityBronze.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"iB"];
+    _insanitySilver.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"iS"];
+    _insanityGold.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"iG"];
     [self checkMedals];
     [self updateScores];
 }
@@ -72,7 +88,7 @@
     } if(classicScore < 20) {
         _classicSilver.visible = true;
     } if(classicScore < 30) {
-        _classicGold.visible = true;
+            _classicGold.visible = true;
     }
     
     if(marathonScore > 10) {

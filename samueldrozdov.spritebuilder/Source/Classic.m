@@ -87,7 +87,7 @@
     
     ball.score = 10;
     [ball updateScore];
-    _timeLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].time];
+    _timeLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
     
     _instructionScoreLabel.string = [NSString stringWithFormat:@"%.2lf", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"]).floatValue];
 }
