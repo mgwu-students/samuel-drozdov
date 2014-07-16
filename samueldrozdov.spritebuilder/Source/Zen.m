@@ -8,11 +8,11 @@
 
 #import "Zen.h"
 
-#import "Classic.h"
 #import <CoreMotion/CoreMotion.h>
 #import "GameMechanics.h"
 #import "Ball.h"
 #import "Crosshair.h"
+#import "PauseScreen.h"
 
 @implementation Zen {
     // time variables
@@ -92,6 +92,10 @@
     _instructionLabel2.visible = false;
     _instructionScoreLabel.visible = false;
     
+    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*2/3) {
+        [self pause];
+    }
+    
     int ballX = ball.position.x;
     int ballY = ball.position.y;
     int crosshairX = crosshair.position.x;
@@ -138,16 +142,18 @@
 
 // updates that happen in 1/60th of a frame
 -(void)update:(CCTime)delta {
-    // accelerometer data to be updated
-    CMAccelerometerData *accelerometerData = [GameMechanics
+    if(![GameMechanics sharedInstance].paused) {
+        // accelerometer data to be updated
+        CMAccelerometerData *accelerometerData = [GameMechanics
                                               sharedInstance].motionManager.accelerometerData;
-    CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
-    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
+        CMAcceleration acceleration = accelerometerData.acceleration;
+        CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
+        CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
     
-    newXPosition = clampf(newXPosition, 0, bbsize.width);
-    newYPosition = 8 + clampf(newYPosition, 0, bbsize.height);
-    crosshair.position = CGPointMake(newXPosition, newYPosition);
+        newXPosition = clampf(newXPosition, 0, bbsize.width);
+        newYPosition = 8 + clampf(newYPosition, 0, bbsize.height);
+        crosshair.position = CGPointMake(newXPosition, newYPosition);
+    }
     
     // when time runs out the Recap scene is loaded
     if([GameMechanics sharedInstance].time == 0) {
@@ -155,17 +161,52 @@
     } else if([GameMechanics sharedInstance].time <= 5) { // counter turns red when at 5 seconds
         _timeLabel.color = [CCColor redColor];
     }
+    
+    if(start && ![GameMechanics sharedInstance].paused) {
+        [self continueGame];
+    }
 }
 
 // updates that happen every 1 second
 -(void)timer:(CCTime)delta {
     // updates the time counter
-    if(start) {
+    if(start && ![GameMechanics sharedInstance].paused) {
         [GameMechanics sharedInstance].time--;
     }
     
     _timeLabel.string = [NSString stringWithFormat:@"%ld", (long)[GameMechanics sharedInstance].time];
 }
+
+#pragma mark - Pause/Continue
+
+-(void)pause {
+    [self pauseGame];
+    
+    PauseScreen *pausePopover = (PauseScreen *)[CCBReader load:@"PauseScreen"];
+    pausePopover.position = ccp(bbsize.width/2, bbsize.width/2);
+    pausePopover.zOrder = INT_MAX;
+    
+    [self addChild:pausePopover];
+}
+
+-(void)pauseGame {
+    [GameMechanics sharedInstance].paused = true;
+    [[GameMechanics sharedInstance].motionManager stopAccelerometerUpdates];
+    
+    crosshair.paused = true;
+    ball.paused = true;
+    _physicsNode.paused = true;
+}
+
+-(void)continueGame {
+    [[GameMechanics sharedInstance].motionManager startAccelerometerUpdates];
+    
+    crosshair.paused = false;
+    ball.paused = false;
+    _physicsNode.paused = false;
+}
+
+#pragma mark -
 
 -(void)endGame {
     NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"ZenHighScore"];

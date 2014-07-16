@@ -82,7 +82,6 @@
     [_physicsNode addChild:ball];
     
     start = false;
-    paused = false;
     
     // reset shared counters
     [GameMechanics sharedInstance].classicTime = 0;
@@ -153,6 +152,9 @@
 
 // updates that happen in 1/60th of a frame
 -(void)update:(CCTime)delta {
+
+    //Accelerometer stuff belongs here
+    
     // when score gets to 0 the round ends
     if(ball.score == 0) {
         [self endGame];
@@ -161,25 +163,28 @@
 
 // updates that happen every 0.01 second
 -(void)timer:(CCTime)delta {
+    
+    //THIS BELONGS IN UPDATE: just put here to keep things running fast until the labels are updated
     if(![GameMechanics sharedInstance].paused) {
         // accelerometer data to be updated
         CMAccelerometerData *accelerometerData = [GameMechanics
-                                              sharedInstance].motionManager.accelerometerData;
+                                                  sharedInstance].motionManager.accelerometerData;
         CMAcceleration acceleration = accelerometerData.acceleration;
         CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
         CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
-    
+        
         newXPosition = clampf(newXPosition, 0, bbsize.width);
         newYPosition = 8 + clampf(newYPosition, 0, bbsize.height);
         crosshair.position = CGPointMake(newXPosition, newYPosition);
-
-    
-        // updates the time counter
-        if(start) {
-            [self continueGame];
-            [GameMechanics sharedInstance].classicTime += 0.01;
-        }
     }
+    
+    // updates the time counter
+    if(start && ![GameMechanics sharedInstance].paused) {
+        [self continueGame];
+        [GameMechanics sharedInstance].classicTime += 0.01;
+    }
+    
+    //this update is making the game slow
     _timeLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
 }
 
