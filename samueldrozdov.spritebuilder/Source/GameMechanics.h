@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreMotion/CoreMotion.h>
 
-static NSString *const GAME_STATE_SCORE_NOTIFICATION = @"GameState_ScoreChanged";
-static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
-
 @interface GameMechanics : NSObject
 
 + (instancetype)sharedInstance;
@@ -22,6 +19,8 @@ static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
 @property (nonatomic, assign) int score;
 @property (nonatomic, assign) int time;
 @property (nonatomic, assign) float classicTime;
+
+@property (nonatomic, assign) int ballRadius;
 
 @property (nonatomic, assign) bool highScoreSet;
 @property (nonatomic, assign) float classicScore;

@@ -164,6 +164,8 @@
 			<key>tabletScale</key>
 			<integer>1</integer>
 		</dict>
+		<key>myResources/Bronze Medal.png</key>
+		<dict/>
 	</dict>
 	<key>versionStr</key>
 	<string>Version: 1.1.0

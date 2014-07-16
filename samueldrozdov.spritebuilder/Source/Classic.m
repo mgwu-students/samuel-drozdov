@@ -32,7 +32,6 @@
     float calibration;
     
     Ball *ball;
-    int ballRadius;
     Crosshair *crosshair;
 }
 
@@ -80,7 +79,6 @@
     // add the ball to the Gameplay scene in the physicsNode
     [_physicsNode addChild:ball];
     
-    ballRadius = 30;
     start = false;
     
     // reset shared counters
@@ -109,7 +107,7 @@
     int crosshairY = crosshair.position.y;
     float distFromBallCenter = powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2);
     // check if the ball contains the crosshair
-    if( powf(ballRadius, 2) >= distFromBallCenter) {
+    if( powf([GameMechanics sharedInstance].ballRadius, 2) >= distFromBallCenter) {
         // starts the timer;
         start = true;
         

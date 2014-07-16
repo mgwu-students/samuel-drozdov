@@ -33,7 +33,6 @@
     CCNode *_bottomWall;
     
     Ball *ball;
-    int ballRadius;
     Crosshair *crosshair;
 }
 
@@ -88,7 +87,6 @@
     [GameMechanics sharedInstance].score = 0;
     [GameMechanics sharedInstance].previousGameMode = @"GameModes/Insanity";
     
-    ballRadius = 30;
     start = false;
     
     _instructionScoreLabel.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"InsanityHighScore"]).intValue];
@@ -108,7 +106,7 @@
     int crosshairY = crosshair.position.y;
     float distFromBallCenter = powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2);
     // check if the ball contains the crosshair
-    if( powf(ballRadius, 2) >= distFromBallCenter) {
+    if( powf([GameMechanics sharedInstance].ballRadius, 2) >= distFromBallCenter) {
         // starts the timer;
         start = true;
         
