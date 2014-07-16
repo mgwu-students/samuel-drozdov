@@ -22,6 +22,8 @@
 
 @property (nonatomic, assign) int ballRadius;
 
+@property (nonatomic, assign) bool paused;
+
 @property (nonatomic, assign) bool highScoreSet;
 @property (nonatomic, assign) float classicScore;
 @property (nonatomic, assign) int zenScore;

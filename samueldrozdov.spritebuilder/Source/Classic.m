@@ -104,10 +104,9 @@
     _instructionLabel2.visible = false;
     _instructionScoreLabel.visible = false;
     
-    if(!paused && touch.locationInWorld.y > bbsize.height*2/3) {
+    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*2/3) {
         [self pause];
     }
-    
     
     int ballX = ball.position.x;
     int ballY = ball.position.y;
@@ -162,7 +161,7 @@
 
 // updates that happen every 0.01 second
 -(void)timer:(CCTime)delta {
-    if(!paused) {
+    if(![GameMechanics sharedInstance].paused) {
         // accelerometer data to be updated
         CMAccelerometerData *accelerometerData = [GameMechanics
                                               sharedInstance].motionManager.accelerometerData;
@@ -173,13 +172,14 @@
         newXPosition = clampf(newXPosition, 0, bbsize.width);
         newYPosition = 8 + clampf(newYPosition, 0, bbsize.height);
         crosshair.position = CGPointMake(newXPosition, newYPosition);
-    }
+
     
-    // updates the time counter
-    if(start) {
-        [GameMechanics sharedInstance].classicTime += 0.01;
+        // updates the time counter
+        if(start) {
+            [self continueGame];
+            [GameMechanics sharedInstance].classicTime += 0.01;
+        }
     }
-    
     _timeLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
 }
 
@@ -196,25 +196,20 @@
 }
 
 -(void)pauseGame {
-    paused = true;
+    [GameMechanics sharedInstance].paused = true;
     [[GameMechanics sharedInstance].motionManager stopAccelerometerUpdates];
     
     crosshair.paused = true;
     ball.paused = true;
-    
-    // for Classic
-    start = false;
+    _physicsNode.paused = true;
 }
 
 -(void)continueGame {
-    paused = false;
     [[GameMechanics sharedInstance].motionManager startAccelerometerUpdates];
     
     crosshair.paused = false;
     ball.paused = false;
-    
-    // for Classic
-    start = true;
+    _physicsNode.paused = false;
 }
 
 #pragma mark -

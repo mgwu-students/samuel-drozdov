@@ -31,6 +31,7 @@ static GameMechanics *sharedInstance = nil;
         _motionManager = [[CMMotionManager alloc] init];
         
         self.highScoreSet = false;
+        self.paused = false;
         self.classicScore = 0;
         self.ballRadius = 32;
         self.zenScore = 0;

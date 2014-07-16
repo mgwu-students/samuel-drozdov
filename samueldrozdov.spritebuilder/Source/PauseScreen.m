@@ -22,6 +22,7 @@
 
 -(void)onExit {
     [super onExit];
+    [GameMechanics sharedInstance].paused = false;
 }
 
 
@@ -59,7 +60,6 @@
 
 // exit back to game, button
 - (void)continuePS {
-    [[GameMechanics sharedInstance].motionManager startAccelerometerUpdates];
     [self removeFromParent];
 }
 
