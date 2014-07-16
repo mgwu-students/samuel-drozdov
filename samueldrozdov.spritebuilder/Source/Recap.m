@@ -12,6 +12,7 @@
 #import "HighScores.h"
 
 @implementation Recap {
+    CCLabelTTF *_highScoreLabel;
     CCLabelTTF *_finalScoreLabel;
     CCLabelTTF *_newHighScore;
 }
@@ -33,14 +34,30 @@
     self.userInteractionEnabled = TRUE;
     _newHighScore.visible = NO;
     
-    if([[GameMechanics sharedInstance].previousGameMode isEqual: @"GameModes/Classic"]) {
-        _finalScoreLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
-    } else { //next line was changed to %ld (long), check if this works!
-        _finalScoreLabel.string = [NSString stringWithFormat:@"%ld", (long)[GameMechanics sharedInstance].score];
-    }
-    
     if([GameMechanics sharedInstance].highScoreSet) {
         _newHighScore.visible = YES;
+    }
+    
+    [self updateLabels];
+}
+
+-(void)updateLabels {
+    //highScoreLabel
+    if([[GameMechanics sharedInstance].previousGameMode isEqual: @"GameModes/Classic"]) {
+        _highScoreLabel.string = [NSString stringWithFormat:@"%.2lf", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"]).floatValue];
+    } else if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Zen"]) {
+        _highScoreLabel.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ZenHighScore"]).intValue];
+    } else if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Marathon"]) {
+        _highScoreLabel.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).intValue];
+    } else if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Insanity"]) {
+        _highScoreLabel.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"InsanityHighScore"]).intValue];
+    }
+    
+    //youScoreLabel
+    if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Classic"]) {
+        _finalScoreLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
+    } else {
+        _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];
     }
 }
 

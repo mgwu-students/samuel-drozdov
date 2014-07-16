@@ -151,7 +151,7 @@
         CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
     
         newXPosition = clampf(newXPosition, 0, bbsize.width);
-        newYPosition = 8 + clampf(newYPosition, 0, bbsize.height);
+        newYPosition = 9 + clampf(newYPosition, 0, bbsize.height);
         crosshair.position = CGPointMake(newXPosition, newYPosition);
     }
     
