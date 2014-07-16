@@ -101,7 +101,7 @@
     _instructionLabel2.visible = false;
     _instructionScoreLabel.visible = false;
     
-    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*2/3) {
+    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5) {
         [self pause];
     }
     
@@ -157,7 +157,7 @@
     }
     
     // when time runs out the Recap scene is loaded
-    if([GameMechanics sharedInstance].time == 0) {
+    if([GameMechanics sharedInstance].time <= 0) {
         if(![GameMechanics sharedInstance].paused)
             [self endGame];
     } else if([GameMechanics sharedInstance].time <= 5) { // counter turns red when at 5 seconds

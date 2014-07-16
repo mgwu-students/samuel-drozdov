@@ -103,7 +103,7 @@
     _instructionLabel2.visible = false;
     _instructionScoreLabel.visible = false;
     
-    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*2/3) {
+    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5) {
         [self pause];
     }
     
@@ -156,7 +156,7 @@
     //Accelerometer stuff belongs here
     
     // when score gets to 0 the round ends
-    if(ball.score == 0) {
+    if(ball.score <= 0) {
         [self endGame];
     }
 }
@@ -179,7 +179,7 @@
     }
     
     // updates the time counter
-    if(start) {
+    if(start && ![GameMechanics sharedInstance].paused) {
         [GameMechanics sharedInstance].classicTime += 0.01;
     }
     if(![GameMechanics sharedInstance].paused) {

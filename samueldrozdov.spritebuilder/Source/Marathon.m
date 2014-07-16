@@ -94,7 +94,7 @@
     _instructionLabel2.visible = false;
     _instructionScoreLabel.visible = false;
     
-    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*2/3) {
+    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5) {
         [self pause];
     }
     
