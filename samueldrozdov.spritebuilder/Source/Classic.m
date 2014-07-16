@@ -112,10 +112,10 @@
         start = true;
         
         // load particle effect
-        CCParticleSystem *hit = (CCParticleSystem *)[CCBReader load:@"Hit"];
+        CCParticleSystem *hit = (CCParticleSystem *)[CCBReader load:@"HitParticle"];
         // make the particle effect clean itself up, once it is completed
         hit.autoRemoveOnFinish = TRUE;
-        // place the particle effect on the balls position
+        // place the particle effect on the ball's position
         hit.position = ball.position;
         // add the particle effect to the same node the ball is on
         [ball.parent addChild:hit z:-1];
@@ -131,8 +131,14 @@
         [GameMechanics sharedInstance].score--;
         [ball updateScore];
     } else {
-        //changed
-        //changed again
+        // load particle effect
+        CCParticleSystem *missed = (CCParticleSystem *)[CCBReader load:@"ShootParticle"];
+        // make the particle effect clean itself up, once it is completed
+        missed.autoRemoveOnFinish = TRUE;
+        // place the particle effect on the crosshair's position
+        missed.position = crosshair.position;
+        // add the particle effect to the same node the crosshair is on
+        [crosshair.parent addChild:missed z:1];
     }
 }
 
@@ -158,7 +164,7 @@
     CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
     
     newXPosition = clampf(newXPosition, 0, bbsize.width);
-    newYPosition = 7 + clampf(newYPosition, 0, bbsize.height);
+    newYPosition = 8 + clampf(newYPosition, 0, bbsize.height);
     crosshair.position = CGPointMake(newXPosition, newYPosition);
     
     // updates the time counter

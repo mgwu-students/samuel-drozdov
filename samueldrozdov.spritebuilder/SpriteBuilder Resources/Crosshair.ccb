@@ -132,8 +132,8 @@
 						<array>
 							<real>0.5</real>
 							<real>0.5</real>
-							<false/>
-							<integer>0</integer>
+							<true/>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -177,6 +177,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>

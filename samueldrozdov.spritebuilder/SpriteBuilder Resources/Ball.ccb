@@ -306,8 +306,8 @@
 						<array>
 							<real>0.30000001192092896</real>
 							<real>0.30000001192092896</real>
-							<false/>
-							<integer>0</integer>
+							<true/>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -335,6 +335,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -454,8 +456,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
