@@ -149,7 +149,7 @@
         crosshair.position = CGPointMake(newXPosition, newYPosition);
     }
     
-    if(start && ![GameMechanics sharedInstance].paused) {
+    if(![GameMechanics sharedInstance].paused) {
         [self continueGame];
     }
 }

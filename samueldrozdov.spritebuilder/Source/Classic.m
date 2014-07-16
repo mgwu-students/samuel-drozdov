@@ -179,9 +179,11 @@
     }
     
     // updates the time counter
-    if(start && ![GameMechanics sharedInstance].paused) {
-        [self continueGame];
+    if(start) {
         [GameMechanics sharedInstance].classicTime += 0.01;
+    }
+    if(![GameMechanics sharedInstance].paused) {
+        [self continueGame];
     }
     
     //this update is making the game slow

@@ -164,7 +164,7 @@
         _timeLabel.color = [CCColor redColor];
     }
     
-    if(start && ![GameMechanics sharedInstance].paused) {
+    if(![GameMechanics sharedInstance].paused) {
         [self continueGame];
     }
 }
