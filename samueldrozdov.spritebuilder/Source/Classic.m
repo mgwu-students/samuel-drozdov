@@ -12,6 +12,7 @@
 #import "GameMechanics.h"
 #import "Ball.h"
 #import "Crosshair.h"
+#import "PauseScreen.h"
 
 #define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 
@@ -19,6 +20,7 @@
     // time variables
     CCLabelTTF *_timeLabel;
     bool start;
+    bool paused;
     
     // size of the bounding box
     CGSize bbsize;
@@ -80,6 +82,7 @@
     [_physicsNode addChild:ball];
     
     start = false;
+    paused = false;
     
     // reset shared counters
     [GameMechanics sharedInstance].classicTime = 0;
@@ -101,13 +104,18 @@
     _instructionLabel2.visible = false;
     _instructionScoreLabel.visible = false;
     
+    if(!paused && touch.locationInWorld.y > bbsize.height/2) {
+        [self pause];
+    }
+    
+    
     int ballX = ball.position.x;
     int ballY = ball.position.y;
     int crosshairX = crosshair.position.x;
     int crosshairY = crosshair.position.y;
     float distFromBallCenter = powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2);
     // check if the ball contains the crosshair
-    if( powf([GameMechanics sharedInstance].ballRadius, 2) >= distFromBallCenter) {
+    if(powf([GameMechanics sharedInstance].ballRadius, 2) >= distFromBallCenter) {
         // starts the timer;
         start = true;
         
@@ -146,8 +154,6 @@
 
 // updates that happen in 1/60th of a frame
 -(void)update:(CCTime)delta {
-    
-    
     // when score gets to 0 the round ends
     if(ball.score == 0) {
         [self endGame];
@@ -173,6 +179,17 @@
     }
     
     _timeLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
+}
+
+-(void)pause {
+    paused = true;
+    [[GameMechanics sharedInstance].motionManager stopAccelerometerUpdates];
+    
+    PauseScreen *pausePopover= (PauseScreen *)[CCBReader load:@"PauseScreen"];
+    pausePopover.position = ccp(bbsize.width/2, bbsize.width/2);
+    pausePopover.zOrder = INT_MAX;
+    
+    [self addChild:pausePopover];
 }
 
 -(void)endGame {
