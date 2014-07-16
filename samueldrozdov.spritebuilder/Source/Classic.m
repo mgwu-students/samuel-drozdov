@@ -104,7 +104,7 @@
     _instructionLabel2.visible = false;
     _instructionScoreLabel.visible = false;
     
-    if(!paused && touch.locationInWorld.y > bbsize.height/2) {
+    if(!paused && touch.locationInWorld.y > bbsize.height*2/3) {
         [self pause];
     }
     
@@ -162,16 +162,18 @@
 
 // updates that happen every 0.01 second
 -(void)timer:(CCTime)delta {
-    // accelerometer data to be updated
-    CMAccelerometerData *accelerometerData = [GameMechanics
+    if(!paused) {
+        // accelerometer data to be updated
+        CMAccelerometerData *accelerometerData = [GameMechanics
                                               sharedInstance].motionManager.accelerometerData;
-    CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
-    CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
+        CMAcceleration acceleration = accelerometerData.acceleration;
+        CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
+        CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
     
-    newXPosition = clampf(newXPosition, 0, bbsize.width);
-    newYPosition = 8 + clampf(newYPosition, 0, bbsize.height);
-    crosshair.position = CGPointMake(newXPosition, newYPosition);
+        newXPosition = clampf(newXPosition, 0, bbsize.width);
+        newYPosition = 8 + clampf(newYPosition, 0, bbsize.height);
+        crosshair.position = CGPointMake(newXPosition, newYPosition);
+    }
     
     // updates the time counter
     if(start) {
@@ -181,16 +183,41 @@
     _timeLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
 }
 
+#pragma mark - Pause/Continue
+
 -(void)pause {
-    paused = true;
-    [[GameMechanics sharedInstance].motionManager stopAccelerometerUpdates];
+    [self pauseGame];
     
-    PauseScreen *pausePopover= (PauseScreen *)[CCBReader load:@"PauseScreen"];
+    PauseScreen *pausePopover = (PauseScreen *)[CCBReader load:@"PauseScreen"];
     pausePopover.position = ccp(bbsize.width/2, bbsize.width/2);
     pausePopover.zOrder = INT_MAX;
     
     [self addChild:pausePopover];
 }
+
+-(void)pauseGame {
+    paused = true;
+    [[GameMechanics sharedInstance].motionManager stopAccelerometerUpdates];
+    
+    crosshair.paused = true;
+    ball.paused = true;
+    
+    // for Classic
+    start = false;
+}
+
+-(void)continueGame {
+    paused = false;
+    [[GameMechanics sharedInstance].motionManager startAccelerometerUpdates];
+    
+    crosshair.paused = false;
+    ball.paused = false;
+    
+    // for Classic
+    start = true;
+}
+
+#pragma mark -
 
 -(void)endGame {
     NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"];
