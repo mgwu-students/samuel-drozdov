@@ -71,11 +71,11 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.5</real>
+							<real>0.5</real>
 							<integer>0</integer>
-							<integer>0</integer>
-							<integer>0</integer>
+							<integer>2</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -98,8 +98,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.5</real>
+							<real>0.5</real>
 						</array>
 					</dict>
 					<dict>
@@ -1986,9 +1986,9 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>ZenScoreLabel1</string>
+						<string>TimeAttackScoreLabel1</string>
 						<key>memberVarAssignmentName</key>
-						<string>_zenScore</string>
+						<string>_timeAttackScore</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -2215,7 +2215,7 @@
 								<key>displayName</key>
 								<string>Bronze Medal</string>
 								<key>memberVarAssignmentName</key>
-								<string>_zenBronze</string>
+								<string>_timeAttackBronze</string>
 								<key>memberVarAssignmentType</key>
 								<integer>1</integer>
 								<key>properties</key>
@@ -2304,7 +2304,7 @@
 								<key>displayName</key>
 								<string>Silver Medal</string>
 								<key>memberVarAssignmentName</key>
-								<string>_zenSilver</string>
+								<string>_timeAttackSilver</string>
 								<key>memberVarAssignmentType</key>
 								<integer>1</integer>
 								<key>properties</key>
@@ -2380,6 +2380,8 @@
 										</array>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 							<dict>
 								<key>UUID</key>
@@ -2393,7 +2395,7 @@
 								<key>displayName</key>
 								<string>Gold Medal</string>
 								<key>memberVarAssignmentName</key>
-								<string>_zenGold</string>
+								<string>_timeAttackGold</string>
 								<key>memberVarAssignmentType</key>
 								<integer>1</integer>
 								<key>properties</key>

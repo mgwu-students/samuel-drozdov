@@ -31,6 +31,8 @@
     
     Ball *ball;
     Crosshair *crosshair;
+    
+    float calibration;
 }
 
 - (id)init
@@ -43,6 +45,11 @@
         
         // find the size of the gameplay scene
         bbsize = [[UIScreen mainScreen] bounds].size;
+        
+        // sets up the timer: method that updates every 0.01 second
+        [self schedule:@selector(timer:) interval:0.01f];
+        
+        calibration = 0;
     }
     return self;
 }
@@ -70,9 +77,6 @@
     _inGame.visible = false;
     [self addBall];
     
-    // sets up the timer: method that updates every 0.01 second
-    [self schedule:@selector(timer:) interval:0.01f];
-    
     // reset shared counters
     [GameMechanics sharedInstance].classicTime = 0;
     [GameMechanics sharedInstance].previousGameMode = @"GameModes/Marathon";
@@ -80,6 +84,11 @@
     start = false;
     
     _instructionScoreLabel.string = [NSString stringWithFormat:@"%.2lf", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).floatValue];
+}
+
+-(void)calibrate {
+    crosshair.position = ccp(bbsize.width/2, bbsize.height/2);
+    calibration = -[GameMechanics sharedInstance].motionManager.accelerometerData.acceleration.y;
 }
 
 -(void)addBall {
@@ -96,9 +105,6 @@
     // only for marathon
     ball.score = 5;
     [ball updateScore];
-    
-    if(start)
-        [ball.physicsBody applyImpulse:ccp(arc4random_uniform(150), arc4random_uniform(150))];
 }
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
@@ -115,7 +121,7 @@
     _instructions.visible = false;
     _inGame.visible = true;
     
-    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5) {
+    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5 && start) {
         [self pause];
     }
     
@@ -144,12 +150,22 @@
         [ball.parent addChild:hit z:-1];
         
         if(start) {
-            [ball removeFromParent];
-            [self addBall];
+            ball.score = 4;
+            [ball updateScore];
+             [ball.physicsBody applyImpulse:ccp(arc4random_uniform(100),arc4random_uniform(100))];//Fix!
+//            [ball removeFromParent];
+//            [self addBall];
         }
         
     } else {
-
+        // load particle effect
+        CCParticleSystem *missed = (CCParticleSystem *)[CCBReader load:@"ShootParticle"];
+        // make the particle effect clean itself up, once it is completed
+        missed.autoRemoveOnFinish = TRUE;
+        // place the particle effect on the crosshair's position
+        missed.position = crosshair.position;
+        // add the particle effect to the same node the crosshair is on
+        [crosshair.parent addChild:missed z:1];
     }
 }
 
@@ -165,10 +181,10 @@
                                                   sharedInstance].motionManager.accelerometerData;
         CMAcceleration acceleration = accelerometerData.acceleration;
         CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
-        CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
+        CGFloat newYPosition = crosshair.position.y + (acceleration.y+calibration) * 1500 * delta;
         
         newXPosition = clampf(newXPosition, 0, bbsize.width);
-        newYPosition = 7 + clampf(newYPosition, 0, bbsize.height);
+        newYPosition = clampf(newYPosition, 0, bbsize.height);
         crosshair.position = CGPointMake(newXPosition, newYPosition);
     }
     

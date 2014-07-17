@@ -11,7 +11,7 @@
 
 @implementation HighScores {
     CCLabelTTF *_classicScore;
-    CCLabelTTF *_zenScore;
+    CCLabelTTF *_timeAttackScore;
     CCLabelTTF *_marathonScore;
     CCLabelTTF *_insanityScore;
     
@@ -21,9 +21,9 @@
     CCNode *_marathonBronze;
     CCNode *_marathonSilver;
     CCNode *_marathonGold;
-    CCNode *_zenBronze;
-    CCNode *_zenSilver;
-    CCNode *_zenGold;
+    CCNode *_timeAttackBronze;
+    CCNode *_timeAttackSilver;
+    CCNode *_timeAttackGold;
     CCNode *_insanityBronze;
     CCNode *_insanitySilver;
     CCNode *_insanityGold;
@@ -64,17 +64,17 @@
     _marathonBronze.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"mB"];
     _marathonSilver.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"mS"];
     _marathonGold.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"mG"];
-    _zenBronze.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"TB"];
-    _zenSilver.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"TS"];
-    _zenGold.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"TG"];
+    _timeAttackBronze.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"TB"];
+    _timeAttackSilver.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"TS"];
+    _timeAttackGold.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"TG"];
     [self checkMedals];
     [self updateScores];
 }
 
 -(void)checkMedals {
     float classicScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"]).floatValue;
-    int zenScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"TimeAttackHighScore"]).intValue;
-    int marathonScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).intValue;
+    int TimeAttackScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"TimeAttackHighScore"]).intValue;
+    float marathonScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).intValue;
     
     if(classicScore < 30) {
         _classicBronze.visible = true;
@@ -92,18 +92,18 @@
         _marathonGold.visible = true;
     }
     
-    if(zenScore > 10) {
-        _zenBronze.visible = true;
-    } if(zenScore > 17) {
-        _zenSilver.visible = true;
-    } if(zenScore > 25) {
-        _zenGold.visible = true;
+    if(TimeAttackScore > 10) {
+        _timeAttackBronze.visible = true;
+    } if(TimeAttackScore > 17) {
+        _timeAttackSilver.visible = true;
+    } if(TimeAttackScore > 25) {
+        _timeAttackGold.visible = true;
     }
 }
 
 -(void)updateScores {
     _classicScore.string = [NSString stringWithFormat:@"%.2lf", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"]).floatValue];
-    _zenScore.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"TimeAttackHighScore"]).intValue];
+    _timeAttackScore.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"TimeAttackHighScore"]).intValue];
     _marathonScore.string = [NSString stringWithFormat:@"%.2lf", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).floatValue];
 }
 

@@ -22,10 +22,10 @@
     [[CCDirector sharedDirector] replaceScene:classicScene];
 }
 
-//When the play button is clicked the Zen scene is loaded
-- (void)zen {
-    CCScene *zenScene = [CCBReader loadAsScene:@"GameModes/TimeAttack"];
-    [[CCDirector sharedDirector] replaceScene:zenScene];
+//When the play button is clicked the Time Attack scene is loaded
+- (void)timeAttack {
+    CCScene *timeAttackScene = [CCBReader loadAsScene:@"GameModes/TimeAttack"];
+    [[CCDirector sharedDirector] replaceScene:timeAttackScene];
 }
 
 //When the play button is clicked the Marathon scene is loaded

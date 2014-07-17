@@ -96,6 +96,11 @@
     _instructionScoreLabel.string = [NSString stringWithFormat:@"%.2lf", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"]).floatValue];
 }
 
+-(void)calibrate {
+    crosshair.position = ccp(bbsize.width/2, bbsize.height/2);
+    calibration = -[GameMechanics sharedInstance].motionManager.accelerometerData.acceleration.y;
+}
+
 #pragma mark - Touch Updates
 
 // called on every touch in this scene
@@ -103,7 +108,7 @@
     _instructions.visible = false;
     _inGame.visible = true;
     
-    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5) {
+    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5 && start) {
         [self pause];
     }
     
@@ -171,10 +176,10 @@
                                                   sharedInstance].motionManager.accelerometerData;
         CMAcceleration acceleration = accelerometerData.acceleration;
         CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
-        CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
+        CGFloat newYPosition = crosshair.position.y + (acceleration.y+calibration) * 1500 * delta;
         
         newXPosition = clampf(newXPosition, 0, bbsize.width);
-        newYPosition = 7 + clampf(newYPosition, 0, bbsize.height);
+        newYPosition = clampf(newYPosition, 0, bbsize.height);
         crosshair.position = CGPointMake(newXPosition, newYPosition);
     }
     
