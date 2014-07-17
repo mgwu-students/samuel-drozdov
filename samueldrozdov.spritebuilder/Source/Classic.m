@@ -31,10 +31,10 @@
     CCLabelTTF *_instructionScoreLabel;
     CCNode *_background;
     
-    float calibration;
-    
     Ball *ball;
     Crosshair *crosshair;
+    
+    float calibration;
 }
 
 - (id)init
@@ -131,10 +131,8 @@
         // add the particle effect to the same node the ball is on
         [ball.parent addChild:hit z:-1];
         
-        // hitting the ball further from the center applies more force
-        int power = ((int)distFromBallCenter / 100) + 5;
-        if((int)distFromBallCenter / 100 <= 4) power = 4;
-        else if(power > 9) power = 9; //power does not exceed 9
+        // hitting the ball further from the center applies some more force
+        int power = 8;
         [ball.physicsBody applyImpulse:ccp((ballX-crosshairX)*power,(ballY-crosshairY)*power)];
         
         // decrease and updates the score on the ball
@@ -155,19 +153,12 @@
 
 #pragma mark - Time Updates
 
-// updates that happen in 1/60th of a frame
--(void)update:(CCTime)delta {
-
-    //Accelerometer stuff belongs here
-    
+// updates that happen every 0.01 second
+-(void)timer:(CCTime)delta {
     // when score gets to 0 the round ends
     if(ball.score <= 0) {
         [self endGame];
     }
-}
-
-// updates that happen every 0.01 second
--(void)timer:(CCTime)delta {
     
     //THIS BELONGS IN UPDATE: just put here to keep things running fast until the labels are updated
     if(![GameMechanics sharedInstance].paused) {

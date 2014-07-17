@@ -126,10 +126,8 @@
         // add the particle effect to the same node the ball is on
         [ball.parent addChild:hit z:-1];
 
-        // hitting the ball further from the center applies more force
-        int power = ((int)distFromBallCenter / 100) + 5;
-        if((int)distFromBallCenter / 100 <= 4) power = 4;
-        else if(power > 9) power = 9; //power does not exceed 9
+        // hitting the ball further from the center applies some more force
+        int power = 8; //power does not exceed 9
         [ball.physicsBody applyImpulse:ccp((ballX-crosshairX)*power,(ballY-crosshairY)*power)];
         
         // increases and updates the score
@@ -150,7 +148,7 @@
 
 #pragma mark - Time Updates
 
-// updates that happen in 0.01
+// updates that happen in 0.01 seconds
 -(void)updateTimer:(CCTime)delta {
     if(![GameMechanics sharedInstance].paused) {
         // accelerometer data to be updated
