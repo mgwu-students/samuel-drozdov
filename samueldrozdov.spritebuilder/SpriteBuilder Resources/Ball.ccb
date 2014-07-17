@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>4</integer>
+	<integer>5</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -304,8 +304,8 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>0.30000001192092896</real>
-							<real>0.30000001192092896</real>
+							<real>0.34999999403953552</real>
+							<real>0.34999999403953552</real>
 							<true/>
 							<integer>1</integer>
 						</array>
@@ -318,7 +318,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>myResources/ball.png</string>
+							<string>myResources/redBall copy.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -387,8 +387,8 @@
 			<key>points</key>
 			<array>
 				<array>
-					<real>29.859375</real>
-					<real>29.6484375</real>
+					<real>29.975278854370117</real>
+					<real>30.024721145629883</real>
 				</array>
 			</array>
 			<key>polygons</key>

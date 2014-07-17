@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>11</integer>
+	<integer>12</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -71,8 +71,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -122,9 +122,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.197975754737854</real>
-							<real>0.096777379512786865</real>
-							<real>0.87000000476837158</real>
+							<real>0.18844009935855865</real>
+							<real>0.18844009935855865</real>
+							<real>0.18844009935855865</real>
 							<real>0.30000001192092896</real>
 						</array>
 					</dict>
@@ -137,6 +137,8 @@
 						<real>0.30000001192092896</real>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -147,9 +149,9 @@
 				<array>
 					<dict>
 						<key>UUID</key>
-						<integer>3</integer>
+						<integer>11</integer>
 						<key>baseClass</key>
-						<string>CCNodeColor</string>
+						<string>CCNodeGradient</string>
 						<key>children</key>
 						<array/>
 						<key>customClass</key>
@@ -177,11 +179,11 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>0.5</real>
-									<real>0.5</real>
+									<real>0.0</real>
+									<real>0.0</real>
 									<integer>0</integer>
-									<integer>2</integer>
-									<integer>2</integer>
+									<integer>0</integer>
+									<integer>0</integer>
 								</array>
 							</dict>
 							<dict>
@@ -204,8 +206,8 @@
 								<string>Point</string>
 								<key>value</key>
 								<array>
-									<real>0.5</real>
-									<real>0.5</real>
+									<real>0.0</real>
+									<real>0.0</real>
 								</array>
 							</dict>
 							<dict>
@@ -223,24 +225,48 @@
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>color</string>
+								<string>startColor</string>
 								<key>type</key>
 								<string>Color3</string>
 								<key>value</key>
 								<array>
-									<real>0.096518330276012421</real>
-									<real>0.87000000476837158</real>
-									<real>0.21448566019535065</real>
-									<real>0.89999997615814209</real>
+									<real>0.014286802150309086</real>
+									<real>0.47343316674232483</real>
+									<real>1</real>
+									<real>0.69999998807907104</real>
 								</array>
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>opacity</string>
+								<string>startOpacity</string>
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>0.89999997615814209</real>
+								<real>0.69999998807907104</real>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>endColor</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<real>0.89625090360641479</real>
+									<real>0.0</real>
+									<real>1</real>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>vector</string>
+								<key>type</key>
+								<string>Point</string>
+								<key>value</key>
+								<array>
+									<real>0.0</real>
+									<real>-1</real>
+								</array>
 							</dict>
 						</array>
 					</dict>
@@ -450,7 +476,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>Futura-Medium</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -776,7 +802,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>Futura-Medium</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1102,7 +1128,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>Futura-Medium</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1160,10 +1186,10 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>255</real>
-									<real>255</real>
-									<real>255</real>
-									<real>255</real>
+									<real>0.0</real>
+									<real>1</real>
+									<real>0.051528330892324448</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -1222,7 +1248,7 @@
 								<key>value</key>
 								<array>
 									<real>0.0</real>
-									<real>-2</real>
+									<real>-3</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -1310,7 +1336,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>Futura-Medium</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1383,7 +1409,7 @@
 									<real>0.0</real>
 									<real>0.0</real>
 									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.5</real>
 								</array>
 							</dict>
 							<dict>
@@ -1517,7 +1543,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>Futura-Medium</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1575,8 +1601,8 @@
 								<key>value</key>
 								<array>
 									<real>1</real>
-									<real>1</real>
-									<real>1</real>
+									<real>0.0049517401494085789</real>
+									<real>0.09517495334148407</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -1590,7 +1616,7 @@
 									<real>0.0</real>
 									<real>0.0</real>
 									<real>0.0</real>
-									<real>0.0</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -1724,7 +1750,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>Futura-Medium</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1797,7 +1823,7 @@
 									<real>0.0</real>
 									<real>0.0</real>
 									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.5</real>
 								</array>
 							</dict>
 							<dict>
@@ -1931,7 +1957,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>Futura-Medium</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1988,9 +2014,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>1</real>
-									<real>1</real>
-									<real>1</real>
+									<real>0.11957494914531708</real>
+									<real>0.97661113739013672</real>
+									<real>0.95901364088058472</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -2004,7 +2030,7 @@
 									<real>0.0</real>
 									<real>0.0</real>
 									<real>0.0</real>
-									<real>0.0</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -2129,8 +2155,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
