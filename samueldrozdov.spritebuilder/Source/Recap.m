@@ -54,7 +54,10 @@
     }
     
     //youScoreLabel
+    //youScoreLabel
     if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Classic"]) {
+        _finalScoreLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
+    } else if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Marathon"]) {
         _finalScoreLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
     } else {
         _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];

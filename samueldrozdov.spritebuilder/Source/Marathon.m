@@ -86,14 +86,14 @@
     // elasticity is set to one so it does not slow down
     ball.physicsBody.elasticity = 0.9;
     // position the ball randomly in the gameplay scene, makes sure it does not laod with part of the ball of the screen
-    ball.position = ccp(arc4random_uniform(bbsize.width - 120) + 60,
-                        arc4random_uniform(bbsize.height - 120) + 60);
+    ball.position = ccp(arc4random_uniform(bbsize.width - 80) + 40,
+                        arc4random_uniform(bbsize.height - 80) + 40);
     // add the ball to the Gameplay scene in the physicsNode
     [_physicsNode addChild:ball];
     
     
     // only for marathon
-    ball.score = 6;
+    ball.score = 5;
     [ball updateScore];
     
     if(start)
