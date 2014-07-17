@@ -23,10 +23,11 @@
     CGSize bbsize;
     
     CCPhysicsNode *_physicsNode;
-    CCLabelTTF *_instructionLabel;
-    CCLabelTTF *_instructionLabel2;
+    CCNode *_inGame;
+    CCNode *_instructions;
     CCLabelTTF *_instructionScoreLabel;
     CCNode *_background;
+    
     
     Ball *ball;
     Crosshair *crosshair;
@@ -66,6 +67,7 @@
     // enable collisions
     _physicsNode.collisionDelegate = self;
     
+    _inGame.visible = false;
     [self addBall];
     
     // sets up the timer: method that updates every 0.01 second
@@ -111,9 +113,8 @@
 
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    _instructionLabel.visible = false;
-    _instructionLabel2.visible = false;
-    _instructionScoreLabel.visible = false;
+    _instructions.visible = false;
+    _inGame.visible = true;
     
     if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5) {
         [self pause];

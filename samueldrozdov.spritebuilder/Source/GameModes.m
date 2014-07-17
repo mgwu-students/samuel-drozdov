@@ -24,7 +24,7 @@
 
 //When the play button is clicked the Zen scene is loaded
 - (void)zen {
-    CCScene *zenScene = [CCBReader loadAsScene:@"GameModes/Zen"];
+    CCScene *zenScene = [CCBReader loadAsScene:@"GameModes/TimeAttack"];
     [[CCDirector sharedDirector] replaceScene:zenScene];
 }
 

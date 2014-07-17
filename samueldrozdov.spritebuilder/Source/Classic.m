@@ -26,8 +26,8 @@
     CGSize bbsize;
     
     CCPhysicsNode *_physicsNode;
-    CCLabelTTF *_instructionLabel;
-    CCLabelTTF *_instructionLabel2;
+    CCNode *_inGame;
+    CCNode *_instructions;
     CCLabelTTF *_instructionScoreLabel;
     CCNode *_background;
     
@@ -73,6 +73,7 @@
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
     
+    _inGame.visible = false;
     // spawns a ball randomly on the screen
     ball = (Ball*)[CCBReader load:@"Ball"];
     // position the ball randomly in the gameplay scene, makes sure it does not laod with part of the ball of the screen
@@ -99,9 +100,8 @@
 
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    _instructionLabel.visible = false;
-    _instructionLabel2.visible = false;
-    _instructionScoreLabel.visible = false;
+    _instructions.visible = false;
+    _inGame.visible = true;
     
     if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5) {
         [self pause];
