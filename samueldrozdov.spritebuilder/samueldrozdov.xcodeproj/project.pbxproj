@@ -13,7 +13,7 @@
 		411074C7196C674500BD7CE5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 411074C6196C674500BD7CE5 /* CoreMotion.framework */; };
 		412A438E196F004D006D9EB8 /* GameModes.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A438D196F004D006D9EB8 /* GameModes.m */; };
 		412A4391196F0141006D9EB8 /* Classic.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4390196F0141006D9EB8 /* Classic.m */; };
-		412A4394196F0150006D9EB8 /* Zen.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4393196F0150006D9EB8 /* Zen.m */; };
+		412A4394196F0150006D9EB8 /* TimeAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4393196F0150006D9EB8 /* TimeAttack.m */; };
 		412A4397196F0181006D9EB8 /* Marathon.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A4396196F0181006D9EB8 /* Marathon.m */; };
 		412A439E196F11AE006D9EB8 /* GameMechanics.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A439D196F11AE006D9EB8 /* GameMechanics.m */; };
 		412A43A319707B81006D9EB8 /* HighScores.m in Sources */ = {isa = PBXBuildFile; fileRef = 412A43A219707B81006D9EB8 /* HighScores.m */; };
@@ -78,8 +78,8 @@
 		412A438D196F004D006D9EB8 /* GameModes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameModes.m; path = Source/GameModes.m; sourceTree = "<group>"; };
 		412A438F196F0141006D9EB8 /* Classic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Classic.h; path = Source/Classic.h; sourceTree = "<group>"; };
 		412A4390196F0141006D9EB8 /* Classic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Classic.m; path = Source/Classic.m; sourceTree = "<group>"; };
-		412A4392196F0150006D9EB8 /* Zen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Zen.h; path = Source/Zen.h; sourceTree = "<group>"; };
-		412A4393196F0150006D9EB8 /* Zen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Zen.m; path = Source/Zen.m; sourceTree = "<group>"; };
+		412A4392196F0150006D9EB8 /* TimeAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeAttack.h; path = Source/TimeAttack.h; sourceTree = "<group>"; };
+		412A4393196F0150006D9EB8 /* TimeAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeAttack.m; path = Source/TimeAttack.m; sourceTree = "<group>"; };
 		412A4395196F0181006D9EB8 /* Marathon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Marathon.h; path = Source/Marathon.h; sourceTree = "<group>"; };
 		412A4396196F0181006D9EB8 /* Marathon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Marathon.m; path = Source/Marathon.m; sourceTree = "<group>"; };
 		412A439C196F11AE006D9EB8 /* GameMechanics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameMechanics.h; path = Source/GameMechanics.h; sourceTree = "<group>"; };
@@ -152,8 +152,8 @@
 			children = (
 				412A438F196F0141006D9EB8 /* Classic.h */,
 				412A4390196F0141006D9EB8 /* Classic.m */,
-				412A4392196F0150006D9EB8 /* Zen.h */,
-				412A4393196F0150006D9EB8 /* Zen.m */,
+				412A4392196F0150006D9EB8 /* TimeAttack.h */,
+				412A4393196F0150006D9EB8 /* TimeAttack.m */,
 				412A4395196F0181006D9EB8 /* Marathon.h */,
 				412A4396196F0181006D9EB8 /* Marathon.m */,
 			);
@@ -413,7 +413,7 @@
 				411074C5196C65DD00BD7CE5 /* Recap.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				41B19AB41976D1AC004C2220 /* PauseScreen.m in Sources */,
-				412A4394196F0150006D9EB8 /* Zen.m in Sources */,
+				412A4394196F0150006D9EB8 /* TimeAttack.m in Sources */,
 				412A4391196F0141006D9EB8 /* Classic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

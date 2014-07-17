@@ -372,8 +372,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -1960,7 +1958,7 @@ Click To Shoot
 						<key>displayName</key>
 						<string>Instruction HighScoreLabel</string>
 						<key>memberVarAssignmentName</key>
-						<string>_highScoreLabel</string>
+						<string>_instructionScoreLabel</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -2154,6 +2152,8 @@ Click To Shoot
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>

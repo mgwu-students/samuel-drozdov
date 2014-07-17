@@ -1,12 +1,12 @@
 //
-//  Zen.m
+//  TimeAttack.m
 //  samueldrozdov
 //
 //  Created by Samuel Drozdov on 7/10/14.
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
-#import "Zen.h"
+#import "TimeAttack.h"
 
 #import <CoreMotion/CoreMotion.h>
 #import "GameMechanics.h"
@@ -14,7 +14,7 @@
 #import "Crosshair.h"
 #import "PauseScreen.h"
 
-@implementation Zen {
+@implementation TimeAttack {
     // time variables
     CCLabelTTF *_timeLabel;
     bool start;
@@ -82,7 +82,7 @@
     
     start = false;
     
-    _instructionScoreLabel.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ZenHighScore"]).intValue];
+    _instructionScoreLabel.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"TimeAttackHighScore"]).intValue];
 }
 
 #pragma mark - Touch Updates
@@ -208,12 +208,12 @@
 #pragma mark -
 
 -(void)endGame {
-    NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"ZenHighScore"];
+    NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"TimeAttackHighScore"];
     if(highScore.intValue < [GameMechanics sharedInstance].score) {
         // new highscore!
         [GameMechanics sharedInstance].highScoreSet = true;
         highScore = [NSNumber numberWithInt:(int)[GameMechanics sharedInstance].score];
-        [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"ZenHighScore"];
+        [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"TimeAttackHighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];

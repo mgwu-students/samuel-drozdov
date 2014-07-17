@@ -88,8 +88,7 @@
     // elasticity is set to one so it does not slow down
     ball.physicsBody.elasticity = 0.9;
     // position the ball randomly in the gameplay scene, makes sure it does not laod with part of the ball of the screen
-    ball.position = ccp(arc4random_uniform(bbsize.width - 80) + 40,
-                        arc4random_uniform(bbsize.height - 80) + 40);
+    ball.position = ccp(bbsize.width/2, bbsize.height/2);
     // add the ball to the Gameplay scene in the physicsNode
     [_physicsNode addChild:ball];
     
@@ -99,7 +98,7 @@
     [ball updateScore];
     
     if(start)
-        [ball.physicsBody applyImpulse:ccp(arc4random_uniform(100)+20, arc4random_uniform(100)+20)];
+        [ball.physicsBody applyImpulse:ccp(arc4random_uniform(150), arc4random_uniform(150))];
 }
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)nodeA wildcard:(CCNode *)nodeB {

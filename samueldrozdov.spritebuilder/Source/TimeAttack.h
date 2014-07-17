@@ -1,5 +1,5 @@
 //
-//  Zen.h
+//  TimeAttack.h
 //  samueldrozdov
 //
 //  Created by Samuel Drozdov on 7/10/14.
@@ -8,6 +8,6 @@
 
 #import "CCScene.h"
 
-@interface Zen : CCScene
+@interface TimeAttack : CCScene
 
 @end
