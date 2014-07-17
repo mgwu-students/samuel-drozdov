@@ -8,8 +8,7 @@
 
 #import "GameMechanics.h"
 
-static NSString *const GAME_STATE_SCORE_KEY = @"GameStateScoreKey";
-static NSString *const GAME_STATE_TIME_KEY = @"GameStateTimeKey";
+#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 
 @implementation GameMechanics 
 

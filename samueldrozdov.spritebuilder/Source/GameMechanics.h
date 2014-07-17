@@ -14,15 +14,15 @@
 + (instancetype)sharedInstance;
 
 @property (nonatomic, strong) CMMotionManager *motionManager;
-@property (nonatomic, assign) NSString *gameMode;
 @property (nonatomic, assign) NSString *previousGameMode;
+@property (nonatomic, assign) int ballRadius;
+@property (nonatomic, assign) bool paused;
+
 @property (nonatomic, assign) int score;
 @property (nonatomic, assign) int time;
 @property (nonatomic, assign) float classicTime;
 
-@property (nonatomic, assign) int ballRadius;
-
-@property (nonatomic, assign) bool paused;
+#pragma mark - High Score Variables
 
 @property (nonatomic, assign) bool highScoreSet;
 @property (nonatomic, assign) float classicScore;
