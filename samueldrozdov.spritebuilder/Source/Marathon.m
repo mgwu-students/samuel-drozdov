@@ -42,9 +42,6 @@
         
         // find the size of the gameplay scene
         bbsize = [[UIScreen mainScreen] bounds].size;
-        
-        // sets up the timer: method that updates every 1 second
-        [self schedule:@selector(timer:) interval:1.0f];
     }
     return self;
 }
@@ -66,24 +63,48 @@
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
     
+    // enable collisions
+    _physicsNode.collisionDelegate = self;
+    
+    [self addBall];
+    
+    // sets up the timer: method that updates every 0.01 second
+    [self schedule:@selector(timer:) interval:0.01f];
+    
+    // reset shared counters
+    [GameMechanics sharedInstance].classicTime = 0;
+    [GameMechanics sharedInstance].previousGameMode = @"GameModes/Marathon";
+    
+    start = false;
+    
+    _instructionScoreLabel.string = [NSString stringWithFormat:@"%.2lf", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).floatValue];
+}
+
+-(void)addBall {
     // spawns a ball randomly on the screen
     ball = (Ball*)[CCBReader load:@"Ball"];
     // elasticity is set to one so it does not slow down
     ball.physicsBody.elasticity = 0.9;
     // position the ball randomly in the gameplay scene, makes sure it does not laod with part of the ball of the screen
-    ball.position = ccp(arc4random_uniform(bbsize.width - 60) + 30,
-                        arc4random_uniform(bbsize.height - 60) + 30);
+    ball.position = ccp(arc4random_uniform(bbsize.width - 120) + 60,
+                        arc4random_uniform(bbsize.height - 120) + 60);
     // add the ball to the Gameplay scene in the physicsNode
     [_physicsNode addChild:ball];
     
-    // reset shared counters
-    [GameMechanics sharedInstance].time = 0;
-    [GameMechanics sharedInstance].score = 0;
-    [GameMechanics sharedInstance].previousGameMode = @"GameModes/Marathon";
     
-    start = false;
+    // only for marathon
+    ball.score = 6;
+    [ball updateScore];
     
-    _instructionScoreLabel.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).intValue];
+    if(start)
+        [ball.physicsBody applyImpulse:ccp(arc4random_uniform(100)+20, arc4random_uniform(100)+20)];
+}
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
+    if(start) {
+        ball.score--;
+        [ball updateScore];
+    }
 }
 
 #pragma mark - Touch Events
@@ -98,6 +119,13 @@
         [self pause];
     }
     
+    if(!start) {
+        [ball.physicsBody applyImpulse:ccp(arc4random_uniform(100), arc4random_uniform(100))];
+    }
+    
+    // starts the timer and balls movement;
+    start = true;
+    
     int ballX = ball.position.x;
     int ballY = ball.position.y;
     int crosshairX = crosshair.position.x;
@@ -105,8 +133,6 @@
     float distFromBallCenter = powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2);
     // check if the ball contains the crosshair
     if( powf([GameMechanics sharedInstance].ballRadius, 2) >= distFromBallCenter) {
-        // starts the timer;
-        start = true;
         
         // load particle effect
         CCParticleSystem *hit = (CCParticleSystem *)[CCBReader load:@"HitParticle"];
@@ -116,47 +142,51 @@
         hit.position = ball.position;
         // add the particle effect to the same node the ball is on
         [ball.parent addChild:hit z:-1];
-
-        // hitting the ball further from the center applies more force
-        int power = ((int)distFromBallCenter / 100) + 5;
-        if(power > 9) power = 9; //power does not exceed 9
-        [ball.physicsBody applyImpulse:ccp((ballX-crosshairX)*(power+1),(ballY-crosshairY)*(power+1))];
         
-        // increases and updates the score on the ball
-        ball.score++;
-        [GameMechanics sharedInstance].score++;
-        [ball updateScore];
+        if(start) {
+            [ball removeFromParent];
+            [self addBall];
+        }
+        
     } else {
-        if(![GameMechanics sharedInstance].paused)
-            [self endGame];
+
     }
 }
 
 #pragma mark - Time Updates
 
-// updates that happen in 1/60th of a frame
--(void)update:(CCTime)delta {
+// updates that happen every 0.01 second
+-(void)timer:(CCTime)delta {
+    
+    // THIS BELONGS IN UPDATE: just put here to keep things running fast until the labels are updated
     if(![GameMechanics sharedInstance].paused) {
         // accelerometer data to be updated
         CMAccelerometerData *accelerometerData = [GameMechanics
-                                              sharedInstance].motionManager.accelerometerData;
+                                                  sharedInstance].motionManager.accelerometerData;
         CMAcceleration acceleration = accelerometerData.acceleration;
         CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
         CGFloat newYPosition = crosshair.position.y + acceleration.y * 1500 * delta;
-    
+        
         newXPosition = clampf(newXPosition, 0, bbsize.width);
-        newYPosition = 9 + clampf(newYPosition, 0, bbsize.height);
+        newYPosition = 7 + clampf(newYPosition, 0, bbsize.height);
         crosshair.position = CGPointMake(newXPosition, newYPosition);
     }
     
+    // if ball reaches 0 the game ends
+    if(ball.score == 0) {
+        [self endGame];
+    }
+    
+    // updates the time counter
+    if(start && ![GameMechanics sharedInstance].paused) {
+        [GameMechanics sharedInstance].classicTime += 0.01;
+    }
     if(![GameMechanics sharedInstance].paused) {
         [self continueGame];
     }
-}
-
-// updates that happen every 1 second
--(void)timer:(CCTime)delta {
-
+    
+    // this update is making the game slow
+    _timeLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
 }
 
 #pragma mark - Pause/Continue
@@ -192,10 +222,10 @@
 
 -(void)endGame {
     NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"];
-    if(highScore.intValue < [GameMechanics sharedInstance].score) {
+    if(highScore.floatValue < [GameMechanics sharedInstance].classicTime) {
         // new highscore!
         [GameMechanics sharedInstance].highScoreSet = true;
-        highScore = [NSNumber numberWithInt:(int)[GameMechanics sharedInstance].score];
+        highScore = [NSNumber numberWithFloat:[GameMechanics sharedInstance].classicTime];
         [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"MarathonHighScore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }

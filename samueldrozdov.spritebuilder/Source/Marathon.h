@@ -8,6 +8,6 @@
 
 #import "CCScene.h"
 
-@interface Marathon : CCScene
+@interface Marathon : CCScene <CCPhysicsCollisionDelegate>
 
 @end

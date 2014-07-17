@@ -14,6 +14,7 @@
 
 // is called when CCB file has completed loading
 -(void)didLoadFromCCB {
+    self.physicsBody.collisionType = @"ball";
     self.score = 0;
     _scoreLabel.string = [NSString stringWithFormat:@"%d", self.score];
 }

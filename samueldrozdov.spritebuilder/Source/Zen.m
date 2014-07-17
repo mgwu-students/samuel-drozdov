@@ -119,7 +119,6 @@
         int power = ((int)distFromBallCenter / 100) + 5;
         if((int)distFromBallCenter / 100 <= 4) power = 4;
         else if(power > 9) power = 9; //power does not exceed 9
-        
         [ball.physicsBody applyImpulse:ccp((ballX-crosshairX)*power,(ballY-crosshairY)*power)];
         
         // increases and updates the score

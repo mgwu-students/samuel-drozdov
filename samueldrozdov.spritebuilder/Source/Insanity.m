@@ -126,7 +126,8 @@
 
         // hitting the ball further from the center applies more force
         int power = ((int)distFromBallCenter / 100) + 5;
-        if(power > 9) power = 9; //power does not exceed 9
+        if((int)distFromBallCenter / 100 <= 4) power = 4;
+        else if(power > 9) power = 9; //power does not exceed 9
         [ball.physicsBody applyImpulse:ccp((ballX-crosshairX)*power,(ballY-crosshairY)*power)];
         
         // increases and updates the score on the ball
