@@ -2500,7 +2500,7 @@ Zero</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbButtonHighlighted.png</string>
+									<string>Assets/In-Game/button_calibrate_1.png</string>
 								</array>
 							</dict>
 							<dict>

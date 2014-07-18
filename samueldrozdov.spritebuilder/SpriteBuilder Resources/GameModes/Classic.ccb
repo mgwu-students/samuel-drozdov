@@ -2481,14 +2481,6 @@ Get 10 Hits</string>
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>togglesSelectedState</string>
-								<key>type</key>
-								<string>Check</string>
-								<key>value</key>
-								<true/>
-							</dict>
-							<dict>
-								<key>name</key>
 								<string>backgroundSpriteFrame|Normal</string>
 								<key>type</key>
 								<string>SpriteFrame</string>
@@ -2506,7 +2498,7 @@ Get 10 Hits</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbButtonHighlighted.png</string>
+									<string>Assets/In-Game/button_calibrate_1.png</string>
 								</array>
 							</dict>
 							<dict>

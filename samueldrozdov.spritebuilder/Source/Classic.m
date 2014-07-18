@@ -40,8 +40,6 @@
         
         // sets up the timer: method that updates every 0.01 second
         [self schedule:@selector(timer:) interval:0.01f];
-        
-        [GameMechanics sharedInstance].calibration = 0;
     }
     return self;
 }

@@ -305,7 +305,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonHighlighted.png</string>
+							<string>Assets/Highscores/button_back_1.png</string>
 						</array>
 					</dict>
 					<dict>
