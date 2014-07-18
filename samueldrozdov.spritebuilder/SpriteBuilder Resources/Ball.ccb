@@ -135,7 +135,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>95</real>
+									<real>40</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -304,8 +304,8 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>0.34999999403953552</real>
-							<real>0.34999999403953552</real>
+							<real>1</real>
+							<real>1</real>
 							<true/>
 							<integer>1</integer>
 						</array>
@@ -318,7 +318,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>myResources/redBall copy.png</string>
+							<string>Assets/In-Game/target_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -335,8 +335,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -375,7 +373,7 @@
 			<key>collisionType</key>
 			<string></string>
 			<key>cornerRadius</key>
-			<real>32</real>
+			<real>36</real>
 			<key>density</key>
 			<real>0.10000000149011612</real>
 			<key>dynamic</key>

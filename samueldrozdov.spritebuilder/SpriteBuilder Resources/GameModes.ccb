@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>38</integer>
+	<integer>41</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -122,19 +122,11 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.014286802150309086</real>
-							<real>0.47343316674232483</real>
+							<real>0.16470588743686676</real>
+							<real>0.85490202903747559</real>
+							<real>0.9647059440612793</real>
 							<real>1</real>
-							<real>0.69999998807907104</real>
 						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>startOpacity</string>
-						<key>type</key>
-						<string>Float</string>
-						<key>value</key>
-						<real>0.69999998807907104</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -143,9 +135,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>0.89625090360641479</real>
-							<real>0.0</real>
+							<real>0.16470588743686676</real>
+							<real>0.85490202903747559</real>
+							<real>0.9647059440612793</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -161,6 +153,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -195,7 +189,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.64999997615814209</real>
+							<real>0.75</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -222,7 +216,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -243,10 +237,10 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>0.94999998807907104</real>
-							<real>0.26408451795578003</real>
-							<integer>2</integer>
-							<integer>2</integer>
+							<real>250</real>
+							<real>100</real>
+							<integer>0</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -258,8 +252,8 @@
 						<array>
 							<real>0.0</real>
 							<real>0.0</real>
-							<integer>2</integer>
-							<integer>2</integer>
+							<integer>0</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -277,7 +271,7 @@
 						<string>String</string>
 						<key>value</key>
 						<array>
-							<string>Classic</string>
+							<string></string>
 							<false/>
 						</array>
 					</dict>
@@ -289,7 +283,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Mode Menu/button_classic_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -534,7 +528,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.40000000596046448</real>
+							<real>0.5</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -561,16 +555,8 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>rotation</string>
-						<key>type</key>
-						<string>Degrees</string>
-						<key>value</key>
-						<real>-0.4357319176197052</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -590,10 +576,10 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>0.94999998807907104</real>
-							<real>0.17605634033679962</real>
-							<integer>2</integer>
-							<integer>2</integer>
+							<real>234</real>
+							<real>65</real>
+							<integer>0</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -605,8 +591,8 @@
 						<array>
 							<real>0.0</real>
 							<real>0.0</real>
-							<integer>2</integer>
-							<integer>2</integer>
+							<integer>0</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -624,7 +610,7 @@
 						<string>String</string>
 						<key>value</key>
 						<array>
-							<string>Time Attack</string>
+							<string></string>
 							<false/>
 						</array>
 					</dict>
@@ -636,7 +622,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Mode Menu/button_time_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -881,7 +867,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.20000000298023224</real>
+							<real>0.30000001192092896</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -908,7 +894,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -929,10 +915,10 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>0.94999998807907104</real>
-							<real>0.17605634033679962</real>
-							<integer>2</integer>
-							<integer>2</integer>
+							<real>234</real>
+							<real>65</real>
+							<integer>0</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -944,8 +930,8 @@
 						<array>
 							<real>0.0</real>
 							<real>0.0</real>
-							<integer>2</integer>
-							<integer>2</integer>
+							<integer>0</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -963,7 +949,7 @@
 						<string>String</string>
 						<key>value</key>
 						<array>
-							<string>Marathon</string>
+							<string></string>
 							<false/>
 						</array>
 					</dict>
@@ -975,7 +961,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Mode Menu/button_marathon_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1220,7 +1206,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.88995850086212158</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -1234,7 +1220,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -1247,7 +1233,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1268,10 +1254,10 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>0.94999998807907104</real>
-							<real>0.10000000149011612</real>
-							<integer>2</integer>
-							<integer>2</integer>
+							<real>128</real>
+							<real>48</real>
+							<integer>0</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1283,8 +1269,8 @@
 						<array>
 							<real>0.0</real>
 							<real>0.0</real>
-							<integer>2</integer>
-							<integer>2</integer>
+							<integer>0</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1302,7 +1288,7 @@
 						<string>String</string>
 						<key>value</key>
 						<array>
-							<string>&lt;&lt; Back</string>
+							<string></string>
 							<false/>
 						</array>
 					</dict>
@@ -1314,7 +1300,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Highscores/button_back_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1597,8 +1583,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

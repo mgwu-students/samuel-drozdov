@@ -122,9 +122,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.88798302412033081</real>
-							<real>0.73211491107940674</real>
-							<real>0.24639154970645905</real>
+							<real>0.0</real>
+							<real>0.85882359743118286</real>
+							<real>0.95294123888015747</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -1740,8 +1740,6 @@ Zero</string>
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>

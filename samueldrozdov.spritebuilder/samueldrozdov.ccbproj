@@ -80,6 +80,16 @@
 			<key>previewFolderHidden</key>
 			<true/>
 		</dict>
+		<key>Assets</key>
+		<dict>
+			<key>isDirty</key>
+			<true/>
+		</dict>
+		<key>Assets/In-Game/sight_1.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>1</integer>
+		</dict>
 		<key>Sprites</key>
 		<dict/>
 		<key>ccbResources</key>
@@ -172,6 +182,16 @@
 		<dict>
 			<key>scaleFrom</key>
 			<integer>4</integer>
+		</dict>
+		<key>myResources/redBall copy.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>1</integer>
+		</dict>
+		<key>myResources/redBall.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>versionStr</key>
