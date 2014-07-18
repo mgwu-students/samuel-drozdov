@@ -72,7 +72,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.49500000476837158</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -160,8 +160,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.68696331977844238</real>
-							<real>0.54160529375076294</real>
+							<real>0.68000000715255737</real>
+							<real>0.54000002145767212</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -367,8 +367,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.68794679641723633</real>
-							<real>0.44981133937835693</real>
+							<real>0.68000000715255737</real>
+							<real>0.43999999761581421</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -574,8 +574,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.80277198553085327</real>
-							<real>0.33500000834465027</real>
+							<real>0.80300003290176392</real>
+							<real>0.33000001311302185</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -900,8 +900,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.45299997925758362</real>
-							<real>0.335999995470047</real>
+							<real>0.45200002193450928</real>
+							<real>0.33000001311302185</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -1227,7 +1227,7 @@
 						<key>value</key>
 						<array>
 							<real>0.15072920918464661</real>
-							<real>0.33623909950256348</real>
+							<real>0.33000001311302185</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -1267,14 +1267,6 @@
 							<string>menuPS</string>
 							<integer>1</integer>
 						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>continuous</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
