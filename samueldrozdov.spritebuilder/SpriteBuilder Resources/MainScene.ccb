@@ -277,6 +277,14 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>togglesSelectedState</string>
+						<key>type</key>
+						<string>Check</string>
+						<key>value</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>backgroundSpriteFrame|Normal</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
@@ -350,7 +358,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Main Menu/button_play_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -616,6 +624,14 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>togglesSelectedState</string>
+						<key>type</key>
+						<string>Check</string>
+						<key>value</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>backgroundSpriteFrame|Normal</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
@@ -676,7 +692,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Main Menu/button_play_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1259,6 +1275,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

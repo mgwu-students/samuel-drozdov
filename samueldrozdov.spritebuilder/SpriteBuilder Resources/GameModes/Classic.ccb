@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>40</integer>
+	<integer>42</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -2441,8 +2441,8 @@ Get 10 Hits</string>
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>40</real>
-									<real>40</real>
+									<real>155</real>
+									<real>53</real>
 									<integer>0</integer>
 									<integer>0</integer>
 								</array>
@@ -2475,9 +2475,17 @@ Get 10 Hits</string>
 								<string>String</string>
 								<key>value</key>
 								<array>
-									<string>Calibrate</string>
+									<string></string>
 									<false/>
 								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>togglesSelectedState</string>
+								<key>type</key>
+								<string>Check</string>
+								<key>value</key>
+								<true/>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -2487,7 +2495,7 @@ Get 10 Hits</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbButtonNormal.png</string>
+									<string>Assets/In-Game/button_calibrate_1.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -2522,7 +2530,7 @@ Get 10 Hits</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbButtonNormal.png</string>
+									<string>Assets/In-Game/button_calibrate_1.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -2685,6 +2693,8 @@ Get 10 Hits</string>
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>

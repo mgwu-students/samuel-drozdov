@@ -2443,8 +2443,8 @@ Zero</string>
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>40</real>
-									<real>40</real>
+									<real>155</real>
+									<real>53</real>
 									<integer>0</integer>
 									<integer>0</integer>
 								</array>
@@ -2477,7 +2477,7 @@ Zero</string>
 								<string>String</string>
 								<key>value</key>
 								<array>
-									<string>Calibrate</string>
+									<string></string>
 									<false/>
 								</array>
 							</dict>
@@ -2489,7 +2489,7 @@ Zero</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbButtonNormal.png</string>
+									<string>Assets/In-Game/button_calibrate_1.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -2524,7 +2524,7 @@ Zero</string>
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbButtonNormal.png</string>
+									<string>Assets/In-Game/button_calibrate_1.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -2687,6 +2687,8 @@ Zero</string>
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>

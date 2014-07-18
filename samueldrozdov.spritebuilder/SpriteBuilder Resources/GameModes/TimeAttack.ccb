@@ -1520,8 +1520,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -2443,8 +2441,8 @@ Click To Shoot
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>40</real>
-									<real>40</real>
+									<real>155</real>
+									<real>53</real>
 									<integer>0</integer>
 									<integer>0</integer>
 								</array>
@@ -2477,9 +2475,17 @@ Click To Shoot
 								<string>String</string>
 								<key>value</key>
 								<array>
-									<string>Calibrate</string>
+									<string></string>
 									<false/>
 								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>togglesSelectedState</string>
+								<key>type</key>
+								<string>Check</string>
+								<key>value</key>
+								<true/>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -2489,7 +2495,7 @@ Click To Shoot
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbButtonNormal.png</string>
+									<string>Assets/In-Game/button_calibrate_1.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -2524,7 +2530,7 @@ Click To Shoot
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>ccbResources/ccbButtonNormal.png</string>
+									<string>Assets/In-Game/button_calibrate_1.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -2687,6 +2693,8 @@ Click To Shoot
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>

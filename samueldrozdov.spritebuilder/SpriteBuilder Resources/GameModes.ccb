@@ -153,8 +153,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -277,6 +275,14 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>togglesSelectedState</string>
+						<key>type</key>
+						<string>Check</string>
+						<key>value</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>backgroundSpriteFrame|Normal</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
@@ -293,9 +299,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.36011859774589539</real>
 							<real>1</real>
-							<real>0.26386302709579468</real>
+							<real>0.97566616535186768</real>
+							<real>0.95912885665893555</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -350,7 +356,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Mode Menu/button_classic_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -494,6 +500,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -616,6 +624,14 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>togglesSelectedState</string>
+						<key>type</key>
+						<string>Check</string>
+						<key>value</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>backgroundSpriteFrame|Normal</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
@@ -689,7 +705,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Mode Menu/button_time_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -955,6 +971,14 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>togglesSelectedState</string>
+						<key>type</key>
+						<string>Check</string>
+						<key>value</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>backgroundSpriteFrame|Normal</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
@@ -1028,7 +1052,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Mode Menu/button_time_1.png</string>
 						</array>
 					</dict>
 					<dict>
