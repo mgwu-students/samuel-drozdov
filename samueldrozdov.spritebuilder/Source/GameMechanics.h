@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
+#import "CCScene.h"
+
 #import <Foundation/Foundation.h>
 #import <CoreMotion/CoreMotion.h>
 
-@interface GameMechanics : NSObject
+@interface GameMechanics : CCScene
 
 + (instancetype)sharedInstance;
 
