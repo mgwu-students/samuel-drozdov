@@ -10,6 +10,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreMotion/CoreMotion.h>
+#import "GameMechanics.h"
+#import "Ball.h"
+#import "Crosshair.h"
+#import "PauseScreen.h"
+
+#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 
 @interface GameMechanics : CCScene
 

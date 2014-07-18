@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
-#import "CCScene.h"
+#import "GameMechanics.h"
 
-@interface Marathon : CCScene <CCPhysicsCollisionDelegate>
+@interface Marathon : GameMechanics <CCPhysicsCollisionDelegate>
 
 @end

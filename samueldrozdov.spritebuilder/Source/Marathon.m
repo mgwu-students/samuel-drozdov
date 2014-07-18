@@ -8,12 +8,6 @@
 
 #import "Marathon.h"
 
-#import <CoreMotion/CoreMotion.h>
-#import "GameMechanics.h"
-#import "Ball.h"
-#import "Crosshair.h"
-#import "PauseScreen.h"
-
 @implementation Marathon {
     // time variables
     CCLabelTTF *_timeLabel;
