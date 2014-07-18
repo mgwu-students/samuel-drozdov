@@ -30,8 +30,6 @@
     
     Ball *ball;
     Crosshair *crosshair;
-    
-    float calibration;
 }
 
 - (id)init
@@ -50,7 +48,6 @@
         // sets up the timer: method that updates every 0.01 second
         [self schedule:@selector(updateTimer:) interval:0.01f];
         
-        calibration = 0;
     }
     return self;
 }
@@ -93,7 +90,7 @@
 
 -(void)calibrate {
     crosshair.position = ccp(bbsize.width/2, bbsize.height/2);
-    calibration = -[GameMechanics sharedInstance].motionManager.accelerometerData.acceleration.y;
+    [GameMechanics sharedInstance].calibration = -[GameMechanics sharedInstance].motionManager.accelerometerData.acceleration.y;
 }
 
 #pragma mark - Touch Updates
@@ -156,7 +153,7 @@
                                               sharedInstance].motionManager.accelerometerData;
         CMAcceleration acceleration = accelerometerData.acceleration;
         CGFloat newXPosition = crosshair.position.x + acceleration.x * 1500 * delta;
-        CGFloat newYPosition = crosshair.position.y + (acceleration.y+calibration) * 1500 * delta;
+        CGFloat newYPosition = crosshair.position.y + (acceleration.y+[GameMechanics sharedInstance].calibration) * 1500 * delta;
     
         newXPosition = clampf(newXPosition, 0, bbsize.width);
         newYPosition = clampf(newYPosition, 0, bbsize.height);

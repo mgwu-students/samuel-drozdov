@@ -17,6 +17,7 @@
 @property (nonatomic, assign) NSString *previousGameMode;
 @property (nonatomic, assign) int ballRadius;
 @property (nonatomic, assign) bool paused;
+@property (nonatomic, assign) float calibration;
 
 @property (nonatomic, assign) int score;
 @property (nonatomic, assign) int time;

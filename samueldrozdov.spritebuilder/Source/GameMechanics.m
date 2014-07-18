@@ -36,6 +36,7 @@ static GameMechanics *sharedInstance = nil;
         self.zenScore = 0;
         self.marathonScore = 0;
         self.insanityScore = 0;
+        self.calibration = 0;
     }
     return self;
 }
