@@ -10,6 +10,4 @@
 
 @interface HighScores : CCScene
 
--(void)updateScores;
-
 @end

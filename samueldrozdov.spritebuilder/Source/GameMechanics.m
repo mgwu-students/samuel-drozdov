@@ -27,16 +27,27 @@ static GameMechanics *sharedInstance = nil;
 {
     if (self = [super init])
     {
-        _motionManager = [[CMMotionManager alloc] init];
+        self.motionManager = [[CMMotionManager alloc] init];
         
         self.highScoreSet = false;
+        self.newMedal = false;
         self.paused = false;
-        self.classicScore = 0;
         self.ballRadius = 32;
+        self.calibration = 0;
+        
+        self.classicScore = 0;
         self.zenScore = 0;
         self.marathonScore = 0;
-        self.insanityScore = 0;
-        self.calibration = 0;
+        
+        self.classicB = false;
+        self.classicS = false;
+        self.classicG = false;
+        self.timeAttackB = false;
+        self.timeAttackS = false;
+        self.timeAttackG = false;
+        self.marathonB = false;
+        self.marathonS = false;
+        self.marathonG = false;
     }
     return self;
 }

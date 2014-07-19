@@ -47,37 +47,42 @@
 {
     [super onEnter];
     [self checkMedals];
+    [self updateMedals];
     [self updateScores];
 }
 
 -(void)checkMedals {
+    
     float classicScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"]).floatValue;
-    int timeAttackScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"TimeAttackHighScore"]).intValue;
     float marathonScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).intValue;
+    int timeAttackScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"TimeAttackHighScore"]).intValue;
     
-    if(classicScore < 30) {
-        _classicBronze.visible = false;
-    } if(classicScore < 20) {
-        _classicSilver.visible = false;
-    } if(classicScore < 12) {
-        _classicGold.visible = false;
-    }
+    if(classicScore < 30) [GameMechanics sharedInstance].classicB = true;
+    if(classicScore < 20) [GameMechanics sharedInstance].classicS = true;
+    if(classicScore < 12) [GameMechanics sharedInstance].classicG = true;
     
-    if(marathonScore > 10) {
-        _marathonBronze.visible = false;
-    } if(marathonScore > 30) {
-        _marathonSilver.visible = false;
-    } if(marathonScore > 50) {
-        _marathonGold.visible = false;
-    }
+    if(marathonScore > 10) [GameMechanics sharedInstance].marathonB = true;
+    if(marathonScore > 30) [GameMechanics sharedInstance].marathonS = true;
+    if(marathonScore > 50) [GameMechanics sharedInstance].marathonG = true;
     
-    if(timeAttackScore > 10) {
-        _timeAttackBronze.visible = false;
-    } if(timeAttackScore > 17) {
-        _timeAttackSilver.visible = false;
-    } if(timeAttackScore > 25) {
-        _timeAttackGold.visible = false;
-    }
+    if(timeAttackScore > 10) [GameMechanics sharedInstance].timeAttackB = true;
+    if(timeAttackScore > 17) [GameMechanics sharedInstance].timeAttackS = true;
+    if(timeAttackScore > 25) [GameMechanics sharedInstance].timeAttackG = true;
+}
+
+// sets the 'covers' of the medals' visibility to false so they are visible
+-(void)updateMedals {
+    if([GameMechanics sharedInstance].classicB) _classicBronze.visible = false;
+    if([GameMechanics sharedInstance].classicS) _classicSilver.visible = false;
+    if([GameMechanics sharedInstance].classicG) _classicGold.visible = false;
+    
+    if([GameMechanics sharedInstance].marathonB) _marathonBronze.visible = false;
+    if([GameMechanics sharedInstance].marathonS) _marathonSilver.visible = false;
+    if([GameMechanics sharedInstance].marathonG) _marathonGold.visible = false;
+    
+    if([GameMechanics sharedInstance].timeAttackB) _timeAttackBronze.visible = false;
+    if([GameMechanics sharedInstance].timeAttackS) _timeAttackSilver.visible = false;
+    if([GameMechanics sharedInstance].timeAttackG) _timeAttackSilver.visible = false;
 }
 
 -(void)updateScores {

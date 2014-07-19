@@ -28,8 +28,8 @@
     [[CCDirector sharedDirector] replaceScene:scoresScene];
 }
 
-//When the play button is clicked the Gameplay scene is loaded
-- (void)settings {
+//When the music button is clicked the music toggles on and off
+- (void)music {
 }
 
 @end

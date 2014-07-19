@@ -37,14 +37,19 @@
 -(void)didLoadFromCCB {
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
+    
     _newHighScore.visible = NO;
     _newMedal.visible = NO;
     
-    if([GameMechanics sharedInstance].highScoreSet) {
+    // showing the newMedal label triumphs the newHighScore label
+    if(![GameMechanics sharedInstance].newMedal && [GameMechanics sharedInstance].highScoreSet) {
         _newHighScore.visible = YES;
+    } else if([GameMechanics sharedInstance].newMedal) {
+        _newMedal.visible = YES;
     }
     
     [self updateLabels];
+    [self updateMedals];
 }
 
 -(void)updateLabels {
@@ -64,6 +69,24 @@
         _finalScoreLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
     } else {
         _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];
+    }
+}
+
+-(void)updateMedals {
+    if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Classic"]) {
+        if([GameMechanics sharedInstance].classicB) _bronzeCover.visible = false;
+        if([GameMechanics sharedInstance].classicS) _silverCover.visible = false;
+        if([GameMechanics sharedInstance].classicG) _goldCover.visible = false;
+    }
+    if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Marathon"]) {
+        if([GameMechanics sharedInstance].marathonB) _bronzeCover.visible = false;
+        if([GameMechanics sharedInstance].marathonS) _silverCover.visible = false;
+        if([GameMechanics sharedInstance].marathonG) _goldCover.visible = false;
+    }
+    if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/TimeAttack"]) {
+        if([GameMechanics sharedInstance].timeAttackB) _bronzeCover.visible = false;
+        if([GameMechanics sharedInstance].timeAttackS) _silverCover.visible = false;
+        if([GameMechanics sharedInstance].timeAttackG) _goldCover.visible = false;
     }
 }
 
