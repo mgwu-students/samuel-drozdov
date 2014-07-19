@@ -31,20 +31,8 @@
 
 -(id)init {
     if(self = [super init]) {
-        // classic medals
-        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"cB"];
-        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"cS"];
-        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"cG"];
-        // time attack medals
-        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"TB"];
-        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"TS"];
-        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"TG"];
-        // marathon medals
-        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"mB"];
-        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"mS"];
-        [[NSUserDefaults standardUserDefaults] setObject:false forKey:@"mG"];
-
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
     }
     return self;
 }
@@ -58,46 +46,37 @@
 - (void)onEnter
 {
     [super onEnter];
-    _classicBronze.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"cB"];
-    _classicSilver.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"cB"];
-    _classicGold.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"cB"];
-    _marathonBronze.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"mB"];
-    _marathonSilver.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"mS"];
-    _marathonGold.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"mG"];
-    _timeAttackBronze.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"TB"];
-    _timeAttackSilver.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"TS"];
-    _timeAttackGold.visible = (bool)[[NSUserDefaults standardUserDefaults] objectForKey:@"TG"];
     [self checkMedals];
     [self updateScores];
 }
 
 -(void)checkMedals {
     float classicScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"]).floatValue;
-    int TimeAttackScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"TimeAttackHighScore"]).intValue;
+    int timeAttackScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"TimeAttackHighScore"]).intValue;
     float marathonScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).intValue;
     
     if(classicScore < 30) {
-        _classicBronze.visible = true;
+        _classicBronze.visible = false;
     } if(classicScore < 20) {
-        _classicSilver.visible = true;
+        _classicSilver.visible = false;
     } if(classicScore < 12) {
-            _classicGold.visible = true;
+        _classicGold.visible = false;
     }
     
     if(marathonScore > 10) {
-        _marathonBronze.visible = true;
+        _marathonBronze.visible = false;
     } if(marathonScore > 30) {
-        _marathonSilver.visible = true;
+        _marathonSilver.visible = false;
     } if(marathonScore > 50) {
-        _marathonGold.visible = true;
+        _marathonGold.visible = false;
     }
     
-    if(TimeAttackScore > 10) {
-        _timeAttackBronze.visible = true;
-    } if(TimeAttackScore > 17) {
-        _timeAttackSilver.visible = true;
-    } if(TimeAttackScore > 25) {
-        _timeAttackGold.visible = true;
+    if(timeAttackScore > 10) {
+        _timeAttackBronze.visible = false;
+    } if(timeAttackScore > 17) {
+        _timeAttackSilver.visible = false;
+    } if(timeAttackScore > 25) {
+        _timeAttackGold.visible = false;
     }
 }
 

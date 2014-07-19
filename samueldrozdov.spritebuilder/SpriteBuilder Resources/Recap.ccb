@@ -173,7 +173,7 @@
 						<key>displayName</key>
 						<string>Bronze</string>
 						<key>memberVarAssignmentName</key>
-						<string>_bronzeMedal</string>
+						<string></string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -262,7 +262,7 @@
 						<key>displayName</key>
 						<string>BronzeCover</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>_bronzeCover</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -361,7 +361,7 @@
 						<key>displayName</key>
 						<string>Silver</string>
 						<key>memberVarAssignmentName</key>
-						<string>_silverMedal</string>
+						<string></string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -450,7 +450,7 @@
 						<key>displayName</key>
 						<string>SilverCover</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>_silverCover</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -470,7 +470,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>124.23045349121094</real>
+									<real>125.70938873291016</real>
 									<real>4.4368019104003906</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -549,7 +549,7 @@
 						<key>displayName</key>
 						<string>Gold</string>
 						<key>memberVarAssignmentName</key>
-						<string>_goldMedal</string>
+						<string></string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -638,7 +638,7 @@
 						<key>displayName</key>
 						<string>GoldCover</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>_goldCover</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -799,95 +799,6 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>26</integer>
-				<key>baseClass</key>
-				<string>CCSprite</string>
-				<key>children</key>
-				<array/>
-				<key>customClass</key>
-				<string></string>
-				<key>displayName</key>
-				<string>New Medal</string>
-				<key>memberVarAssignmentName</key>
-				<string>_newMedal</string>
-				<key>memberVarAssignmentType</key>
-				<integer>1</integer>
-				<key>properties</key>
-				<array>
-					<dict>
-						<key>name</key>
-						<string>name</string>
-						<key>type</key>
-						<string>StringSimple</string>
-						<key>value</key>
-						<string></string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>position</string>
-						<key>type</key>
-						<string>Position</string>
-						<key>value</key>
-						<array>
-							<real>0.5</real>
-							<real>0.64999997615814209</real>
-							<integer>0</integer>
-							<integer>2</integer>
-							<integer>2</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>anchorPoint</string>
-						<key>type</key>
-						<string>Point</string>
-						<key>value</key>
-						<array>
-							<real>0.5</real>
-							<real>0.5</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>scale</string>
-						<key>type</key>
-						<string>ScaleLock</string>
-						<key>value</key>
-						<array>
-							<real>1</real>
-							<real>1</real>
-							<false/>
-							<integer>0</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>spriteFrame</string>
-						<key>type</key>
-						<string>SpriteFrame</string>
-						<key>value</key>
-						<array>
-							<string></string>
-							<string>Assets/Game Over/alert_medal_1.png</string>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>color</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
-						</array>
-					</dict>
-				</array>
-			</dict>
-			<dict>
-				<key>UUID</key>
 				<integer>29</integer>
 				<key>baseClass</key>
 				<string>CCSprite</string>
@@ -919,10 +830,10 @@
 						<key>value</key>
 						<array>
 							<real>160</real>
-							<real>256</real>
+							<real>0.5</real>
 							<integer>0</integer>
 							<integer>1</integer>
-							<integer>1</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1008,10 +919,10 @@
 						<key>value</key>
 						<array>
 							<real>0.69300001859664917</real>
-							<real>159.03999328613281</real>
+							<real>0.32599997520446777</real>
 							<integer>0</integer>
 							<integer>2</integer>
-							<integer>1</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1113,7 +1024,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonHighlighted.png</string>
+							<string>Assets/Game Over/button_restart_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1137,7 +1048,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Game Over/button_restart_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1156,7 +1067,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Game Over/button_restart_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1334,10 +1245,10 @@
 						<key>value</key>
 						<array>
 							<real>71.360000610351562</real>
-							<real>159.03999328613281</real>
+							<real>0.32599997520446777</real>
 							<integer>0</integer>
 							<integer>1</integer>
-							<integer>1</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1439,7 +1350,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonHighlighted.png</string>
+							<string>Assets/Game Over/button_menu_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1463,7 +1374,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Game Over/button_restart_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1482,7 +1393,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>Assets/Game Over/button_restart_1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1660,7 +1571,7 @@
 						<key>value</key>
 						<array>
 							<real>0.65718895196914673</real>
-							<real>0.49500000476837158</real>
+							<real>0.54199999570846558</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -1867,7 +1778,7 @@
 						<key>value</key>
 						<array>
 							<real>0.65586680173873901</real>
-							<real>0.39500001072883606</real>
+							<real>0.44200000166893005</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -2043,6 +1954,95 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
+				<integer>26</integer>
+				<key>baseClass</key>
+				<string>CCSprite</string>
+				<key>children</key>
+				<array/>
+				<key>customClass</key>
+				<string></string>
+				<key>displayName</key>
+				<string>New Medal</string>
+				<key>memberVarAssignmentName</key>
+				<string>_newMedal</string>
+				<key>memberVarAssignmentType</key>
+				<integer>1</integer>
+				<key>properties</key>
+				<array>
+					<dict>
+						<key>name</key>
+						<string>name</string>
+						<key>type</key>
+						<string>StringSimple</string>
+						<key>value</key>
+						<string></string>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>position</string>
+						<key>type</key>
+						<string>Position</string>
+						<key>value</key>
+						<array>
+							<real>0.5</real>
+							<real>0.67500001192092896</real>
+							<integer>0</integer>
+							<integer>2</integer>
+							<integer>2</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>anchorPoint</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.5</real>
+							<real>0.5</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>scale</string>
+						<key>type</key>
+						<string>ScaleLock</string>
+						<key>value</key>
+						<array>
+							<real>1</real>
+							<real>1</real>
+							<false/>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>spriteFrame</string>
+						<key>type</key>
+						<string>SpriteFrame</string>
+						<key>value</key>
+						<array>
+							<string></string>
+							<string>Assets/Game Over/alert_medal_1.png</string>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>color</string>
+						<key>type</key>
+						<string>Color3</string>
+						<key>value</key>
+						<array>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
+						</array>
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>UUID</key>
 				<integer>25</integer>
 				<key>baseClass</key>
 				<string>CCSprite</string>
@@ -2074,7 +2074,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.64999997615814209</real>
+							<real>0.67500001192092896</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -2268,7 +2268,7 @@
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>0.15313434600830078</real>
 			<key>position</key>
 			<real>0.0</real>
 			<key>resolution</key>

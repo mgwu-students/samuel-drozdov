@@ -15,6 +15,11 @@
     CCLabelTTF *_highScoreLabel;
     CCLabelTTF *_finalScoreLabel;
     CCLabelTTF *_newHighScore;
+    CCLabelTTF *_newMedal;
+    
+    CCNode *_bronzeCover;
+    CCNode *_silverCover;
+    CCNode *_goldCover;
 }
 
 - (void)onEnter
@@ -33,6 +38,7 @@
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
     _newHighScore.visible = NO;
+    _newMedal.visible = NO;
     
     if([GameMechanics sharedInstance].highScoreSet) {
         _newHighScore.visible = YES;
@@ -50,8 +56,7 @@
     } else if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Marathon"]) {
         _highScoreLabel.string = [NSString stringWithFormat:@"%.2lf", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).floatValue];
     } 
-    
-    //youScoreLabel
+
     //youScoreLabel
     if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Classic"]) {
         _finalScoreLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];

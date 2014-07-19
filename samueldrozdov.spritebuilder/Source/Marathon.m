@@ -112,7 +112,7 @@
     _instructions.visible = false;
     _inGame.visible = true;
     
-    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5 && start) {
+    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5 && _instructions.visible == false) {
         [self pause];
     }
     
@@ -212,6 +212,7 @@
     [GameMechanics sharedInstance].paused = true;
     [[GameMechanics sharedInstance].motionManager stopAccelerometerUpdates];
     
+    self.userInteractionEnabled = FALSE;
     crosshair.paused = true;
     ball.paused = true;
     _physicsNode.paused = true;
@@ -220,6 +221,7 @@
 -(void)continueGame {
     [[GameMechanics sharedInstance].motionManager startAccelerometerUpdates];
     
+    self.userInteractionEnabled = TRUE;
     crosshair.paused = false;
     ball.paused = false;
     _physicsNode.paused = false;

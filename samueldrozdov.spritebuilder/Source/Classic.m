@@ -70,12 +70,12 @@
     // add the ball to the Gameplay scene in the physicsNode
     [_physicsNode addChild:ball];
     
-    start = false;
-    
     // reset shared counters
     [GameMechanics sharedInstance].classicTime = 0;
     [GameMechanics sharedInstance].score = 10;
     [GameMechanics sharedInstance].previousGameMode = @"GameModes/Classic";
+    
+    start = false;
     
     ball.score = 10;
     [ball updateScore];
@@ -96,7 +96,7 @@
     _instructions.visible = false;
     _inGame.visible = true;
     
-    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5 && start) {
+    if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5 && _instructions.visible == false) {
         [self pause];
     }
     
@@ -190,6 +190,7 @@
     [GameMechanics sharedInstance].paused = true;
     [[GameMechanics sharedInstance].motionManager stopAccelerometerUpdates];
     
+    self.userInteractionEnabled = FALSE;
     crosshair.paused = true;
     ball.paused = true;
     _physicsNode.paused = true;
@@ -198,6 +199,7 @@
 -(void)continueGame {
     [[GameMechanics sharedInstance].motionManager startAccelerometerUpdates];
     
+    self.userInteractionEnabled = TRUE;
     crosshair.paused = false;
     ball.paused = false;
     _physicsNode.paused = false;
