@@ -31,6 +31,7 @@
 {
     [super onExit];
     [GameMechanics sharedInstance].highScoreSet = false;
+    [GameMechanics sharedInstance].newMedal = false;
 }
 
 // is called when CCB file has completed loading
@@ -45,7 +46,7 @@
     if(![GameMechanics sharedInstance].newMedal && [GameMechanics sharedInstance].highScoreSet) {
         _newHighScore.visible = YES;
     } else if([GameMechanics sharedInstance].newMedal) {
-        _newMedal.visible = YES;
+        _newMedal.visible = YES; // HOW TO CHECK??
     }
     
     [self updateLabels];
@@ -65,11 +66,11 @@
     //youScoreLabel
     if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Classic"]) {
         _finalScoreLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
+    } else if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/TimeAttack"]) {
+        _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];
     } else if([[GameMechanics sharedInstance].previousGameMode isEqual:@"GameModes/Marathon"]) {
         _finalScoreLabel.string = [NSString stringWithFormat:@"%.2lf", [GameMechanics sharedInstance].classicTime];
-    } else {
-        _finalScoreLabel.string = [NSString stringWithFormat:@"%d", [GameMechanics sharedInstance].score];
-    }
+    } 
 }
 
 -(void)updateMedals {

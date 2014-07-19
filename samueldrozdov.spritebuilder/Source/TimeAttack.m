@@ -56,6 +56,7 @@
 {
     [super onExit];
     [[GameMechanics sharedInstance].motionManager stopAccelerometerUpdates];
+    [[GameMechanics sharedInstance] checkMedals];
 }
 
 // is called when CCB file has completed loading

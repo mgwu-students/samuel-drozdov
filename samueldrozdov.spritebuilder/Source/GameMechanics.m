@@ -52,6 +52,25 @@ static GameMechanics *sharedInstance = nil;
     return self;
 }
 
+// stores medals earned
+-(void)checkMedals {
+    float classicScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"ClassicHighScore"]).floatValue;
+    float marathonScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"MarathonHighScore"]).floatValue;
+    int timeAttackScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"TimeAttackHighScore"]).intValue;
+    
+    if(classicScore <= 30) [GameMechanics sharedInstance].classicB = true;
+    if(classicScore <= 20) [GameMechanics sharedInstance].classicS = true;
+    if(classicScore <= 12) [GameMechanics sharedInstance].classicG = true;
+    
+    if(marathonScore >= 10) [GameMechanics sharedInstance].marathonB = true;
+    if(marathonScore >= 30) [GameMechanics sharedInstance].marathonS = true;
+    if(marathonScore >= 50) [GameMechanics sharedInstance].marathonG = true;
+    
+    if(timeAttackScore >= 10) [GameMechanics sharedInstance].timeAttackB = true;
+    if(timeAttackScore >= 17) [GameMechanics sharedInstance].timeAttackS = true;
+    if(timeAttackScore >= 25) [GameMechanics sharedInstance].timeAttackG = true;
+}
+
 
 
 

@@ -20,6 +20,7 @@
 @interface GameMechanics : CCScene
 
 + (instancetype)sharedInstance;
+-(void)checkMedals;
 
 @property (nonatomic, strong) CMMotionManager *motionManager;
 @property (nonatomic, assign) NSString *previousGameMode;
