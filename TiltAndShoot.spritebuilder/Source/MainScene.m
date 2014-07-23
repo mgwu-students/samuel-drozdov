@@ -33,13 +33,11 @@
     CCNodeColor *_timerCover;
 }
 
-- (void)onEnter
-{
+- (void)onEnter {
     [super onEnter];
     [_motionManager startAccelerometerUpdates];
 }
-- (void)onExit
-{
+- (void)onExit {
     [super onExit];
     [_motionManager stopAccelerometerUpdates];
 }
@@ -181,7 +179,6 @@
 }
 
 -(void)endGame {
-    
     NSNumber *playCount = [[NSUserDefaults standardUserDefaults] objectForKey:@"PlayCount"];//
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:playCount.intValue+1] forKey:@"PlayCount"];//
     
