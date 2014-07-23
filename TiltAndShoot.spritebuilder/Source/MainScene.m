@@ -77,6 +77,8 @@
     int crosshairDistToBall = sqrtf(powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2));
     // check if the ball contains the crosshair
     if(ballRadius >= crosshairDistToBall) {
+        [MGWU logEvent:@"BallHit" withParams:nil];//
+        
         _instructions.visible = false;
         _scoreLabel.visible = true;
         _keepShootingLabel.visible = true;
@@ -108,6 +110,8 @@
         hit.position = _ball.positionInPoints;
         [_ball.parent addChild:hit z:-1];
     } else {
+        [MGWU logEvent:@"BallMiss" withParams:nil];
+        
         // load particle effect
         CCParticleSystem *missed = (CCParticleSystem *)[CCBReader load:@"ShootParticle"];
         // make the particle effect clean itself up, once it is completed
@@ -153,12 +157,15 @@
     if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Start"] integerValue]) {
         _timerCover.position = ccp(_timerCover.position.x, _timerCover.position.y - 0.2 );
         if(_timerCover.position.y <= 10){
+            [MGWU logEvent:@"LostByTime" withParams:nil];
             [self endGame];
         }
     }
 }
 
 -(void)calibrate {
+    [MGWU logEvent:@"Calibrated" withParams:nil];//
+    
     _crosshair.position = ccp(bbSize.width/2, bbSize.height/2);
     float calibrationX = -_motionManager.accelerometerData.acceleration.x;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:calibrationX] forKey:@"calibrationX"];
@@ -174,6 +181,10 @@
 }
 
 -(void)endGame {
+    
+    NSNumber *playCount = [[NSUserDefaults standardUserDefaults] objectForKey:@"PlayCount"];//
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:playCount.intValue+1] forKey:@"PlayCount"];//
+    
     NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"HighScore"];
     NSNumber *prevScore = [NSNumber numberWithInt:score];
     if(prevScore.intValue > highScore.intValue) {
@@ -182,6 +193,10 @@
         [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"HighScore"];
     }
     [[NSUserDefaults standardUserDefaults] setObject:prevScore forKey:@"PreviousScore"];
+    
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: playCount, @"PlayCount", prevScore, @"PreviousScore", nil];//
+    
+    [MGWU logEvent:@"EndGame" withParams:params];
     [[NSUserDefaults standardUserDefaults] synchronize];
     // change scenes
     CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];

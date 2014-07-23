@@ -42,12 +42,14 @@
 }
 
 -(void)restart {
+    [MGWU logEvent:@"ClickedRestart" withParams:nil];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Start"];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
 
 -(void)menu {
+    [MGWU logEvent:@"ClickedMenu" withParams:nil];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"Start"];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
