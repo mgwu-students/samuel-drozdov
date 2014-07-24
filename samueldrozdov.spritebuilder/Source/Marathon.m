@@ -15,6 +15,7 @@
     
     // size of the bounding box
     CGSize bbsize;
+    float power;
     
     CCPhysicsNode *_physicsNode;
     CCNode *_inGame;
@@ -40,6 +41,7 @@
         
         // sets up the timer: method that updates every 0.01 second
         [self schedule:@selector(timer:) interval:0.01f];
+        power = 0;
         
     }
     return self;
@@ -93,17 +95,16 @@
     // add the ball to the Gameplay scene in the physicsNode
     [_physicsNode addChild:ball];
     
-    
-    // only for marathon
-    ball.score = 5;
+    ball.score = 0;
     [ball updateScore];
 }
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)nodeA wildcard:(CCNode *)nodeB {
     if(start) {
-        ball.score--;
-        [ball updateScore];
+        [self endGame];
     }
+    
+    
 }
 
 #pragma mark - Touch Events
@@ -116,21 +117,23 @@
     if(![GameMechanics sharedInstance].paused && touch.locationInWorld.y > bbsize.height*4/5 && _instructions.visible == false) {
         [self pause];
     }
-    
+    /*
     if(!start) {
         [ball.physicsBody applyImpulse:ccp(arc4random_uniform(100), arc4random_uniform(100))];
     }
+     */
     
     // starts the timer and balls movement;
     start = true;
-    
     int ballX = ball.position.x;
     int ballY = ball.position.y;
     int crosshairX = crosshair.position.x;
     int crosshairY = crosshair.position.y;
     float distFromBallCenter = powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2);
     // check if the ball contains the crosshair
-    if( powf([GameMechanics sharedInstance].ballRadius, 2) >= distFromBallCenter) {
+    if(powf([GameMechanics sharedInstance].ballRadius, 2) >= distFromBallCenter) {
+        // starts the timer;
+        start = true;
         
         // load particle effect
         CCParticleSystem *hit = (CCParticleSystem *)[CCBReader load:@"HitParticle"];
@@ -141,15 +144,12 @@
         // add the particle effect to the same node the ball is on
         [ball.parent addChild:hit z:-1];
         
-        if(start) {
-            ball.score = 4;
-            [ball updateScore];
-             [ball.physicsBody applyImpulse:ccp(arc4random_uniform(100),arc4random_uniform(100))];//Fix!
-//            [ball removeFromParent];
-//            [self addBall];
-        }
-        
-    } else {
+        [ball.physicsBody applyForce:ccp((ballX-crosshairX)*power,(ballY-crosshairY)*power)];
+        ball.score++;
+        [ball updateScore];
+        power += 0.5;
+    }
+    else {
         // load particle effect
         CCParticleSystem *missed = (CCParticleSystem *)[CCBReader load:@"ShootParticle"];
         // make the particle effect clean itself up, once it is completed
@@ -178,11 +178,6 @@
         newXPosition = clampf(newXPosition, 0, bbsize.width);
         newYPosition = clampf(newYPosition, 0, bbsize.height);
         crosshair.position = CGPointMake(newXPosition, newYPosition);
-    }
-    
-    // if ball reaches 0 the game ends
-    if(ball.score == 0) {
-        [self endGame];
     }
     
     // updates the time counter

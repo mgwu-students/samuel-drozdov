@@ -1202,8 +1202,8 @@
 							<real>175</real>
 							<real>266</real>
 							<integer>0</integer>
-							<integer>0</integer>
-							<integer>0</integer>
+							<integer>1</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1215,8 +1215,8 @@
 						<array>
 							<real>100</real>
 							<real>40</real>
-							<integer>0</integer>
-							<integer>0</integer>
+							<integer>1</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1350,8 +1350,6 @@
 								<real>0.60000002384185791</real>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
