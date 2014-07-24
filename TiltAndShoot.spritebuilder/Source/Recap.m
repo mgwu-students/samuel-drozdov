@@ -10,7 +10,12 @@
 
 @implementation Recap {
     CCLabelTTF *_finalScoreLabel;
-    CCLabelTTF *_highScoreLabel;
+    CCLabelTTF *_highScoreLabel1;
+    CCLabelTTF *_highScoreLabel2;
+    CCLabelTTF *_highScoreLabel3;
+    CCLabelTTF *_highScoreLabel4;
+    CCLabelTTF *_highScoreLabel5;
+    
     CCLabelTTF *_newHighScore;
     
     CCNode *_bronzeCover;
@@ -27,7 +32,6 @@
 
 - (void)didLoadFromCCB {
     _finalScoreLabel.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"PreviousScore"]).intValue];
-    _highScoreLabel.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"HighScore"]).intValue];
     
     int prevScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"PreviousScore"]).intValue;
     if(prevScore > 50) {
@@ -39,6 +43,8 @@
     if(prevScore > 150) {
         _goldCover.visible = false;
     }
+    
+    [MGWU submitHighScore:10 byPlayer:@"ashu" forLeaderboard:@"defaultLeaderboard"];
 }
 
 -(void)restart {
