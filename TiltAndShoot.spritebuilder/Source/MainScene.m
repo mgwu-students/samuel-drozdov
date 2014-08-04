@@ -33,6 +33,8 @@
     int power;
     bool firstHit;
     
+    CCNodeGradient *_endGameButton;
+    
     CCNodeColor *_timerCover;
     CCNodeColor *_background;
     
@@ -120,9 +122,12 @@
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touches = [touch locationInWorld];
-    if(touches.y >= bbSize.height*0.9) {
+    if(touches.y >= bbSize.height*0.9 && touches.x <= bbSize.width*0.1) {
         CCScene *colorMarket = [CCBReader loadAsScene:@"ColorMarket"];
         [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
+    }
+    if(_endGameButton.visible && touches.y >= bbSize.height*0.92 && touches.x >= bbSize.width*0.92) {
+        [self endGame];
     }
     
     int ballX = _ball.positionInPoints.x;
@@ -136,6 +141,7 @@
         _scoreLabel.visible = true;
         _keepShootingLabel.visible = true;
         _colorMarketNode.visible = false;
+        _endGameButton.visible = true;
         firstHit = true;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Start"];
         // increase the score and update the labels
