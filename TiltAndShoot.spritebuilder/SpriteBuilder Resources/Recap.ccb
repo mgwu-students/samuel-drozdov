@@ -411,7 +411,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>+50</string>
+									<string>+25</string>
 									<false/>
 								</array>
 							</dict>
@@ -814,7 +814,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>+100</string>
+									<string>+50</string>
 									<false/>
 								</array>
 							</dict>
@@ -1217,7 +1217,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>+150</string>
+									<string>+75</string>
 									<false/>
 								</array>
 							</dict>

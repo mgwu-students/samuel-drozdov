@@ -80,13 +80,17 @@
     int x = [[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] intValue];
     CCColor *color;
     if(x == 1) {
-        color = [CCColor colorWithRed:0.13 green:0.502 blue:0.74];;
+        color = [CCColor colorWithRed:0.302 green:0.427 blue:0.835];
     } else if(x == 2) {
-        color = [CCColor colorWithRed:0.0 green:0.949 blue:0.0];
+        color = [CCColor colorWithRed:0.251 green:0.898 blue:0.251];
     } else if(x == 3) {
-        color = [CCColor colorWithRed:1.0 green:0.62 blue:0.13];
+        color = [CCColor colorWithRed:1.0 green:0.776 blue:0.278];
     } else if(x == 4) {
-        color = [CCColor colorWithRed:0.95 green:0.176 blue:0.176];
+        color = [CCColor colorWithRed:1.0 green:0.278 blue:0.278];
+    } else if(x == 5) {
+        color = [CCColor colorWithRed:0.471 green:0.298 blue:0.839];
+    } else {
+        color = [CCColor colorWithRed:0.227 green:0.773 blue:0.796];
     }
     return color;
 }

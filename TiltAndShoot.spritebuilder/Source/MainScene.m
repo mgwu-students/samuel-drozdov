@@ -15,6 +15,7 @@
     CCNode *_instructions;
     CCNode *_ball;
     CCNode *_crosshair;
+    CCSprite *_pointer;
     CCLabelTTF *_scoreLabel;
     CCPhysicsNode *_physicsNode;
     
@@ -53,6 +54,7 @@
     CCNodeColor *_backgroundColorLabel3;
     CCNodeColor *_backgroundColorLabel4;
     CCNodeColor *_backgroundColorLabel5;
+    CCLabelTTF *_points;
 }
 
 - (void)onEnter {
@@ -73,11 +75,16 @@
     _physicsNode.collisionDelegate = self;
     
     //Color nodes change color of the background(bottom) and the instructions,crosshairs(top)
-    color1 = [CCColor colorWithRed:0.13 green:0.502 blue:0.74];
-    color2 = [CCColor colorWithRed:0.0 green:0.949 blue:0.0];
-    color3 = [CCColor colorWithRed:1.0 green:0.62 blue:0.13];
-    color4 = [CCColor colorWithRed:0.95 green:0.176 blue:0.176];
-    color5 = [CCColor colorWithRed:0.95 green:0.176 blue:0.176];
+    color1 = [CCColor colorWithRed:0.302 green:0.427 blue:0.835];
+    _backgroundColorNode1.color = color1;
+    color2 = [CCColor colorWithRed:0.251 green:0.898 blue:0.251];
+    _backgroundColorNode2.color = color2;
+    color3 = [CCColor colorWithRed:1.0 green:0.776 blue:0.278];
+    _backgroundColorNode3.color = color3;
+    color4 = [CCColor colorWithRed:1.0 green:0.278 blue:0.278];
+    _backgroundColorNode4.color = color4;
+    color5 = [CCColor colorWithRed:0.227 green:0.773 blue:0.796];
+    _backgroundColorNode5.color = color5;
     
     _background.color = [self checkForBackgroundColor];
     _timerCover.color = [self checkForBackgroundColor];
@@ -123,12 +130,80 @@
         color = color4;
     } else if(x == 5) {
         color = color5;
+    } else {
+        color = color1;
     }
     return color;
 }
 
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    // Everything for the color choice popup
+    if (!firstHit) {
+        CGPoint touches = [touch locationInWorld];
+        int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
+        _points.string = [NSString stringWithFormat:@"Points: %d", overallScore];
+        if(_backgroundColorPopup.visible) {
+            if(touches.y > bbSize.height*0.8) {
+                _background.color = color1;
+                _timerCover.color = color1;
+                _backgroundColorPopup.visible = false;
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"backgroundColor"];
+            } else if(touches.y > bbSize.height*0.6) {
+                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color2Unlocked"]
+                   && overallScore >= 500) {
+                    overallScore -= 500;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color2Unlocked"];
+                }
+                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color2Unlocked"] intValue]) {
+                    _background.color = color2;
+                    _timerCover.color = color2;
+                    _backgroundColorPopup.visible = false;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:2] forKey:@"backgroundColor"];
+                }
+            } else if(touches.y > bbSize.height*0.4) {
+                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color3Unlocked"]
+                   && overallScore >= 500) {
+                    overallScore -= 500;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color3Unlocked"];
+                }
+                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color3Unlocked"] intValue]) {
+                    _background.color = color3;
+                    _timerCover.color = color3;
+                    _backgroundColorPopup.visible = false;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:3] forKey:@"backgroundColor"];
+                }
+            } else if(touches.y > bbSize.height*0.2) {
+                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color4Unlocked"]
+                   && overallScore >= 500) {
+                    overallScore -= 500;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color4Unlocked"];
+                }
+                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color4Unlocked"] intValue]) {
+                    _background.color = color4;
+                    _timerCover.color = color4;
+                    _backgroundColorPopup.visible = false;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:4] forKey:@"backgroundColor"];
+                }
+            } else if(touches.y > bbSize.height*0.0) {
+                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color5Unlocked"]
+                   && overallScore >= 500) {
+                    overallScore -= 500;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color5Unlocked"];
+                }
+                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color5Unlocked"] intValue]) {
+                    _background.color = color5;
+                    _timerCover.color = color5;
+                    _backgroundColorPopup.visible = false;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:5] forKey:@"backgroundColor"];
+                }
+            }
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
+        } else if(touches.y > bbSize.height*.85) {
+            _backgroundColorPopup.visible = true;
+        }
+    }
+    
     int ballX = _ball.positionInPoints.x;
     int ballY = _ball.positionInPoints.y;
     int crosshairX = _crosshair.position.x;
@@ -179,65 +254,6 @@
             [self addChild:missed z:0];
         }
     }
-
-    if (!firstHit) {
-        CGPoint touches = [touch locationInWorld];
-        if(_backgroundColorPopup.visible) {
-            int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
-            if(touches.y > bbSize.height*0.8) {
-                _background.color = _backgroundColorNode1.color;
-                _timerCover.color = _backgroundColorNode1.color;
-                _backgroundColorPopup.visible = false;
-            } else if(touches.y > bbSize.height*0.6) {
-                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color2Unlocked"]
-                   && overallScore >= 500) {
-                    overallScore -= 500;
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color2Unlocked"];
-                }
-                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color2Unlocked"] intValue]) {
-                    _background.color = _backgroundColorNode2.color;
-                    _timerCover.color = _backgroundColorNode2.color;
-                    _backgroundColorPopup.visible = false;
-                }
-            } else if(touches.y > bbSize.height*0.4) {
-                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color3Unlocked"]
-                   && overallScore >= 500) {
-                    overallScore -= 500;
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color3Unlocked"];
-                }
-                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color3Unlocked"] intValue]) {
-                    _background.color = _backgroundColorNode3.color;
-                    _timerCover.color = _backgroundColorNode3.color;
-                    _backgroundColorPopup.visible = false;
-                }
-            } else if(touches.y > bbSize.height*0.2) {
-                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color4Unlocked"]
-                   && overallScore >= 500) {
-                    overallScore -= 500;
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color4Unlocked"];
-                }
-                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color4Unlocked"] intValue]) {
-                    _background.color = _backgroundColorNode4.color;
-                    _timerCover.color = _backgroundColorNode4.color;
-                    _backgroundColorPopup.visible = false;
-                }
-            } else if(touches.y > bbSize.height*0.0) {
-                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color5Unlocked"]
-                   && overallScore >= 500) {
-                    overallScore -= 500;
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color5Unlocked"];
-                }
-                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color5Unlocked"] intValue]) {
-                    _background.color = _backgroundColorNode5.color;
-                    _timerCover.color = _backgroundColorNode5.color;
-                    _backgroundColorPopup.visible = false;
-                }
-            }
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
-        } else if(touches.y > bbSize.height*.85) {
-            _backgroundColorPopup.visible = true;
-        }
-    }
 }
 
 // updates that happen every 1/60th second
@@ -285,6 +301,14 @@
         _backgroundColorLabel5.visible = false;
     }
     
+    // finds the angle of the crosshair to the ball and moves the pointer accordingly
+    float angle = ccpAngle(ccp(0,1),ccpSub(_crosshair.position, _ball.positionInPoints));
+    float angleDegrees = 180*angle/M_PI;
+    if(_crosshair.position.x < _ball.positionInPoints.x) {
+        
+        angleDegrees *= -1;
+    }
+    _pointer.rotation = angleDegrees - 180;
     
     // timer only starts after the game starts
     if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Start"] integerValue]) {
@@ -308,6 +332,7 @@
     _holdLabel.visible = false;
     _clickShootLabel.visible = true;
     _arrowLabel.visible = true;
+    _backgroundColorNode.visible = false;
 }
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)nodeA wall:(CCNode *)nodeB {
