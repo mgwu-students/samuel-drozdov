@@ -38,6 +38,8 @@
     
     [MGWU useCrashlyticsWithApiKey:@"2d036bd18fa0c7a9a7148929a1d2ea6d8ad9c630"];
     
+    [MGWU setReminderMessage:@"Come back and play!"];
+    
     // Configure Cocos2d with the options set in SpriteBuilder
     NSString* configPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Published-iOS"]; // TODO: add support for Published-Android support
     configPath = [configPath stringByAppendingPathComponent:@"configCocos2d.plist"];
