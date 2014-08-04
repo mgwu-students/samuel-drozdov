@@ -819,9 +819,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
-					"-lsqlite3",
-					"-ObjC",
 					"-lsqlite3.0",
+					"-ObjC",
 				);
 				PRODUCT_NAME = TiltAndShoot;
 				PROVISIONING_PROFILE = "";
@@ -860,9 +859,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lz",
-					"-lsqlite3",
-					"-ObjC",
 					"-lsqlite3.0",
+					"-ObjC",
 				);
 				PRODUCT_NAME = TiltAndShoot;
 				PROVISIONING_PROFILE = "";

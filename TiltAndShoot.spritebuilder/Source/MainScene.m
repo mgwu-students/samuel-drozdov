@@ -23,18 +23,41 @@
     CCLabelTTF *_clickShootLabel;
     CCLabelTTF *_keepShootingLabel;
     CCLabelTTF *_dontHitWallsLabel;
+    CCLabelTTF *_holdLabel;
     
     CMMotionManager *_motionManager;
     CGSize bbSize;
     float ballRadius;
     int score;
     int power;
+    bool firstHit;
     
     CCNodeColor *_timerCover;
+    
+    CCNodeColor *_background;
+    
+    CCColor *color1;
+    CCColor *color2;
+    CCColor *color3;
+    CCColor *color4;
+    CCColor *color5;
+    
+    CCNode *_backgroundColorPopup;
+    CCNode *_backgroundColorNode;
+    CCNodeColor *_backgroundColorNode1;
+    CCNodeColor *_backgroundColorNode2;
+    CCNodeColor *_backgroundColorNode3;
+    CCNodeColor *_backgroundColorNode4;
+    CCNodeColor *_backgroundColorNode5;
+    CCNodeColor *_backgroundColorLabel2;
+    CCNodeColor *_backgroundColorLabel3;
+    CCNodeColor *_backgroundColorLabel4;
+    CCNodeColor *_backgroundColorLabel5;
 }
 
 - (void)onEnter {
     [super onEnter];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"Start"];
     [_motionManager startAccelerometerUpdates];
 }
 - (void)onExit {
@@ -49,14 +72,35 @@
     // enable collisions
     _physicsNode.collisionDelegate = self;
     
+    //Color nodes change color of the background(bottom) and the instructions,crosshairs(top)
+    color1 = [CCColor colorWithRed:0.13 green:0.502 blue:0.74];
+    color2 = [CCColor colorWithRed:0.0 green:0.949 blue:0.0];
+    color3 = [CCColor colorWithRed:1.0 green:0.62 blue:0.13];
+    color4 = [CCColor colorWithRed:0.95 green:0.176 blue:0.176];
+    color5 = [CCColor colorWithRed:0.95 green:0.176 blue:0.176];
+    
+    _background.color = [self checkForBackgroundColor];
+    _timerCover.color = [self checkForBackgroundColor];
+    
     // find the size of the gameplay scene
     bbSize = [[UIScreen mainScreen] bounds].size;
     
     _motionManager = [[CMMotionManager alloc] init];
     _scoreLabel.visible = false;
+    firstHit = false;
     ballRadius = 35.5;
     score = 0;
-    power = 20;
+    power = 50;
+    
+    // only called the first time playing the game
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimePlaying"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"firstTimePlaying"];
+        _background.color = color1;
+        _timerCover.color = color1;
+        _crosshair.color = [CCColor whiteColor];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"backgroundColor"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"crosshairColor"];
+    }
     
     // if restart is clicked the game skips the menu screen
     if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Start"] integerValue]) {
@@ -64,6 +108,23 @@
         _scoreLabel.visible = true;
         _keepShootingLabel.visible = true;
     }
+}
+
+-(CCColor *)checkForBackgroundColor{
+    int x = [[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] intValue];
+    CCColor *color;
+    if(x == 1) {
+        color = color1;
+    } else if(x == 2) {
+        color = color2;
+    } else if(x == 3) {
+        color = color3;
+    } else if(x == 4) {
+        color = color4;
+    } else if(x == 5) {
+        color = color5;
+    }
+    return color;
 }
 
 // called on every touch in this scene
@@ -74,49 +135,108 @@
     int crosshairY = _crosshair.position.y;
     int crosshairDistToBall = sqrtf(powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2));
     // check if the ball contains the crosshair
-    if(ballRadius >= crosshairDistToBall) {
-        [MGWU logEvent:@"BallHit" withParams:nil];//
-        
-        _instructions.visible = false;
-        _scoreLabel.visible = true;
-        _keepShootingLabel.visible = true;
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Start"];
-        // increase the score and update the labels
-        score++;
-        _scoreLabel.string = [NSString stringWithFormat:@"%d", score];
-        if(score >= 5) {
-            _keepShootingLabel.visible = false;
-            _dontHitWallsLabel.visible = true;
+    if(!_backgroundColorPopup.visible) {
+        if(ballRadius >= crosshairDistToBall) {
+            _instructions.visible = false;
+            _scoreLabel.visible = true;
+            _keepShootingLabel.visible = true;
+            _backgroundColorNode.visible = false;
+            firstHit = true;
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Start"];
+            // increase the score and update the labels
+            score++;
+            _scoreLabel.string = [NSString stringWithFormat:@"%d", score];
+            if(score >= 5) {
+                _keepShootingLabel.visible = false;
+                _dontHitWallsLabel.visible = true;
+            }
+            if(score >= 15) {
+                _dontHitWallsLabel.visible = false;
+            }
+            
+            // hitting the ball further from the center applies some more force
+            [_ball.physicsBody applyForce:ccp((ballX-crosshairX)*power,(ballY-crosshairY)*power)];
+            power += 5;
+            
+            // add time to timerCover's positon
+            if(_timerCover.position.y < 85)
+                _timerCover.position = ccp(_timerCover.position.x, _timerCover.position.y + 15);
+            
+            // load particle effect
+            CCParticleSystem *hit = (CCParticleSystem *)[CCBReader load:@"HitParticle"];
+            // make the particle effect clean itself up, once it is completed
+            hit.autoRemoveOnFinish = TRUE;
+            // place the particle effect on the ball's position
+            hit.position = _ball.positionInPoints;
+            [_ball.parent addChild:hit z:-1];
+        } else {
+            // load particle effect
+            CCParticleSystem *missed = (CCParticleSystem *)[CCBReader load:@"ShootParticle"];
+            // make the particle effect clean itself up, once it is completed
+            missed.autoRemoveOnFinish = TRUE;
+            // place the particle effect on the crosshair's position
+            missed.position = _crosshair.position;
+            [self addChild:missed z:0];
         }
-        if(score >= 15) {
-            _dontHitWallsLabel.visible = false;
+    }
+
+    if (!firstHit) {
+        CGPoint touches = [touch locationInWorld];
+        if(_backgroundColorPopup.visible) {
+            int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
+            if(touches.y > bbSize.height*0.8) {
+                _background.color = _backgroundColorNode1.color;
+                _timerCover.color = _backgroundColorNode1.color;
+                _backgroundColorPopup.visible = false;
+            } else if(touches.y > bbSize.height*0.6) {
+                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color2Unlocked"]
+                   && overallScore >= 500) {
+                    overallScore -= 500;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color2Unlocked"];
+                }
+                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color2Unlocked"] intValue]) {
+                    _background.color = _backgroundColorNode2.color;
+                    _timerCover.color = _backgroundColorNode2.color;
+                    _backgroundColorPopup.visible = false;
+                }
+            } else if(touches.y > bbSize.height*0.4) {
+                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color3Unlocked"]
+                   && overallScore >= 500) {
+                    overallScore -= 500;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color3Unlocked"];
+                }
+                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color3Unlocked"] intValue]) {
+                    _background.color = _backgroundColorNode3.color;
+                    _timerCover.color = _backgroundColorNode3.color;
+                    _backgroundColorPopup.visible = false;
+                }
+            } else if(touches.y > bbSize.height*0.2) {
+                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color4Unlocked"]
+                   && overallScore >= 500) {
+                    overallScore -= 500;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color4Unlocked"];
+                }
+                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color4Unlocked"] intValue]) {
+                    _background.color = _backgroundColorNode4.color;
+                    _timerCover.color = _backgroundColorNode4.color;
+                    _backgroundColorPopup.visible = false;
+                }
+            } else if(touches.y > bbSize.height*0.0) {
+                if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color5Unlocked"]
+                   && overallScore >= 500) {
+                    overallScore -= 500;
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color5Unlocked"];
+                }
+                if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color5Unlocked"] intValue]) {
+                    _background.color = _backgroundColorNode5.color;
+                    _timerCover.color = _backgroundColorNode5.color;
+                    _backgroundColorPopup.visible = false;
+                }
+            }
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
+        } else if(touches.y > bbSize.height*.85) {
+            _backgroundColorPopup.visible = true;
         }
-        
-        // hitting the ball further from the center applies some more force
-        [_ball.physicsBody applyForce:ccp((ballX-crosshairX)*power,(ballY-crosshairY)*power)];
-        power += 5;
-        
-        // add time to timerCover's positon
-        if(_timerCover.position.y < 85)
-            _timerCover.position = ccp(_timerCover.position.x, _timerCover.position.y + 15);
-        
-        // load particle effect
-        CCParticleSystem *hit = (CCParticleSystem *)[CCBReader load:@"HitParticle"];
-        // make the particle effect clean itself up, once it is completed
-        hit.autoRemoveOnFinish = TRUE;
-        // place the particle effect on the ball's position
-        hit.position = _ball.positionInPoints;
-        [_ball.parent addChild:hit z:-1];
-    } else {
-        [MGWU logEvent:@"BallMiss" withParams:nil];
-        
-        // load particle effect
-        CCParticleSystem *missed = (CCParticleSystem *)[CCBReader load:@"ShootParticle"];
-        // make the particle effect clean itself up, once it is completed
-        missed.autoRemoveOnFinish = TRUE;
-        // place the particle effect on the crosshair's position
-        missed.position = _crosshair.position;
-        [self addChild:missed z:0];
     }
 }
 
@@ -151,6 +271,21 @@
         _scoreLabel.color = [CCColor magentaColor];
     }
     
+    // hides color unlock labels
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color2Unlocked"] intValue]) {
+        _backgroundColorLabel2.visible = false;
+    }
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color3Unlocked"] intValue]) {
+        _backgroundColorLabel3.visible = false;
+    }
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color4Unlocked"] intValue]) {
+        _backgroundColorLabel4.visible = false;
+    }
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color5Unlocked"] intValue]) {
+        _backgroundColorLabel5.visible = false;
+    }
+    
+    
     // timer only starts after the game starts
     if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Start"] integerValue]) {
         _timerCover.position = ccp(_timerCover.position.x, _timerCover.position.y - 0.2 );
@@ -162,7 +297,7 @@
 }
 
 -(void)calibrate {
-    [MGWU logEvent:@"Calibrated" withParams:nil];//
+    [MGWU logEvent:@"Calibrated" withParams:nil];
     
     _crosshair.position = ccp(bbSize.width/2, bbSize.height/2);
     float calibrationX = -_motionManager.accelerometerData.acceleration.x;
@@ -170,6 +305,7 @@
     float calibrationY = -_motionManager.accelerometerData.acceleration.y;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:calibrationY] forKey:@"calibrationY"];
     _calibrateButton.visible = false;
+    _holdLabel.visible = false;
     _clickShootLabel.visible = true;
     _arrowLabel.visible = true;
 }
@@ -179,9 +315,12 @@
 }
 
 -(void)endGame {
-    NSNumber *playCount = [[NSUserDefaults standardUserDefaults] objectForKey:@"PlayCount"];//
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:playCount.intValue+1] forKey:@"PlayCount"];//
+    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
+    overallScore += score;
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
     
+    NSNumber *playCount = [[NSUserDefaults standardUserDefaults] objectForKey:@"PlayCount"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:playCount.intValue+1] forKey:@"PlayCount"];
     NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"HighScore"];
     NSNumber *prevScore = [NSNumber numberWithInt:score];
     if(prevScore.intValue > highScore.intValue) {

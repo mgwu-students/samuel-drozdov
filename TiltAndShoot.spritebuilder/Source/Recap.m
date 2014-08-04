@@ -10,41 +10,85 @@
 
 @implementation Recap {
     CCLabelTTF *_finalScoreLabel;
-    CCLabelTTF *_highScoreLabel1;
-    CCLabelTTF *_highScoreLabel2;
-    CCLabelTTF *_highScoreLabel3;
-    CCLabelTTF *_highScoreLabel4;
-    CCLabelTTF *_highScoreLabel5;
+    CCLabelTTF *_yourHighScoreLabel;
     
     CCLabelTTF *_newHighScore;
+    CCLabelTTF *_newGlobalHighScore;
     
     CCNode *_bronzeCover;
     CCNode *_silverCover;
     CCNode *_goldCover;
+    CCNodeColor *_background;
+    CCNodeColor *_stupidBestBackground;
+    CCNodeColor *_stupidScoreBackground;
+    
+    CCLabelTTF *_add50;
+    CCLabelTTF *_add100;
+    CCLabelTTF *_add150;
+    CCLabelTTF *_overallScoreLabel;
 }
 
 - (void)onEnter {
     [super onEnter];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"Start"];
 }
 - (void)onExit {
     [super onExit];
 }
 
 - (void)didLoadFromCCB {
-    _finalScoreLabel.string = [NSString stringWithFormat:@"%d", ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"PreviousScore"]).intValue];
-    
     int prevScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"PreviousScore"]).intValue;
-    if(prevScore > 50) {
+    int yourHighScore = ((NSNumber*)[[NSUserDefaults standardUserDefaults] objectForKey:@"HighScore"]).intValue;
+    
+    _finalScoreLabel.string = [NSString stringWithFormat:@"%d", prevScore];
+    _yourHighScoreLabel.string = [NSString stringWithFormat:@"%d", yourHighScore];
+    
+    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
+    
+    if(prevScore >= 50) {
         _bronzeCover.visible = false;
+        _add50.visible = true;
+        overallScore += 25;
     }
-    if(prevScore > 100) {
+    if(prevScore >= 100) {
         _silverCover.visible = false;
+        _add100.visible = true;
+        overallScore += 50;
     }
-    if(prevScore > 150) {
+    if(prevScore >= 150) {
         _goldCover.visible = false;
+        _add150.visible = true;
+        overallScore += 75;
     }
     
-    [MGWU submitHighScore:10 byPlayer:@"ashu" forLeaderboard:@"defaultLeaderboard"];
+    if(prevScore == yourHighScore) {
+        _newHighScore.visible = true;
+    }
+    
+    _overallScoreLabel.string = [NSString stringWithFormat:@"%d", overallScore];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
+    
+    _background.color = [self checkForBackgroundColor];
+    _stupidBestBackground.color = [self checkForBackgroundColor];
+    _stupidScoreBackground.color = [self checkForBackgroundColor];
+    _bronzeCover.color = [self checkForBackgroundColor];
+    _silverCover.color = [self checkForBackgroundColor];
+    _goldCover.color = [self checkForBackgroundColor];
+}
+
+-(CCColor *)checkForBackgroundColor{
+    int x = [[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] intValue];
+    CCColor *color;
+    if(x == 1) {
+        color = [CCColor colorWithRed:0.13 green:0.502 blue:0.74];;
+    } else if(x == 2) {
+        color = [CCColor colorWithRed:0.0 green:0.949 blue:0.0];
+    } else if(x == 3) {
+        color = [CCColor colorWithRed:1.0 green:0.62 blue:0.13];
+    } else if(x == 4) {
+        color = [CCColor colorWithRed:0.95 green:0.176 blue:0.176];
+    }
+    return color;
 }
 
 -(void)restart {
@@ -60,6 +104,5 @@
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
-
 
 @end
