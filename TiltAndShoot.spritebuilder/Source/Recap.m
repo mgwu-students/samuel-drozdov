@@ -88,9 +88,9 @@
     } else if(x == 4) {
         color = [CCColor colorWithRed:1.0 green:0.278 blue:0.278];
     } else if(x == 5) {
-        color = [CCColor colorWithRed:0.471 green:0.298 blue:0.839];
-    } else {
         color = [CCColor colorWithRed:0.227 green:0.773 blue:0.796];
+    } else {
+        color = [CCColor colorWithRed:0.302 green:0.427 blue:0.835];
     }
     return color;
 }

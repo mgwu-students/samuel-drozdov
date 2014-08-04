@@ -97,6 +97,8 @@
         _instructions.visible = false;
         _scoreLabel.visible = true;
         _keepShootingLabel.visible = true;
+        _colorMarketNode.visible = false;
+        _endGameButton.visible = true;
     }
 }
 
