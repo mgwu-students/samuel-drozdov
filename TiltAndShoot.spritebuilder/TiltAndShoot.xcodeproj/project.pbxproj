@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4125A872198FD90D0041825C /* ColorMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4125A871198FD90D0041825C /* ColorMarket.m */; };
 		41809A9D197D79FB00323545 /* Recap.m in Sources */ = {isa = PBXBuildFile; fileRef = 41809A8E197CCAE000323545 /* Recap.m */; };
 		41809AA3197D7BEE00323545 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41809AA2197D7BEE00323545 /* CoreMotion.framework */; };
 		419EB28D19804A04001C9601 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 419EB28C19804A04001C9601 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -138,6 +139,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4125A870198FD90D0041825C /* ColorMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorMarket.h; path = Source/ColorMarket.h; sourceTree = "<group>"; };
+		4125A871198FD90D0041825C /* ColorMarket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorMarket.m; path = Source/ColorMarket.m; sourceTree = "<group>"; };
 		41809A8D197CCAE000323545 /* Recap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Recap.h; path = Source/Recap.h; sourceTree = "<group>"; };
 		41809A8E197CCAE000323545 /* Recap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Recap.m; path = Source/Recap.m; sourceTree = "<group>"; };
 		41809AA2197D7BEE00323545 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -410,6 +413,8 @@
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
+				4125A870198FD90D0041825C /* ColorMarket.h */,
+				4125A871198FD90D0041825C /* ColorMarket.m */,
 				41809A8D197CCAE000323545 /* Recap.h */,
 				41809A8E197CCAE000323545 /* Recap.m */,
 			);
@@ -712,6 +717,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
+				4125A872198FD90D0041825C /* ColorMarket.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				41809A9D197D79FB00323545 /* Recap.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,

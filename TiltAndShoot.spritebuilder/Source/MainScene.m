@@ -138,6 +138,12 @@
 
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint touches = [touch locationInWorld];
+    if(touches.y >= bbSize.height*0.9) {
+        CCScene *colorMarket = [CCBReader loadAsScene:@"ColorMarket"];
+        [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
+    }
+    /*
     // Everything for the color choice popup
     if (!firstHit) {
         CGPoint touches = [touch locationInWorld];
@@ -203,6 +209,7 @@
             _backgroundColorPopup.visible = true;
         }
     }
+     */
     
     int ballX = _ball.positionInPoints.x;
     int ballY = _ball.positionInPoints.y;
