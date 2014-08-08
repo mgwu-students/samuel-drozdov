@@ -35,9 +35,7 @@
     // MGWU SDK
     [MGWU loadMGWU:@"10583letsgetitstarted"];
     [MGWU preFacebook]; //Temporarily disables Facebook until you integrate it later
-    
-    [MGWU useCrashlyticsWithApiKey:@"2d036bd18fa0c7a9a7148929a1d2ea6d8ad9c630"];
-    
+        
     [MGWU setReminderMessage:@"Come back and play!"];
     
     // Configure Cocos2d with the options set in SpriteBuilder

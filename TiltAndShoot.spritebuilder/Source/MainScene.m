@@ -37,6 +37,7 @@
     
     CCNodeColor *_timerCover;
     CCNodeColor *_background;
+    CCLabelTTF *_points;
     
     CCNodeGradient *_colorMarketNode;
     CCColor *color1;
@@ -71,6 +72,9 @@
     
     _background.color = [self checkForBackgroundColor];
     _timerCover.color = [self checkForBackgroundColor];
+    
+    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
+    _points.string = [NSString stringWithFormat:@"%d",overallScore];
     
     // find the size of the gameplay scene
     bbSize = [[UIScreen mainScreen] bounds].size;
@@ -127,6 +131,9 @@
     if(touches.y >= bbSize.height*0.9 && touches.x <= bbSize.width*0.1) {
         CCScene *colorMarket = [CCBReader loadAsScene:@"ColorMarket"];
         [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
+    } else if(touches.y >= bbSize.height*0.9 && touches.x >= bbSize.width*0.4 && touches.x <= bbSize.width*0.6) {
+        CCScene *colorMarket = [CCBReader loadAsScene:@"PointsMarket"];
+        [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
     }
     if(_endGameButton.visible && touches.y >= bbSize.height*0.92 && touches.x >= bbSize.width*0.92) {
         [self endGame];
@@ -139,11 +146,14 @@
     int crosshairDistToBall = sqrtf(powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2));
     // check if the ball contains the crosshair
     if(ballRadius >= crosshairDistToBall) {
+        [[OALSimpleAudio sharedInstance] playBg:@"hit.wav"];
+        
         _instructions.visible = false;
         _scoreLabel.visible = true;
         _keepShootingLabel.visible = true;
         _colorMarketNode.visible = false;
         _endGameButton.visible = true;
+        _points.visible = false;
         firstHit = true;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Start"];
         // increase the score and update the labels
@@ -226,7 +236,7 @@
     // timer only starts after the game starts
     if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Start"] integerValue]) {
         _timerCover.position = ccp(_timerCover.position.x, _timerCover.position.y - 0.2 );
-        if(_timerCover.position.y <= 10){
+        if(_timerCover.position.y <= 10) {
             [MGWU logEvent:@"LostByTime" withParams:nil];
             [self endGame];
         }
@@ -246,6 +256,7 @@
     _clickShootLabel.visible = true;
     _arrowLabel.visible = true;
     _colorMarketNode.visible = false;
+    _points.visible = false;
 }
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)nodeA wall:(CCNode *)nodeB {
