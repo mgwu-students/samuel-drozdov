@@ -1353,8 +1353,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -1931,7 +1929,7 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>120</real>
+									<real>119</real>
 									<real>75</real>
 									<integer>0</integer>
 									<integer>0</integer>

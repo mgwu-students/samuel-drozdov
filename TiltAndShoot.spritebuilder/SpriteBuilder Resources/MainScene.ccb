@@ -262,7 +262,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>0.60000002384185791</real>
+								<real>0.80000001192092896</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -274,7 +274,7 @@
 									<real>1</real>
 									<real>0.98250633478164673</real>
 									<real>0.97764331102371216</real>
-									<real>0.60000002384185791</real>
+									<real>0.80000001192092896</real>
 								</array>
 							</dict>
 							<dict>
@@ -382,6 +382,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -1534,8 +1536,6 @@ Hit the Walls</string>
 										</array>
 									</dict>
 								</array>
-								<key>selected</key>
-								<true/>
 							</dict>
 							<dict>
 								<key>UUID</key>
