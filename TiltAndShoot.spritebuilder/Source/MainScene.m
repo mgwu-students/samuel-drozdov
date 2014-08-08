@@ -24,7 +24,7 @@
     CCLabelTTF *_clickShootLabel;
     CCLabelTTF *_keepShootingLabel;
     CCLabelTTF *_dontHitWallsLabel;
-    CCLabelTTF *_holdLabel;
+    CCNode *_holdLabel;
     
     CMMotionManager *_motionManager;
     CGSize bbSize;
@@ -32,8 +32,10 @@
     int score;
     int power;
     bool firstHit;
+    bool start;
+    CCLabelTTF *_startLabel;
     
-    CCNodeGradient *_endGameButton;
+    CCButton *_endGameButton;
     
     CCNodeColor *_timerCover;
     CCNodeColor *_background;
@@ -72,6 +74,7 @@
     
     _background.color = [self checkForBackgroundColor];
     _timerCover.color = [self checkForBackgroundColor];
+    _startLabel.color = [self checkForBackgroundColor];
     
     int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
     _points.string = [NSString stringWithFormat:@"%d",overallScore];
@@ -82,6 +85,7 @@
     _motionManager = [[CMMotionManager alloc] init];
     _scoreLabel.visible = false;
     firstHit = false;
+    start = false;
     ballRadius = 35.5;
     score = 0;
     power = 50;
@@ -132,9 +136,6 @@
         CCScene *colorMarket = [CCBReader loadAsScene:@"PointsMarket"];
         [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
     }
-    if(_endGameButton.visible && touches.y >= bbSize.height*0.92 && touches.x >= bbSize.width*0.92) {
-        [self endGame];
-    }
     
     int ballX = _ball.positionInPoints.x;
     int ballY = _ball.positionInPoints.y;
@@ -142,7 +143,7 @@
     int crosshairY = _crosshair.position.y;
     int crosshairDistToBall = sqrtf(powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2));
     // check if the ball contains the crosshair
-    if(ballRadius >= crosshairDistToBall) {
+    if(start && ballRadius >= crosshairDistToBall) {
         [[OALSimpleAudio sharedInstance] playBg:@"hit.wav"];
         
         _instructions.visible = false;
@@ -242,7 +243,7 @@
 
 -(void)calibrate {
     [MGWU logEvent:@"Calibrated" withParams:nil];
-    
+    start = true;
     _crosshair.position = ccp(bbSize.width/2, bbSize.height/2);
     float calibrationX = -_motionManager.accelerometerData.acceleration.x;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:calibrationX] forKey:@"calibrationX"];
@@ -259,6 +260,10 @@
 -(void)shop {
     CCScene *colorMarket = [CCBReader loadAsScene:@"ColorMarket"];
     [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
+}
+
+-(void)end {
+    [self endGame];
 }
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)nodeA wall:(CCNode *)nodeB {
