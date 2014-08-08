@@ -107,6 +107,7 @@
         _keepShootingLabel.visible = true;
         _colorMarketNode.visible = false;
         _endGameButton.visible = true;
+        start = true;
     }
 }
 
