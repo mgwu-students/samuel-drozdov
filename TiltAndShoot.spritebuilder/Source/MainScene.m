@@ -128,10 +128,7 @@
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touches = [touch locationInWorld];
-    if(touches.y >= bbSize.height*0.9 && touches.x <= bbSize.width*0.1) {
-        CCScene *colorMarket = [CCBReader loadAsScene:@"ColorMarket"];
-        [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
-    } else if(touches.y >= bbSize.height*0.9 && touches.x >= bbSize.width*0.4 && touches.x <= bbSize.width*0.6) {
+    if(touches.y >= bbSize.height*0.9 && touches.x >= bbSize.width*0.4 && touches.x <= bbSize.width*0.7) {
         CCScene *colorMarket = [CCBReader loadAsScene:@"PointsMarket"];
         [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
     }
@@ -257,6 +254,11 @@
     _arrowLabel.visible = true;
     _colorMarketNode.visible = false;
     _points.visible = false;
+}
+
+-(void)shop {
+    CCScene *colorMarket = [CCBReader loadAsScene:@"ColorMarket"];
+    [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
 }
 
 - (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)nodeA wall:(CCNode *)nodeB {
