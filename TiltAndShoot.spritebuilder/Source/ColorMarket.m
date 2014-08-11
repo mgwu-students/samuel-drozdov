@@ -10,6 +10,7 @@
 
 @implementation ColorMarket {
     CGSize bbSize;
+    CCNodeColor *_stupidButtonCover;
     
     CCColor *color1;
     CCColor *color2;
@@ -40,6 +41,7 @@
     
     //Color nodes change color of the background(bottom) and the instructions,crosshairs(top)
     color1 = [CCColor colorWithRed:0.302 green:0.427 blue:0.835];
+    _stupidButtonCover.color = color1;
     _backgroundColorNode1.color = color1;
     color2 = [CCColor colorWithRed:0.251 green:0.898 blue:0.251];
     _backgroundColorNode2.color = color2;
@@ -53,7 +55,7 @@
     [self checkBought];
     
     int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
-    _points.string = [NSString stringWithFormat:@"Points: %d", overallScore];
+    _points.string = [NSString stringWithFormat:@"%d", overallScore];
 }
 
 -(void)checkBought {
@@ -77,7 +79,6 @@
     bool colorPicked = false;
     CGPoint touches = [touch locationInWorld];
     int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
-    _points.string = [NSString stringWithFormat:@"Points: %d", overallScore];
 
     if(touches.y > bbSize.height*0.8) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"backgroundColor"];
@@ -123,6 +124,8 @@
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color5Unlocked"];
         }
     }
+    _points.string = [NSString stringWithFormat:@"%d", overallScore];
+    
     // updates overall score if something was bought
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
     [self checkBought];
@@ -132,9 +135,13 @@
     }
 }
 
+-(void)back {
+    [self returnToMenu];
+}
+
 -(void)returnToMenu {
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
-    [[CCDirector sharedDirector] replaceScene:mainScene withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:0.3f]];
+    [[CCDirector sharedDirector] replaceScene:mainScene withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:0.3f]];
 }
 
 

@@ -34,6 +34,7 @@
 {
     // MGWU SDK
     [MGWU loadMGWU:@"10583letsgetitstarted"];
+    [MGWU useIAPs];
     [MGWU preFacebook]; //Temporarily disables Facebook until you integrate it later
         
     [MGWU setReminderMessage:@"Come back and play!"];

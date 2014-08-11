@@ -19,6 +19,7 @@
     CCLabelTTF *_scoreLabel;
     CCPhysicsNode *_physicsNode;
     
+    CCNodeColor *_stupidScoreCover;
     CCNode *_calibrateButton;
     CCLabelTTF *_arrowLabel;
     CCLabelTTF *_clickShootLabel;
@@ -51,6 +52,12 @@
 
 - (void)onEnter {
     [super onEnter];
+    [MGWU submitHighScore:25 byPlayer:@"123" forLeaderboard:@"defaultLeaderboard"];
+    [MGWU submitHighScore:30 byPlayer:@"1234" forLeaderboard:@"defaultLeaderboard"];
+    [MGWU submitHighScore:35 byPlayer:@"12345" forLeaderboard:@"defaultLeaderboard"];
+    [MGWU submitHighScore:40 byPlayer:@"123456" forLeaderboard:@"defaultLeaderboard"];
+    [MGWU submitHighScore:45 byPlayer:@"Dundy" forLeaderboard:@"defaultLeaderboard"];
+    
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"Start"];
     [_motionManager startAccelerometerUpdates];
 }
@@ -75,6 +82,7 @@
     _background.color = [self checkForBackgroundColor];
     _timerCover.color = [self checkForBackgroundColor];
     _startLabel.color = [self checkForBackgroundColor];
+    _stupidScoreCover.color = [self checkForBackgroundColor];
     
     int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
     _points.string = [NSString stringWithFormat:@"%d",overallScore];
@@ -89,9 +97,9 @@
     ballRadius = 35.5;
     score = 0;
     power = 50;
-    
     // only called the first time playing the game
     if(![[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimePlaying"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"Player" forKey:@"UserName"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"firstTimePlaying"];
         _background.color = color1;
         _timerCover.color = color1;
@@ -132,12 +140,6 @@
 
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint touches = [touch locationInWorld];
-    if(touches.y >= bbSize.height*0.9 && touches.x >= bbSize.width*0.4 && touches.x <= bbSize.width*0.7) {
-        CCScene *colorMarket = [CCBReader loadAsScene:@"PointsMarket"];
-        [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
-    }
-    
     int ballX = _ball.positionInPoints.x;
     int ballY = _ball.positionInPoints.y;
     int crosshairX = _crosshair.position.x;
@@ -174,6 +176,14 @@
         if(_timerCover.position.y < 85)
             _timerCover.position = ccp(_timerCover.position.x, _timerCover.position.y + 15);
         
+        // polish to the score label
+        CCActionFiniteTime *grow = [CCActionScaleTo actionWithDuration:0.3 scale:1.15f];
+        CCActionFiniteTime *shrink = [CCActionScaleTo actionWithDuration:0.2 scale:1.0f];
+        CCActionSequence *action = [CCActionSequence actions:grow, shrink, nil];
+        if(score % 50 == 0) {
+            [_scoreLabel runAction:action];
+        }
+        
         // load particle effect
         CCParticleSystem *hit = (CCParticleSystem *)[CCBReader load:@"HitParticle"];
         // make the particle effect clean itself up, once it is completed
@@ -202,26 +212,6 @@
     newXPosition = clampf(newXPosition, 0, bbSize.width);
     newYPosition = clampf(newYPosition, 0, bbSize.height);
     _crosshair.position = CGPointMake(newXPosition, newYPosition);
-    
-    // score label color changes
-    if(score >= 50) {
-        _scoreLabel.color = [CCColor blueColor];
-    }
-    if(score >= 100) {
-        _scoreLabel.color = [CCColor orangeColor];
-    }
-    if(score >= 150) {
-        _scoreLabel.color = [CCColor yellowColor];
-    }
-    if(score >= 200) {
-        _scoreLabel.color = [CCColor redColor];
-    }
-    if(score >= 250 ) {
-        _scoreLabel.color = [CCColor purpleColor];
-    }
-    if(score >= 300) {
-        _scoreLabel.color = [CCColor magentaColor];
-    }
     
     // finds the angle of the crosshair to the ball and moves the pointer accordingly
     float angle = ccpAngle(ccp(0,1),ccpSub(_crosshair.position, _ball.positionInPoints));
@@ -259,11 +249,25 @@
 }
 
 -(void)shop {
+    [MGWU logEvent:@"ThemeCustomizationMenu" withParams:nil];
     CCScene *colorMarket = [CCBReader loadAsScene:@"ColorMarket"];
+    [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:0.3f]];
+}
+
+-(void)appPurchases {
+    [MGWU logEvent:@"InAppPurchasesMenu" withParams:nil];
+    CCScene *colorMarket = [CCBReader loadAsScene:@"PointsMarket"];
     [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
 }
 
+-(void)scores {
+    [MGWU logEvent:@"GlobalScoresMenu" withParams:nil];
+    CCScene *colorMarket = [CCBReader loadAsScene:@"GlobalScores"];
+    [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:0.3f]];
+}
+
 -(void)end {
+    [MGWU logEvent:@"GameEndButtonPressed" withParams:nil];
     [self endGame];
 }
 
@@ -278,6 +282,8 @@
     
     NSNumber *playCount = [[NSUserDefaults standardUserDefaults] objectForKey:@"PlayCount"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:playCount.intValue+1] forKey:@"PlayCount"];
+    [MGWU submitHighScore:score byPlayer:[[NSUserDefaults standardUserDefaults] objectForKey:@"UserName"] forLeaderboard:@"defaultLeaderboard"];
+    
     NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"HighScore"];
     NSNumber *prevScore = [NSNumber numberWithInt:score];
     if(prevScore.intValue > highScore.intValue) {

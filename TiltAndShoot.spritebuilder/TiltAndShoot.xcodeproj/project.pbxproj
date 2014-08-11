@@ -82,6 +82,7 @@
 		4182C676199509D800C699DB /* send-button-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 4182C62F199509D800C699DB /* send-button-inactive.png */; };
 		4182C677199509D800C699DB /* send-button-instate.png in Resources */ = {isa = PBXBuildFile; fileRef = 4182C630199509D800C699DB /* send-button-instate.png */; };
 		4182C678199509D800C699DB /* send-field-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 4182C631199509D800C699DB /* send-field-landscape.png */; };
+		4182C6831997D46E00C699DB /* GlobalScores.m in Sources */ = {isa = PBXBuildFile; fileRef = 4182C6821997D46E00C699DB /* GlobalScores.m */; };
 		419EB28D19804A04001C9601 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 419EB28C19804A04001C9601 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		419EB28F19804A0C001C9601 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 419EB28E19804A0C001C9601 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		419EB29119804A13001C9601 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 419EB29019804A13001C9601 /* CFNetwork.framework */; };
@@ -218,6 +219,8 @@
 		4182C62F199509D800C699DB /* send-button-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-button-inactive.png"; sourceTree = "<group>"; };
 		4182C630199509D800C699DB /* send-button-instate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-button-instate.png"; sourceTree = "<group>"; };
 		4182C631199509D800C699DB /* send-field-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-field-landscape.png"; sourceTree = "<group>"; };
+		4182C6811997D46E00C699DB /* GlobalScores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobalScores.h; path = Source/GlobalScores.h; sourceTree = "<group>"; };
+		4182C6821997D46E00C699DB /* GlobalScores.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GlobalScores.m; path = Source/GlobalScores.m; sourceTree = "<group>"; };
 		419EB28C19804A04001C9601 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		419EB28E19804A0C001C9601 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		419EB29019804A13001C9601 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -417,6 +420,8 @@
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 				4125A911199014CB0041825C /* PointsMarket.h */,
 				4125A912199014CB0041825C /* PointsMarket.m */,
+				4182C6811997D46E00C699DB /* GlobalScores.h */,
+				4182C6821997D46E00C699DB /* GlobalScores.m */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
 				4125A870198FD90D0041825C /* ColorMarket.h */,
@@ -722,6 +727,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4125A913199014CB0041825C /* PointsMarket.m in Sources */,
+				4182C6831997D46E00C699DB /* GlobalScores.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				4125A872198FD90D0041825C /* ColorMarket.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,

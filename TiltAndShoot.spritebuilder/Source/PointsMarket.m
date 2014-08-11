@@ -11,6 +11,7 @@
 @implementation PointsMarket {
     CCLabelTTF *_overallScore;
     CCNodeColor *_background;
+    CCNodeColor *_stupidBackCover;
 }
 
 - (void)didLoadFromCCB {
@@ -18,6 +19,7 @@
     _overallScore.string = [NSString stringWithFormat:@"%d",overallScore];
     
     _background.color = [self checkForBackgroundColor];
+    _stupidBackCover.color = [self checkForBackgroundColor];
 }
 
 -(CCColor *)checkForBackgroundColor{
@@ -40,14 +42,20 @@
 }
 
 -(void)first {
-    
+    [MGWU buyProduct:@"com.xxx.xxx.productID1" withCallback:@selector(boughtProduct:) onTarget:self];
 }
 -(void)second {
-    
+    [MGWU buyProduct:@"com.xxx.xxx.productID2" withCallback:@selector(boughtProduct:) onTarget:self];
 }
 -(void)third {
-    
+    [MGWU buyProduct:@"com.xxx.xxx.productID3" withCallback:@selector(boughtProduct:) onTarget:self];
 }
+-(void)restore {
+    [MGWU restoreProductsWithCallback:@selector(restoredProducts:) onTarget:self];
+}
+
+//???
+
 -(void)back {
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:0.3f]];
