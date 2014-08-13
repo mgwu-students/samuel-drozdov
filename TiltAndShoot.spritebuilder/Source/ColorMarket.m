@@ -11,6 +11,7 @@
 @implementation ColorMarket {
     CGSize bbSize;
     CCNodeColor *_stupidButtonCover;
+    CCLabelTTF *_points;
     
     CCColor *color1;
     CCColor *color2;
@@ -18,18 +19,38 @@
     CCColor *color4;
     CCColor *color5;
     
-    CCNode *_backgroundColorPopup;
-    CCNode *_backgroundColorNode;
+    CCNodeColor *_background;
     CCNodeColor *_backgroundColorNode1;
     CCNodeColor *_backgroundColorNode2;
     CCNodeColor *_backgroundColorNode3;
     CCNodeColor *_backgroundColorNode4;
     CCNodeColor *_backgroundColorNode5;
-    CCNodeColor *_backgroundColorLabel2;
-    CCNodeColor *_backgroundColorLabel3;
-    CCNodeColor *_backgroundColorLabel4;
-    CCNodeColor *_backgroundColorLabel5;
-    CCLabelTTF *_points;
+    
+    int selectedBackground;
+    bool background2Unlocked;
+    bool background3Unlocked;
+    bool background4Unlocked;
+    bool background5Unlocked;
+    CCSprite *_backStar2;
+    CCSprite *_backStar3;
+    CCSprite *_backStar4;
+    CCSprite *_backStar5;
+    
+    int selectedCrosshair;
+    CCSprite *_selectedCircle;
+    bool crosshair2Unlocked;
+    bool crosshair3Unlocked;
+    bool crosshair4Unlocked;
+    bool crosshair5Unlocked;
+    CCSprite *_crossStar2;
+    CCSprite *_crossStar3;
+    CCSprite *_crossStar4;
+    CCSprite *_crossStar5;
+    CCNode *_cPosition1;
+    CCNode *_cPosition2;
+    CCNode *_cPosition3;
+    CCNode *_cPosition4;
+    CCNode *_cPosition5;
 }
 
 // is called when CCB file has completed loading
@@ -41,7 +62,6 @@
     
     //Color nodes change color of the background(bottom) and the instructions,crosshairs(top)
     color1 = [CCColor colorWithRed:0.302 green:0.427 blue:0.835];
-    _stupidButtonCover.color = color1;
     _backgroundColorNode1.color = color1;
     color2 = [CCColor colorWithRed:0.251 green:0.898 blue:0.251];
     _backgroundColorNode2.color = color2;
@@ -52,96 +72,220 @@
     color5 = [CCColor colorWithRed:0.227 green:0.773 blue:0.796];
     _backgroundColorNode5.color = color5;
     
+    _background.color = [self checkForBackgroundColor];
+    _stupidButtonCover.color = [self checkForBackgroundColor];
     [self checkBought];
+    [self pickCrosshair];
+    [self pickBackground];
     
     int stars = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue];
     _points.string = [NSString stringWithFormat:@"%d", stars];
 }
 
+
 -(void)checkBought {
-    // hides color unlock labels
-    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color2Unlocked"] intValue]) {
-        _backgroundColorLabel2.visible = false;
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Background2"] intValue]) {
+        background2Unlocked = true;
+        _backStar2.visible = false;
     }
-    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color3Unlocked"] intValue]) {
-        _backgroundColorLabel3.visible = false;
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Background3"] intValue]) {
+        background3Unlocked = true;
+        _backStar3.visible = false;
     }
-    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color4Unlocked"] intValue]) {
-        _backgroundColorLabel4.visible = false;
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Background4"] intValue]) {
+        background4Unlocked = true;
+        _backStar4.visible = false;
     }
-    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color5Unlocked"] intValue]) {
-        _backgroundColorLabel5.visible = false;
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Background5"] intValue]) {
+        background5Unlocked = true;
+        _backStar5.visible = false;
+    }
+    
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Crosshair2"] intValue]) {
+        crosshair2Unlocked = true;
+        _crossStar2.visible = false;
+    }
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Crosshair3"] intValue]) {
+        crosshair3Unlocked = true;
+        _crossStar3.visible = false;
+    }
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Crosshair4"] intValue]) {
+        crosshair4Unlocked = true;
+        _crossStar4.visible = false;
+    }
+    if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Crosshair5"] intValue]) {
+        crosshair5Unlocked = true;
+        _crossStar5.visible = false;
     }
 }
 
-// called on every touch in this scene
--(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    bool colorPicked = false;
-    CGPoint touches = [touch locationInWorld];
-    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue];
-
-    if(touches.y > bbSize.height*0.8) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"backgroundColor"];
-        colorPicked = true;
-    } else if(touches.y > bbSize.height*0.6) {
-        if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color2Unlocked"] intValue]) {
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:2] forKey:@"backgroundColor"];
-            colorPicked = true;
-        }
-        if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color2Unlocked"]
-           && overallScore >= 100) {
-            overallScore -= 100;
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color2Unlocked"];
-        }
-    } else if(touches.y > bbSize.height*0.4) {
-        if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color3Unlocked"] intValue]) {
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:3] forKey:@"backgroundColor"];
-            colorPicked = true;
-        }
-        if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color3Unlocked"]
-           && overallScore >= 100) {
-            overallScore -= 100;
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color3Unlocked"];
-        }
-    } else if(touches.y > bbSize.height*0.2) {
-        if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color4Unlocked"] intValue]) {
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:4] forKey:@"backgroundColor"];
-            colorPicked = true;
-        }
-        if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color4Unlocked"]
-           && overallScore >= 100) {
-            overallScore -= 100;
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color4Unlocked"];
-        }
-    } else if(touches.y > bbSize.height*0.0) {
-        if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Color5Unlocked"] intValue]) {
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:5] forKey:@"backgroundColor"];
-            colorPicked = true;
-        }
-        if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color5Unlocked"]
-           && overallScore >= 100) {
-            overallScore -= 100;
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color5Unlocked"];
-        }
+-(CCColor *)checkForBackgroundColor{
+    int x = [[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] intValue];
+    CCColor *color;
+    if(x == 1) {
+        color = color1;
+    } else if(x == 2) {
+        color = color2;
+    } else if(x == 3) {
+        color = color3;
+    } else if(x == 4) {
+        color = color4;
+    } else if(x == 5) {
+        color = color5;
+    } else {
+        color = color1;
     }
-    _points.string = [NSString stringWithFormat:@"%d", overallScore];
-    
-    // updates overall score if something was bought
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"Stars"];
-    [self checkBought];
-    
-    if(colorPicked) {
-        [self returnToMenu];
-    }
+    return color;
 }
 
 -(void)back {
-    [self returnToMenu];
-}
-
--(void)returnToMenu {
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:0.3f]];
+}
+
+#pragma mark - Crosshair Selecting Mechanics
+
+-(void)cross1 {
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"SelectedCrosshair"];
+    [self pickCrosshair];
+}
+
+-(void)cross2 {
+    if(!crosshair2Unlocked) {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue] >= 150) {
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"Crosshair2"];
+            [self boughtCrosshair];
+        }
+        return;
+    }
+    [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"SelectedCrosshair"];
+    [self pickCrosshair];
+}
+
+-(void)cross3 {
+    if(!crosshair3Unlocked) {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue] >= 150) {
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"Crosshair3"];
+            [self boughtCrosshair];
+        }
+        return;
+    }
+    [[NSUserDefaults standardUserDefaults] setInteger:3 forKey:@"SelectedCrosshair"];
+    [self pickCrosshair];
+}
+
+-(void)cross4 {
+    if(!crosshair4Unlocked) {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue] >= 150) {
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"Crosshair4"];
+            [self boughtCrosshair];
+        }
+        return;
+    }
+    [[NSUserDefaults standardUserDefaults] setInteger:4 forKey:@"SelectedCrosshair"];
+    [self pickCrosshair];
+}
+
+-(void)cross5 {
+    if(!crosshair5Unlocked) {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue] >= 150) {
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"Crosshair5"];
+            [self boughtCrosshair];
+        }
+        return;
+    }
+    [[NSUserDefaults standardUserDefaults] setInteger:5 forKey:@"SelectedCrosshair"];
+    [self pickCrosshair];
+}
+
+-(void)boughtCrosshair {
+    int stars = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue];
+    [[NSUserDefaults standardUserDefaults] setInteger:(stars-150) forKey:@"Stars"];
+    _points.string = [NSString stringWithFormat:@"%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue]];
+    [self checkBought];
+}
+
+-(void)pickCrosshair {
+    selectedCrosshair = [[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCrosshair"] integerValue];
+    if(selectedCrosshair == 1){
+        _selectedCircle.positionInPoints = [_cPosition1 convertToWorldSpace:_cPosition1.position];
+    } else if(selectedCrosshair == 2){
+        _selectedCircle.positionInPoints = [_cPosition2 convertToWorldSpace:_cPosition2.position];
+    } else if(selectedCrosshair == 3){
+        _selectedCircle.positionInPoints = [_cPosition3 convertToWorldSpace:_cPosition3.position];
+    } else if(selectedCrosshair == 4){
+        _selectedCircle.positionInPoints = [_cPosition4 convertToWorldSpace:_cPosition4.position];
+    } else if(selectedCrosshair == 5){
+        _selectedCircle.positionInPoints = [_cPosition5 convertToWorldSpace:_cPosition5.position];
+    }
+}
+
+#pragma mark - Background Selecting Mechanics
+
+-(void)background1 {
+    selectedBackground = 1;
+    [self pickBackground];
+}
+
+-(void)background2 {
+    if(!background2Unlocked) {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue] >= 50) {
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"Background2"];
+            [self boughtBackground];
+        }
+        return;
+    }
+    selectedBackground = 2;
+    [self pickBackground];
+}
+
+-(void)background3 {
+    if(!background3Unlocked) {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue] >= 50) {
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"Background3"];
+            [self boughtBackground];
+        }
+        return;
+    }
+    selectedBackground = 3;
+    [self pickBackground];
+}
+
+-(void)background4 {
+    if(!background4Unlocked) {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue] >= 50) {
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"Background4"];
+            [self boughtBackground];
+        }
+        return;
+    }
+    selectedBackground = 4;
+    [self pickBackground];
+}
+
+-(void)background5 {
+    if(!background5Unlocked) {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue] >= 50) {
+            [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"Background5"];
+            [self boughtBackground];
+        }
+        return;
+    }
+    selectedBackground = 5;
+    [self pickBackground];
+}
+
+-(void)boughtBackground {
+    int stars = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue];
+    [[NSUserDefaults standardUserDefaults] setInteger:(stars-50) forKey:@"Stars"];
+    _points.string = [NSString stringWithFormat:@"%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue]];
+    [self checkBought];
+}
+
+-(void)pickBackground {
+    [[NSUserDefaults standardUserDefaults] setInteger:selectedBackground forKey:@"backgroundColor"];
+    _background.color = [self checkForBackgroundColor];
+    _stupidButtonCover.color = [self checkForBackgroundColor];
 }
 
 

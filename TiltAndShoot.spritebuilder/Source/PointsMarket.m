@@ -51,13 +51,13 @@
 //REDO THIS ALL FOR STARSSSS
 
 -(void)first {
-    [MGWU buyProduct:@"com.SamuelDrozdov.TiltAndShoot.2000Points" withCallback:@selector(boughtProduct:) onTarget:self];
+    [MGWU buyProduct:@"com.SamuelDrozdov.TiltAndShoot.stars1" withCallback:@selector(boughtProduct:) onTarget:self];
 }
 -(void)second {
-    [MGWU buyProduct:@"com.SamuelDrozdov.TiltAndShoot.5000Points" withCallback:@selector(boughtProduct:) onTarget:self];
+    [MGWU buyProduct:@"com.SamuelDrozdov.TiltAndShoot.stars2" withCallback:@selector(boughtProduct:) onTarget:self];
 }
 -(void)third {
-    [MGWU buyProduct:@"com.SamuelDrozdov.TiltAndShoot.10000Points" withCallback:@selector(boughtProduct:) onTarget:self];
+    [MGWU buyProduct:@"com.SamuelDrozdov.TiltAndShoot.stars3" withCallback:@selector(boughtProduct:) onTarget:self];
 }
 -(void)restore {
     [MGWU restoreProductsWithCallback:@selector(restoredProducts:) onTarget:self];
@@ -70,12 +70,12 @@
     
     if(productID == nil) {
         return;
-    } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.2000Points"]) {
-        overallScore += 2000;
-    } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.5000Points"]) {
-        overallScore += 5000;
-    } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.10000Points"]) {
-        overallScore += 10000;
+    } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.stars1"]) {
+        overallScore += 50;
+    } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.stars2"]) {
+        overallScore += 250;
+    } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.stars3"]) {
+        overallScore += 1000;
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
@@ -88,12 +88,12 @@
         int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
         
         for (NSString* productID in productIDs) {
-            if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.2000Points"]) {
-                overallScore += 2000;
-            } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.5000Points"]) {
-                overallScore += 5000;
-            } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.10000Points"]) {
-                overallScore += 10000;
+            if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.stars1"]) {
+                overallScore += 50;
+            } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.stars2"]) {
+                overallScore += 250;
+            } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.stars3"]) {
+                overallScore += 1000;
             }
         }
         

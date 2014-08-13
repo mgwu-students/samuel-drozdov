@@ -17,7 +17,7 @@
 @implementation MainScene {
     CCNode *_instructions;
     CCNode *_ball;
-    CCNode *_crosshair;
+    CCSprite *_crosshair;
     CCSprite *_pointer;
     CCLabelTTF *_scoreLabel;
     CCPhysicsNode *_physicsNode;
@@ -66,6 +66,14 @@
 
 // is called when CCB file has completed loading
 - (void)didLoadFromCCB {
+    // only called the first time playing the game
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimePlaying"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"Player" forKey:@"UserName"];
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"SelectedCrosshair"];
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"backgroundColor"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"firstTimePlaying"];
+    }
+    
     // tell this scene to accept touches
     self.userInteractionEnabled = TRUE;
     // enable collisions
@@ -81,6 +89,7 @@
     _timerCover.color = [self checkForBackgroundColor];
     _startLabel.color = [self checkForBackgroundColor];
     _stupidScoreCover.color = [self checkForBackgroundColor];
+    [self crosshairSelect];
     
     int stars = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue];
     _points.string = [NSString stringWithFormat:@"%d",stars];
@@ -96,15 +105,6 @@
     ballRadius = 35.5;
     score = 0;
     power = 50;
-    // only called the first time playing the game
-    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimePlaying"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"Player" forKey:@"UserName"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"firstTimePlaying"];
-        _background.color = color1;
-        _timerCover.color = color1;
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"backgroundColor"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"crosshairColor"];
-    }
     
     // if restart is clicked the game skips the menu screen
     if(1 == [[[NSUserDefaults standardUserDefaults] objectForKey:@"Start"] integerValue]) {
@@ -136,6 +136,21 @@
     return color;
 }
 
+-(void)crosshairSelect {
+    int crosshairSelection = [[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCrosshair"] intValue];
+    if(crosshairSelection == 1) {
+        [_crosshair setTexture:[[CCSprite spriteWithImageNamed:@"Assets/Sights/sight1.png"]texture]];
+    } else if(crosshairSelection == 2) {
+        [_crosshair setTexture:[[CCSprite spriteWithImageNamed:@"Assets/Sights/sight2.png"]texture]];
+    } else if(crosshairSelection == 3) {
+        [_crosshair setTexture:[[CCSprite spriteWithImageNamed:@"Assets/Sights/sight3.png"]texture]];
+    } else if(crosshairSelection == 4) {
+        [_crosshair setTexture:[[CCSprite spriteWithImageNamed:@"Assets/Sights/sight4.png"]texture]];
+    } else if(crosshairSelection == 5) {
+        [_crosshair setTexture:[[CCSprite spriteWithImageNamed:@"Assets/Sights/sight5.png"]texture]];
+    }
+}
+
 #pragma mark - Game Mechancis
 
 // called on every touch in this scene
@@ -152,7 +167,6 @@
     int crosshairDistToBall = sqrtf(powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2));
     // check if the ball contains the crosshair
     if(start && ballRadius >= crosshairDistToBall) {
-        [[OALSimpleAudio sharedInstance] playBg:@"hit.wav"];
         
         _instructions.visible = false;
         _scoreLabel.visible = true;
@@ -209,7 +223,7 @@
     if(score >= 15 && score % 5 == 0 && !starActive) {
         starActive = true;
         Star *star = (Star *)[CCBReader load:@"Star"];
-        star.position = ccp((arc4random_uniform(bbSize.width*0.8)+bbSize.width*0.2),(arc4random_uniform(bbSize.height*0.8)+bbSize.height*0.2));
+        star.position = ccp((arc4random_uniform(bbSize.width*0.7)+bbSize.width*0.15),(arc4random_uniform(bbSize.height*0.7)+bbSize.height*0.15));
         [_physicsNode addChild:star];
     }
 }
@@ -264,7 +278,7 @@
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: playCount, @"PlayCount", prevScore, @"PreviousScore", nil];
     [MGWU logEvent:@"EndGame" withParams:params];
     
-    [[NSUserDefaults standardUserDefaults] synchronize]; //IDK
+    [[NSUserDefaults standardUserDefaults] synchronize]; //idk what this does
     // change scenes
     CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
     [[CCDirector sharedDirector] replaceScene:recapScene];
