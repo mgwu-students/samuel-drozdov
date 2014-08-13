@@ -61,6 +61,8 @@
     
     [self setupCocos2dWithOptions:cocos2dSetup];
     
+    [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+    
     return YES;
 }
 

@@ -54,8 +54,8 @@
     
     [self checkBought];
     
-    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
-    _points.string = [NSString stringWithFormat:@"%d", overallScore];
+    int stars = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue];
+    _points.string = [NSString stringWithFormat:@"%d", stars];
 }
 
 -(void)checkBought {
@@ -78,7 +78,7 @@
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     bool colorPicked = false;
     CGPoint touches = [touch locationInWorld];
-    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
+    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue];
 
     if(touches.y > bbSize.height*0.8) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"backgroundColor"];
@@ -89,8 +89,8 @@
             colorPicked = true;
         }
         if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color2Unlocked"]
-           && overallScore >= 500) {
-            overallScore -= 500;
+           && overallScore >= 100) {
+            overallScore -= 100;
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color2Unlocked"];
         }
     } else if(touches.y > bbSize.height*0.4) {
@@ -99,8 +99,8 @@
             colorPicked = true;
         }
         if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color3Unlocked"]
-           && overallScore >= 500) {
-            overallScore -= 500;
+           && overallScore >= 100) {
+            overallScore -= 100;
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color3Unlocked"];
         }
     } else if(touches.y > bbSize.height*0.2) {
@@ -109,8 +109,8 @@
             colorPicked = true;
         }
         if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color4Unlocked"]
-           && overallScore >= 500) {
-            overallScore -= 500;
+           && overallScore >= 100) {
+            overallScore -= 100;
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color4Unlocked"];
         }
     } else if(touches.y > bbSize.height*0.0) {
@@ -119,15 +119,15 @@
             colorPicked = true;
         }
         if(0 == [[NSUserDefaults standardUserDefaults] objectForKey:@"Color5Unlocked"]
-           && overallScore >= 500) {
-            overallScore -= 500;
+           && overallScore >= 100) {
+            overallScore -= 100;
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Color5Unlocked"];
         }
     }
     _points.string = [NSString stringWithFormat:@"%d", overallScore];
     
     // updates overall score if something was bought
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"Stars"];
     [self checkBought];
     
     if(colorPicked) {

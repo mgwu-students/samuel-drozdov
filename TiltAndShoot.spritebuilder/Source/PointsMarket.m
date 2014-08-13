@@ -15,8 +15,8 @@
 }
 
 - (void)didLoadFromCCB {
-    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
-    _overallScore.string = [NSString stringWithFormat:@"%d",overallScore];
+    int stars = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue];
+    _overallScore.string = [NSString stringWithFormat:@"%d",stars];
     
     _background.color = [self checkForBackgroundColor];
     _stupidBackCover.color = [self checkForBackgroundColor];
@@ -41,24 +41,65 @@
     return color;
 }
 
+-(void)back {
+    CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
+    [[CCDirector sharedDirector] replaceScene:mainScene withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:0.3f]];
+}
+
+#pragma mark -  Buttons
+
+//REDO THIS ALL FOR STARSSSS
+
 -(void)first {
-    [MGWU buyProduct:@"com.xxx.xxx.productID1" withCallback:@selector(boughtProduct:) onTarget:self];
+    [MGWU buyProduct:@"com.SamuelDrozdov.TiltAndShoot.2000Points" withCallback:@selector(boughtProduct:) onTarget:self];
 }
 -(void)second {
-    [MGWU buyProduct:@"com.xxx.xxx.productID2" withCallback:@selector(boughtProduct:) onTarget:self];
+    [MGWU buyProduct:@"com.SamuelDrozdov.TiltAndShoot.5000Points" withCallback:@selector(boughtProduct:) onTarget:self];
 }
 -(void)third {
-    [MGWU buyProduct:@"com.xxx.xxx.productID3" withCallback:@selector(boughtProduct:) onTarget:self];
+    [MGWU buyProduct:@"com.SamuelDrozdov.TiltAndShoot.10000Points" withCallback:@selector(boughtProduct:) onTarget:self];
 }
 -(void)restore {
     [MGWU restoreProductsWithCallback:@selector(restoredProducts:) onTarget:self];
 }
 
-//???
+#pragma mark - Product Purchas Methods
 
--(void)back {
-    CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
-    [[CCDirector sharedDirector] replaceScene:mainScene withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:0.3f]];
+-(void)boughtProduct: (NSString *)productID {
+    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
+    
+    if(productID == nil) {
+        return;
+    } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.2000Points"]) {
+        overallScore += 2000;
+    } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.5000Points"]) {
+        overallScore += 5000;
+    } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.10000Points"]) {
+        overallScore += 10000;
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
+}
+
+-(void)restoredProducts: (NSArray *)productIDs {
+    if(productIDs == nil) {
+        return;
+    } else {
+        int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
+        
+        for (NSString* productID in productIDs) {
+            if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.2000Points"]) {
+                overallScore += 2000;
+            } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.5000Points"]) {
+                overallScore += 5000;
+            } else if([productID isEqualToString:@"com.SamuelDrozdov.TiltAndShoot.10000Points"]) {
+                overallScore += 10000;
+            }
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
+    }
+    
 }
 
 @end

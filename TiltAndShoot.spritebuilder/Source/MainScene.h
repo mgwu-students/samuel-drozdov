@@ -8,6 +8,6 @@
 
 #import "CCNode.h"
 
-@interface MainScene : CCNode <CCPhysicsCollisionDelegate>
+@interface MainScene : CCNode <CCPhysicsCollisionDelegate, GKGameCenterControllerDelegate>
 
 @end

@@ -10,6 +10,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreMotion/CoreMotion.h>
+#import "Star.h"
+
+#define gkLeaderboard @"TASLeaderboard"
 
 @implementation MainScene {
     CCNode *_instructions;
@@ -35,6 +38,7 @@
     bool firstHit;
     bool start;
     CCLabelTTF *_startLabel;
+    bool starActive;
     
     CCButton *_endGameButton;
     
@@ -52,12 +56,6 @@
 
 - (void)onEnter {
     [super onEnter];
-    [MGWU submitHighScore:25 byPlayer:@"123" forLeaderboard:@"defaultLeaderboard"];
-    [MGWU submitHighScore:30 byPlayer:@"1234" forLeaderboard:@"defaultLeaderboard"];
-    [MGWU submitHighScore:35 byPlayer:@"12345" forLeaderboard:@"defaultLeaderboard"];
-    [MGWU submitHighScore:40 byPlayer:@"123456" forLeaderboard:@"defaultLeaderboard"];
-    [MGWU submitHighScore:45 byPlayer:@"Dundy" forLeaderboard:@"defaultLeaderboard"];
-    
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"Start"];
     [_motionManager startAccelerometerUpdates];
 }
@@ -84,8 +82,8 @@
     _startLabel.color = [self checkForBackgroundColor];
     _stupidScoreCover.color = [self checkForBackgroundColor];
     
-    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
-    _points.string = [NSString stringWithFormat:@"%d",overallScore];
+    int stars = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue];
+    _points.string = [NSString stringWithFormat:@"%d",stars];
     
     // find the size of the gameplay scene
     bbSize = [[UIScreen mainScreen] bounds].size;
@@ -94,6 +92,7 @@
     _scoreLabel.visible = false;
     firstHit = false;
     start = false;
+    starActive = false;
     ballRadius = 35.5;
     score = 0;
     power = 50;
@@ -103,7 +102,6 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"firstTimePlaying"];
         _background.color = color1;
         _timerCover.color = color1;
-        _crosshair.color = [CCColor whiteColor];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"backgroundColor"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"crosshairColor"];
     }
@@ -138,8 +136,15 @@
     return color;
 }
 
+#pragma mark - Game Mechancis
+
 // called on every touch in this scene
 -(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    CCActionFiniteTime *shrink = [CCActionScaleTo actionWithDuration:0.1 scale:0.9f];
+    CCActionFiniteTime *grow = [CCActionScaleTo actionWithDuration:0.1 scale:1.0f];
+    CCActionSequence *action = [CCActionSequence actions:shrink, grow, nil];
+    [_crosshair runAction:action];
+    
     int ballX = _ball.positionInPoints.x;
     int ballY = _ball.positionInPoints.y;
     int crosshairX = _crosshair.position.x;
@@ -200,6 +205,13 @@
         missed.position = _crosshair.position;
         [self addChild:missed z:0];
     }
+    
+    if(score >= 15 && score % 5 == 0 && !starActive) {
+        starActive = true;
+        Star *star = (Star *)[CCBReader load:@"Star"];
+        star.position = ccp((arc4random_uniform(bbSize.width*0.8)+bbSize.width*0.2),(arc4random_uniform(bbSize.height*0.8)+bbSize.height*0.2));
+        [_physicsNode addChild:star];
+    }
 }
 
 // updates that happen every 1/60th second
@@ -232,6 +244,60 @@
     }
 }
 
+-(void)endGame {
+    [[GameKitHelper sharedGameKitHelper] submitScore:score  category:gkLeaderboard];
+    
+    NSNumber *playCount = [[NSUserDefaults standardUserDefaults] objectForKey:@"PlayCount"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:playCount.intValue+1] forKey:@"PlayCount"];
+    [MGWU submitHighScore:score byPlayer:[[NSUserDefaults standardUserDefaults] objectForKey:@"UserName"] forLeaderboard:@"defaultLeaderboard"];
+    
+    NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"HighScore"];
+    NSNumber *prevScore = [NSNumber numberWithInt:score];
+    if(prevScore.intValue > highScore.intValue) {
+        // new highscore
+        highScore = prevScore;
+        [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"HighScore"];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:prevScore forKey:@"PreviousScore"];
+    
+    //Analytics
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: playCount, @"PlayCount", prevScore, @"PreviousScore", nil];
+    [MGWU logEvent:@"EndGame" withParams:params];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize]; //IDK
+    // change scenes
+    CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
+    [[CCDirector sharedDirector] replaceScene:recapScene];
+}
+
+#pragma mark - Physics
+
+- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)nodeA wall:(CCNode *)nodeB {
+    [self endGame];
+}
+
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair ball:(CCNode *)nodeA star:(CCNode *)nodeB {
+    starActive = false;
+    [nodeB removeFromParent];
+    
+    int stars = [[[NSUserDefaults standardUserDefaults]  objectForKey:@"Stars"] integerValue];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:stars+1] forKey:@"Stars"];
+    
+    CCLabelTTF *plus = [[CCLabelTTF alloc] initWithString:@"+1" fontName:@"Futura-Medium" fontSize:25];
+    plus.positionInPoints = nodeB.positionInPoints;
+    [self addChild:plus];
+
+    CCActionFiniteTime *fade = [CCActionFadeTo actionWithDuration:0.5 opacity:0.0];
+    CCActionFiniteTime *slide = [CCActionMoveTo actionWithDuration:0.5 position:ccp(plus.positionInPoints.x,plus.positionInPoints.y+15)];
+    CCActionSequence *action = [CCActionSequence actions:slide, fade, [CCActionRemove action], nil];
+    [plus runAction:action];
+    
+    return false;
+}
+
+#pragma mark - Buttons
+
+//start button
 -(void)calibrate {
     [MGWU logEvent:@"Calibrated" withParams:nil];
     start = true;
@@ -260,46 +326,42 @@
     [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionDown duration:0.3f]];
 }
 
--(void)scores {
-    [MGWU logEvent:@"GlobalScoresMenu" withParams:nil];
-    CCScene *colorMarket = [CCBReader loadAsScene:@"GlobalScores"];
-    [[CCDirector sharedDirector] replaceScene:colorMarket withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:0.3f]];
-}
-
+//only visible during gameplay
 -(void)end {
     [MGWU logEvent:@"GameEndButtonPressed" withParams:nil];
     [self endGame];
 }
 
-- (void)ccPhysicsCollisionPostSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)nodeA wall:(CCNode *)nodeB {
-    [self endGame];
+#pragma mark - Game Center
+
+//Calls GameCenter
+-(void)scores {
+    [self showLeaderboardAndAchievements:YES];
 }
 
--(void)endGame {
-    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
-    overallScore += score;
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
+//GameCenter
+-(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard
+{
+    GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
     
-    NSNumber *playCount = [[NSUserDefaults standardUserDefaults] objectForKey:@"PlayCount"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:playCount.intValue+1] forKey:@"PlayCount"];
-    [MGWU submitHighScore:score byPlayer:[[NSUserDefaults standardUserDefaults] objectForKey:@"UserName"] forLeaderboard:@"defaultLeaderboard"];
+    gcViewController.gameCenterDelegate = self;
     
-    NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"HighScore"];
-    NSNumber *prevScore = [NSNumber numberWithInt:score];
-    if(prevScore.intValue > highScore.intValue) {
-        // new highscore
-        highScore = prevScore;
-        [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"HighScore"];
+    if (shouldShowLeaderboard) {
+        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gcViewController.leaderboardIdentifier = gkLeaderboard;
     }
-    [[NSUserDefaults standardUserDefaults] setObject:prevScore forKey:@"PreviousScore"];
+    else{
+        gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
+    }
     
-    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: playCount, @"PlayCount", prevScore, @"PreviousScore", nil];//
+    // [self presentViewController:gcViewController animated:YES completion:nil];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:gcViewController animated:YES completion:nil];
     
-    [MGWU logEvent:@"EndGame" withParams:params];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    // change scenes
-    CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
-    [[CCDirector sharedDirector] replaceScene:recapScene];
 }
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

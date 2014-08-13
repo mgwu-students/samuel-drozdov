@@ -43,22 +43,22 @@
     _finalScoreLabel.string = [NSString stringWithFormat:@"%d", prevScore];
     _yourHighScoreLabel.string = [NSString stringWithFormat:@"%d", yourHighScore];
     
-    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"OverallScore"] intValue];
+    int overallScore = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue];
     
     if(prevScore >= 50) {
         _bronzeCover.visible = false;
         _add50.visible = true;
-        overallScore += 25;
+        overallScore += 5;
     }
     if(prevScore >= 100) {
         _silverCover.visible = false;
         _add100.visible = true;
-        overallScore += 50;
+        overallScore += 10;
     }
     if(prevScore >= 150) {
         _goldCover.visible = false;
         _add150.visible = true;
-        overallScore += 75;
+        overallScore += 15;
     }
     
     if(prevScore == yourHighScore) {
@@ -66,7 +66,7 @@
     }
     
     _overallScoreLabel.string = [NSString stringWithFormat:@"%d", overallScore];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"OverallScore"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:overallScore] forKey:@"Stars"];
     
     _background.color = [self checkForBackgroundColor];
     _stupidBestBackground.color = [self checkForBackgroundColor];
