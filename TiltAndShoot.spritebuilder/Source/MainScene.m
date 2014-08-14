@@ -330,11 +330,9 @@
 -(void)calibrate {
     [MGWU logEvent:@"Calibrated" withParams:nil];
     
-    CCAnimationManager *animationManager = self.animationManager;
-    [animationManager runAnimationsForSequenceNamed:@"StartGame Timeline"];
-    
     start = true;
     _crosshair.position = ccp(bbSize.width/2, bbSize.height/2);
+    [self.animationManager runAnimationsForSequenceNamed:@"StartGame Timeline"];
     float calibrationX = -_motionManager.accelerometerData.acceleration.x;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:calibrationX] forKey:@"calibrationX"];
     float calibrationY = -_motionManager.accelerometerData.acceleration.y;
@@ -343,8 +341,6 @@
     _holdLabel.visible = false;
     _clickShootLabel.visible = true;
     _arrowLabel.visible = true;
-    _colorMarketNode.visible = false;
-    _points.visible = false;
     _endGameButton.visible = true;
 }
 

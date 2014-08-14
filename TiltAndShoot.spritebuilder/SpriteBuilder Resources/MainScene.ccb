@@ -16,7 +16,7 @@
 	<key>currentResolution</key>
 	<integer>2</integer>
 	<key>currentSequenceId</key>
-	<integer>2</integer>
+	<integer>0</integer>
 	<key>docDimensionsType</key>
 	<integer>0</integer>
 	<key>fileType</key>
@@ -2837,36 +2837,7 @@ To Shoot</string>
 				<key>animatedProperties</key>
 				<dict>
 					<key>1</key>
-					<dict>
-						<key>position</key>
-						<dict>
-							<key>keyframes</key>
-							<array>
-								<dict>
-									<key>easing</key>
-									<dict>
-										<key>type</key>
-										<integer>1</integer>
-									</dict>
-									<key>name</key>
-									<string>position</string>
-									<key>time</key>
-									<real>1</real>
-									<key>type</key>
-									<integer>3</integer>
-									<key>value</key>
-									<array>
-										<real>0.50360971689224243</real>
-										<real>0.50143861770629883</real>
-									</array>
-								</dict>
-							</array>
-							<key>name</key>
-							<string>position</string>
-							<key>type</key>
-							<integer>3</integer>
-						</dict>
-					</dict>
+					<dict/>
 				</dict>
 				<key>baseClass</key>
 				<string>CCPhysicsNode</string>
@@ -2970,7 +2941,7 @@ To Shoot</string>
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>0.0</real>
+									<real>-0.02864360623061657</real>
 									<integer>0</integer>
 									<integer>2</integer>
 									<integer>2</integer>
@@ -3112,8 +3083,8 @@ To Shoot</string>
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>0.5</real>
-									<real>1</real>
+									<real>0.50537067651748657</real>
+									<real>1.0071609020233154</real>
 									<integer>0</integer>
 									<integer>2</integer>
 									<integer>2</integer>
@@ -3212,6 +3183,10 @@ To Shoot</string>
 									<real>583.9365234375</real>
 								</array>
 								<array>
+									<real>34.847724914550781</real>
+									<real>208.01509094238281</real>
+								</array>
+								<array>
 									<real>15.616828918457031</real>
 									<real>3.0948350429534912</real>
 								</array>
@@ -3230,6 +3205,10 @@ To Shoot</string>
 									<array>
 										<real>15.616828918457031</real>
 										<real>3.0948350429534912</real>
+									</array>
+									<array>
+										<real>34.847724914550781</real>
+										<real>208.01509094238281</real>
 									</array>
 									<array>
 										<real>18.863672256469727</real>
@@ -3263,7 +3242,7 @@ To Shoot</string>
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>1</real>
+									<real>1.0053707361221313</real>
 									<real>0.5</real>
 									<integer>0</integer>
 									<integer>2</integer>
@@ -3406,7 +3385,7 @@ To Shoot</string>
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
+									<real>-0.005370674654841423</real>
 									<real>0.5</real>
 									<integer>0</integer>
 									<integer>2</integer>
@@ -3745,7 +3724,7 @@ To Shoot</string>
 							<key>affectedByGravity</key>
 							<false/>
 							<key>allowsRotation</key>
-							<true/>
+							<false/>
 							<key>bodyShape</key>
 							<integer>1</integer>
 							<key>collisionCategories</key>
@@ -3759,7 +3738,7 @@ To Shoot</string>
 							<key>density</key>
 							<real>1</real>
 							<key>dynamic</key>
-							<false/>
+							<true/>
 							<key>elasticity</key>
 							<real>0.30000001192092896</real>
 							<key>friction</key>
@@ -3868,11 +3847,6 @@ To Shoot</string>
 						<string></string>
 					</dict>
 					<dict>
-						<key>baseValue</key>
-						<array>
-							<real>0.50360971689224243</real>
-							<real>0.50143861770629883</real>
-						</array>
 						<key>name</key>
 						<string>position</string>
 						<key>type</key>
@@ -3943,8 +3917,6 @@ To Shoot</string>
 						<real>0.5</real>
 					</dict>
 				</array>
-				<key>seqExpanded</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -4047,7 +4019,7 @@ To Shoot</string>
 													<key>name</key>
 													<string>position</string>
 													<key>time</key>
-													<real>0.66666668653488159</real>
+													<real>0.5</real>
 													<key>type</key>
 													<integer>3</integer>
 													<key>value</key>
@@ -4406,7 +4378,7 @@ To Shoot</string>
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>-0.5</real>
+											<real>-0.041468571871519089</real>
 											<real>0.5</real>
 											<integer>0</integer>
 											<integer>2</integer>
@@ -4552,7 +4524,7 @@ To Shoot</string>
 													<key>name</key>
 													<string>position</string>
 													<key>time</key>
-													<real>0.66666668653488159</real>
+													<real>0.5</real>
 													<key>type</key>
 													<integer>3</integer>
 													<key>value</key>
@@ -4603,7 +4575,7 @@ To Shoot</string>
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>1.5</real>
+											<real>1</real>
 											<real>0.5</real>
 											<integer>0</integer>
 											<integer>2</integer>
@@ -4659,8 +4631,6 @@ To Shoot</string>
 										</array>
 									</dict>
 								</array>
-								<key>selected</key>
-								<true/>
 								<key>seqExpanded</key>
 								<true/>
 							</dict>
@@ -5509,7 +5479,7 @@ To Shoot</string>
 											<key>name</key>
 											<string>position</string>
 											<key>time</key>
-											<real>0.66666668653488159</real>
+											<real>0.5</real>
 											<key>type</key>
 											<integer>3</integer>
 											<key>value</key>
@@ -6315,7 +6285,7 @@ To Shoot</string>
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>2</real>
+									<real>1</real>
 									<integer>0</integer>
 									<integer>2</integer>
 									<integer>2</integer>
@@ -6622,7 +6592,7 @@ To Shoot</string>
 									<key>name</key>
 									<string>position</string>
 									<key>time</key>
-									<real>0.10000000149011612</real>
+									<real>0.1666666716337204</real>
 									<key>type</key>
 									<integer>3</integer>
 									<key>value</key>
@@ -6640,7 +6610,7 @@ To Shoot</string>
 									<key>name</key>
 									<string>position</string>
 									<key>time</key>
-									<real>0.66666668653488159</real>
+									<real>1</real>
 									<key>type</key>
 									<integer>3</integer>
 									<key>value</key>
@@ -7197,6 +7167,8 @@ To Shoot</string>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -7412,7 +7384,7 @@ To Shoot</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.66666668653488159</real>
+			<real>1</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
