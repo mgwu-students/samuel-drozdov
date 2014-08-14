@@ -26,7 +26,6 @@
     CCNodeColor *_backgroundColorNode4;
     CCNodeColor *_backgroundColorNode5;
     
-    int selectedBackground;
     bool background2Unlocked;
     bool background3Unlocked;
     bool background4Unlocked;
@@ -36,7 +35,6 @@
     CCSprite *_backStar4;
     CCSprite *_backStar5;
     
-    int selectedCrosshair;
     CCSprite *_selectedCircle;
     bool crosshair2Unlocked;
     bool crosshair3Unlocked;
@@ -72,8 +70,6 @@
     color5 = [CCColor colorWithRed:0.227 green:0.773 blue:0.796];
     _backgroundColorNode5.color = color5;
     
-    _background.color = [self checkForBackgroundColor];
-    _stupidButtonCover.color = [self checkForBackgroundColor];
     [self checkBought];
     [self pickCrosshair];
     [self pickBackground];
@@ -119,7 +115,7 @@
     }
 }
 
--(CCColor *)checkForBackgroundColor{
+-(CCColor *)checkForBackgroundColor {
     int x = [[[NSUserDefaults standardUserDefaults] objectForKey:@"backgroundColor"] intValue];
     CCColor *color;
     if(x == 1) {
@@ -205,25 +201,25 @@
     [self checkBought];
 }
 
--(void)pickCrosshair {
-    selectedCrosshair = [[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCrosshair"] integerValue];
-    if(selectedCrosshair == 1){
-        _selectedCircle.positionInPoints = [_cPosition1 convertToWorldSpace:_cPosition1.position];
-    } else if(selectedCrosshair == 2){
-        _selectedCircle.positionInPoints = [_cPosition2 convertToWorldSpace:_cPosition2.position];
-    } else if(selectedCrosshair == 3){
-        _selectedCircle.positionInPoints = [_cPosition3 convertToWorldSpace:_cPosition3.position];
-    } else if(selectedCrosshair == 4){
-        _selectedCircle.positionInPoints = [_cPosition4 convertToWorldSpace:_cPosition4.position];
-    } else if(selectedCrosshair == 5){
-        _selectedCircle.positionInPoints = [_cPosition5 convertToWorldSpace:_cPosition5.position];
+-(void)pickCrosshair { //Positions are weriddd
+    int selectedCrosshair = [[[NSUserDefaults standardUserDefaults] objectForKey:@"SelectedCrosshair"] integerValue];
+    if(selectedCrosshair == 1) {
+        _selectedCircle.position = _cPosition1.parent.positionInPoints;
+    } else if(selectedCrosshair == 2) {
+        _selectedCircle.position = _cPosition2.parent.positionInPoints;
+    } else if(selectedCrosshair == 3) {
+        _selectedCircle.position = _cPosition3.parent.positionInPoints;
+    } else if(selectedCrosshair == 4) {
+        _selectedCircle.position = _cPosition4.parent.positionInPoints;
+    } else if(selectedCrosshair == 5) {
+        _selectedCircle.position = _cPosition5.parent.positionInPoints;
     }
 }
 
 #pragma mark - Background Selecting Mechanics
 
 -(void)background1 {
-    selectedBackground = 1;
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"backgroundColor"];
     [self pickBackground];
 }
 
@@ -235,7 +231,7 @@
         }
         return;
     }
-    selectedBackground = 2;
+    [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"backgroundColor"];
     [self pickBackground];
 }
 
@@ -247,7 +243,7 @@
         }
         return;
     }
-    selectedBackground = 3;
+    [[NSUserDefaults standardUserDefaults] setInteger:3 forKey:@"backgroundColor"];
     [self pickBackground];
 }
 
@@ -259,7 +255,7 @@
         }
         return;
     }
-    selectedBackground = 4;
+    [[NSUserDefaults standardUserDefaults] setInteger:4 forKey:@"backgroundColor"];
     [self pickBackground];
 }
 
@@ -271,7 +267,7 @@
         }
         return;
     }
-    selectedBackground = 5;
+    [[NSUserDefaults standardUserDefaults] setInteger:5 forKey:@"backgroundColor"];
     [self pickBackground];
 }
 
@@ -283,7 +279,6 @@
 }
 
 -(void)pickBackground {
-    [[NSUserDefaults standardUserDefaults] setInteger:selectedBackground forKey:@"backgroundColor"];
     _background.color = [self checkForBackgroundColor];
     _stupidButtonCover.color = [self checkForBackgroundColor];
 }

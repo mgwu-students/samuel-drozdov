@@ -23,6 +23,7 @@
     CCPhysicsNode *_physicsNode;
     
     CCNodeColor *_stupidScoreCover;
+    CCNodeColor *_stupidShopCover;
     CCNode *_calibrateButton;
     CCLabelTTF *_arrowLabel;
     CCLabelTTF *_clickShootLabel;
@@ -40,7 +41,8 @@
     CCLabelTTF *_startLabel;
     bool starActive;
     
-    CCButton *_endGameButton;
+    CCSprite *_endGameButton;
+    CCNodeColor *_stupidEndCover;
     
     CCNodeColor *_timerCover;
     CCNodeColor *_background;
@@ -66,6 +68,14 @@
 
 // is called when CCB file has completed loading
 - (void)didLoadFromCCB {
+    // plays an animation if openning the game
+    if([[NSUserDefaults standardUserDefaults] integerForKey:@"LoadedScene"] == 1) {
+        CCAnimationManager *animationManager = self.animationManager;
+        [animationManager runAnimationsForSequenceNamed:@"Animated Timeline"];
+        
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"LoadedScene"];
+    }
+    
     // only called the first time playing the game
     if(![[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimePlaying"]) {
         [[NSUserDefaults standardUserDefaults] setObject:@"Player" forKey:@"UserName"];
@@ -89,6 +99,8 @@
     _timerCover.color = [self checkForBackgroundColor];
     _startLabel.color = [self checkForBackgroundColor];
     _stupidScoreCover.color = [self checkForBackgroundColor];
+    _stupidShopCover.color = [self checkForBackgroundColor];
+    _stupidEndCover.color = [self checkForBackgroundColor];
     [self crosshairSelect];
     
     int stars = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Stars"] intValue];
@@ -151,6 +163,8 @@
     }
 }
 
+
+
 #pragma mark - Game Mechancis
 
 // called on every touch in this scene
@@ -172,7 +186,6 @@
         _scoreLabel.visible = true;
         _keepShootingLabel.visible = true;
         _colorMarketNode.visible = false;
-        _endGameButton.visible = true;
         _points.visible = false;
         firstHit = true;
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Start"];
@@ -279,9 +292,11 @@
     [MGWU logEvent:@"EndGame" withParams:params];
     
     [[NSUserDefaults standardUserDefaults] synchronize]; //idk what this does
+    
+    _endGameButton.visible = false;
     // change scenes
     CCScene *recapScene = [CCBReader loadAsScene:@"Recap"];
-    [[CCDirector sharedDirector] replaceScene:recapScene];
+    [[CCDirector sharedDirector] replaceScene:recapScene withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:0.3f]];
 }
 
 #pragma mark - Physics
@@ -314,6 +329,10 @@
 //start button
 -(void)calibrate {
     [MGWU logEvent:@"Calibrated" withParams:nil];
+    
+    CCAnimationManager *animationManager = self.animationManager;
+    [animationManager runAnimationsForSequenceNamed:@"StartGame Timeline"];
+    
     start = true;
     _crosshair.position = ccp(bbSize.width/2, bbSize.height/2);
     float calibrationX = -_motionManager.accelerometerData.acceleration.x;
@@ -326,6 +345,7 @@
     _arrowLabel.visible = true;
     _colorMarketNode.visible = false;
     _points.visible = false;
+    _endGameButton.visible = true;
 }
 
 -(void)shop {

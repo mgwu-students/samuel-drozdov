@@ -99,14 +99,14 @@
     [MGWU logEvent:@"ClickedRestart" withParams:nil];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:1] forKey:@"Start"];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
-    [[CCDirector sharedDirector] replaceScene:mainScene];
+    [[CCDirector sharedDirector] replaceScene:mainScene withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:0.3f]];
 }
 
 -(void)menu {
     [MGWU logEvent:@"ClickedMenu" withParams:nil];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"Start"];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
-    [[CCDirector sharedDirector] replaceScene:mainScene];
+    [[CCDirector sharedDirector] replaceScene:mainScene withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:0.3f]];
 }
 
 @end

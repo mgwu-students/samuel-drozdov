@@ -74,6 +74,7 @@
 
 - (CCScene*) startScene
 {
+    [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"LoadedScene"];
     return [CCBReader loadAsScene:@"MainScene"];
 }
 

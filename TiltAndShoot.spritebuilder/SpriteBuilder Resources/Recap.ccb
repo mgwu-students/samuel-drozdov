@@ -2380,8 +2380,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
@@ -3695,7 +3693,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Assets/Star-16@4x.png</string>
+									<string>Assets/star_1.png</string>
 								</array>
 							</dict>
 							<dict>

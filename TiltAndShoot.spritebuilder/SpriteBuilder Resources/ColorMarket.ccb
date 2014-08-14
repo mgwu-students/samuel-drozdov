@@ -51,7 +51,7 @@
 				<key>displayName</key>
 				<string>CCNodeColor</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_background</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -140,100 +140,100 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>54</integer>
-				<key>baseClass</key>
-				<string>CCSprite</string>
-				<key>children</key>
-				<array/>
-				<key>customClass</key>
-				<string></string>
-				<key>displayName</key>
-				<string>Selected</string>
-				<key>memberVarAssignmentName</key>
-				<string>_selectedCircle</string>
-				<key>memberVarAssignmentType</key>
-				<integer>1</integer>
-				<key>properties</key>
-				<array>
-					<dict>
-						<key>name</key>
-						<string>name</string>
-						<key>type</key>
-						<string>StringSimple</string>
-						<key>value</key>
-						<string></string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>position</string>
-						<key>type</key>
-						<string>Position</string>
-						<key>value</key>
-						<array>
-							<real>0.25</real>
-							<real>0.79984390735626221</real>
-							<integer>0</integer>
-							<integer>2</integer>
-							<integer>2</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>anchorPoint</string>
-						<key>type</key>
-						<string>Point</string>
-						<key>value</key>
-						<array>
-							<real>0.5</real>
-							<real>0.5</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>scale</string>
-						<key>type</key>
-						<string>ScaleLock</string>
-						<key>value</key>
-						<array>
-							<real>1</real>
-							<real>1</real>
-							<false/>
-							<integer>0</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>spriteFrame</string>
-						<key>type</key>
-						<string>SpriteFrame</string>
-						<key>value</key>
-						<array>
-							<string></string>
-							<string>Assets/In-Game/target_1.png</string>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>color</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
-						</array>
-					</dict>
-				</array>
-			</dict>
-			<dict>
-				<key>UUID</key>
 				<integer>35</integer>
 				<key>baseClass</key>
 				<string>CCNodeColor</string>
 				<key>children</key>
 				<array>
+					<dict>
+						<key>UUID</key>
+						<integer>54</integer>
+						<key>baseClass</key>
+						<string>CCSprite</string>
+						<key>children</key>
+						<array/>
+						<key>customClass</key>
+						<string></string>
+						<key>displayName</key>
+						<string>Selected</string>
+						<key>memberVarAssignmentName</key>
+						<string>_selectedCircle</string>
+						<key>memberVarAssignmentType</key>
+						<integer>1</integer>
+						<key>properties</key>
+						<array>
+							<dict>
+								<key>name</key>
+								<string>name</string>
+								<key>type</key>
+								<string>StringSimple</string>
+								<key>value</key>
+								<string></string>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>position</string>
+								<key>type</key>
+								<string>Position</string>
+								<key>value</key>
+								<array>
+									<real>158.35926818847656</real>
+									<real>362.12396240234375</real>
+									<integer>0</integer>
+									<integer>0</integer>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>anchorPoint</string>
+								<key>type</key>
+								<string>Point</string>
+								<key>value</key>
+								<array>
+									<real>0.5</real>
+									<real>0.5</real>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>scale</string>
+								<key>type</key>
+								<string>ScaleLock</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<real>1</real>
+									<false/>
+									<integer>0</integer>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>spriteFrame</string>
+								<key>type</key>
+								<string>SpriteFrame</string>
+								<key>value</key>
+								<array>
+									<string></string>
+									<string>Assets/In-Game/target_1.png</string>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>color</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>1</real>
+									<real>1</real>
+									<real>1</real>
+									<real>1</real>
+								</array>
+							</dict>
+						</array>
+					</dict>
 					<dict>
 						<key>UUID</key>
 						<integer>51</integer>
@@ -609,7 +609,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Assets/Star-16@4x.png</string>
+											<string>Assets/star_1.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -1024,11 +1024,11 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>0.5</real>
-											<real>0.5</real>
+											<real>25</real>
+											<real>25</real>
 											<integer>0</integer>
-											<integer>2</integer>
-											<integer>2</integer>
+											<integer>0</integer>
+											<integer>0</integer>
 										</array>
 									</dict>
 									<dict>
@@ -1517,7 +1517,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Assets/Star-16@4x.png</string>
+											<string>Assets/star_1.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -2425,7 +2425,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Assets/Star-16@4x.png</string>
+											<string>Assets/star_1.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -3331,7 +3331,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Assets/Star-16@4x.png</string>
+											<string>Assets/star_1.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -4348,11 +4348,11 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>0.5</real>
-											<real>0.5</real>
+											<real>25</real>
+											<real>25</real>
 											<integer>0</integer>
-											<integer>2</integer>
-											<integer>2</integer>
+											<integer>0</integer>
+											<integer>0</integer>
 										</array>
 									</dict>
 									<dict>
@@ -4472,7 +4472,7 @@
 				<key>displayName</key>
 				<string>Crosshairs</string>
 				<key>memberVarAssignmentName</key>
-				<string>_background</string>
+				<string></string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -4493,10 +4493,10 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>0.20000000298023224</real>
+							<real>0.0</real>
+							<integer>1</integer>
 							<integer>0</integer>
-							<integer>2</integer>
-							<integer>2</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -4506,10 +4506,10 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>0.80000001192092896</real>
-							<integer>2</integer>
-							<integer>2</integer>
+							<real>320</real>
+							<real>454.39999389648438</real>
+							<integer>0</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -4520,7 +4520,7 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>0.0</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -5318,7 +5318,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Assets/Star-16@4x.png</string>
+											<string>Assets/star_1.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -6081,7 +6081,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Assets/Star-16@4x.png</string>
+											<string>Assets/star_1.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -6844,7 +6844,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Assets/Star-16@4x.png</string>
+											<string>Assets/star_1.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -7607,7 +7607,7 @@
 										<key>value</key>
 										<array>
 											<string></string>
-											<string>Assets/Star-16@4x.png</string>
+											<string>Assets/star_1.png</string>
 										</array>
 									</dict>
 									<dict>
@@ -8666,7 +8666,7 @@
 										<key>value</key>
 										<array>
 											<real>20</real>
-											<real>0.5</real>
+											<real>0.55000001192092896</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>2</integer>
@@ -9186,7 +9186,7 @@
 								<key>value</key>
 								<array>
 									<real>0.090000003576278687</real>
-									<real>0.5</real>
+									<real>0.52999997138977051</real>
 									<integer>0</integer>
 									<integer>2</integer>
 									<integer>2</integer>
@@ -9224,7 +9224,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Assets/Star-16@4x.png</string>
+									<string>Assets/star_1.png</string>
 								</array>
 							</dict>
 							<dict>
