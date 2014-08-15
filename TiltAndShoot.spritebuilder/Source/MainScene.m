@@ -54,6 +54,8 @@
     CCColor *color3;
     CCColor *color4;
     CCColor *color5;
+    
+    CCPhysicsNode *_ballPhysicsNode;
 }
 
 - (void)onEnter {
@@ -176,8 +178,8 @@
     
     int ballX = _ball.positionInPoints.x;
     int ballY = _ball.positionInPoints.y;
-    int crosshairX = _crosshair.position.x;
-    int crosshairY = _crosshair.position.y;
+    int crosshairX = _crosshair.positionInPoints.x;
+    int crosshairY = _crosshair.positionInPoints.y;
     int crosshairDistToBall = sqrtf(powf(crosshairX - ballX, 2) + powf(crosshairY - ballY, 2));
     // check if the ball contains the crosshair
     if(start && ballRadius >= crosshairDistToBall) {
@@ -229,8 +231,8 @@
         // make the particle effect clean itself up, once it is completed
         missed.autoRemoveOnFinish = TRUE;
         // place the particle effect on the crosshair's position
-        missed.position = _crosshair.position;
-        [self addChild:missed z:0];
+        missed.position = _crosshair.positionInPoints;
+        [_crosshair addChild:missed z:0];
     }
     
     if(score >= 15 && score % 5 == 0 && !starActive) {
@@ -248,9 +250,9 @@
     CGFloat newXPosition = _crosshair.position.x + (acceleration.x + [[[NSUserDefaults standardUserDefaults] objectForKey:@"calibrationX"] floatValue]) * 1500 * delta;
     CGFloat newYPosition = _crosshair.position.y + (acceleration.y + [[[NSUserDefaults standardUserDefaults] objectForKey:@"calibrationY"] floatValue]) * 1500 * delta;
     
-    newXPosition = clampf(newXPosition, 0, bbSize.width);
-    newYPosition = clampf(newYPosition, 0, bbSize.height);
-    _crosshair.position = CGPointMake(newXPosition, newYPosition);
+    newXPosition = clampf(newXPosition, _ballPhysicsNode.positionInPoints.x-45, _ballPhysicsNode.positionInPoints.x+45);
+    newYPosition = clampf(newYPosition, _ballPhysicsNode.positionInPoints.x-45, _ballPhysicsNode.positionInPoints.y+45);
+    _crosshair.positionInPoints = CGPointMake(newXPosition, newYPosition);
     
     // finds the angle of the crosshair to the ball and moves the pointer accordingly
     float angle = ccpAngle(ccp(0,1),ccpSub(_crosshair.position, _ball.positionInPoints));
@@ -373,7 +375,6 @@
 -(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard
 {
     GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
-    
     gcViewController.gameCenterDelegate = self;
     
     if (shouldShowLeaderboard) {
