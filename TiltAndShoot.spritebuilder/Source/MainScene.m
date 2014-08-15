@@ -54,8 +54,6 @@
     CCColor *color3;
     CCColor *color4;
     CCColor *color5;
-    
-    CCPhysicsNode *_ballPhysicsNode;
 }
 
 - (void)onEnter {
@@ -226,6 +224,7 @@
         hit.position = _ball.positionInPoints;
         [_ball.parent addChild:hit z:-1];
     } else {
+        /*
         // load particle effect
         CCParticleSystem *missed = (CCParticleSystem *)[CCBReader load:@"ShootParticle"];
         // make the particle effect clean itself up, once it is completed
@@ -233,6 +232,7 @@
         // place the particle effect on the crosshair's position
         missed.position = _crosshair.positionInPoints;
         [_crosshair addChild:missed z:0];
+         */
     }
     
     if(score >= 15 && score % 5 == 0 && !starActive) {
@@ -250,9 +250,22 @@
     CGFloat newXPosition = _crosshair.position.x + (acceleration.x + [[[NSUserDefaults standardUserDefaults] objectForKey:@"calibrationX"] floatValue]) * 1500 * delta;
     CGFloat newYPosition = _crosshair.position.y + (acceleration.y + [[[NSUserDefaults standardUserDefaults] objectForKey:@"calibrationY"] floatValue]) * 1500 * delta;
     
-    newXPosition = clampf(newXPosition, _ballPhysicsNode.positionInPoints.x-45, _ballPhysicsNode.positionInPoints.x+45);
-    newYPosition = clampf(newYPosition, _ballPhysicsNode.positionInPoints.x-45, _ballPhysicsNode.positionInPoints.y+45);
-    _crosshair.positionInPoints = CGPointMake(newXPosition, newYPosition);
+    //Keep the crosshair within the raidus of the ball
+    newXPosition = clampf(newXPosition, _ball.positionInPoints.x - 30, _ball.positionInPoints.x + 30);
+    newYPosition = clampf(newYPosition, _ball.positionInPoints.y - 30, _ball.positionInPoints.y + 30);
+    CGPoint cross1 = CGPointMake(newXPosition, newYPosition);
+    CGPoint distV = ccpNormalize(ccpSub(cross1,_ball.positionInPoints));
+
+    float dist1 = ccpLength(ccpSub(cross1, _ball.positionInPoints));
+    float dist2 = ccpLength(ccpMult(distV, 30));
+    
+    if(dist2 < dist1) {
+        _crosshair.positionInPoints = ccpAdd(_ball.positionInPoints, ccpMult(distV, 30));
+    } else {
+        newXPosition = clampf(newXPosition, _ball.positionInPoints.x - 30, _ball.positionInPoints.x + 30);
+        newYPosition = clampf(newYPosition, _ball.positionInPoints.y - 30, _ball.positionInPoints.y + 30);
+        _crosshair.positionInPoints = CGPointMake(newXPosition, newYPosition);
+    }
     
     // finds the angle of the crosshair to the ball and moves the pointer accordingly
     float angle = ccpAngle(ccp(0,1),ccpSub(_crosshair.position, _ball.positionInPoints));
