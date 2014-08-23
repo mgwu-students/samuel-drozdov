@@ -32,8 +32,9 @@
 
 -(void) authenticateLocalPlayer {
     
-    GKLocalPlayer* localPlayer =
-    [GKLocalPlayer localPlayer];
+    GKLocalPlayer* localPlayer = [GKLocalPlayer localPlayer];
+    
+    __weak GKLocalPlayer *blockLocalPlayer = localPlayer;
     
     localPlayer.authenticateHandler =
     ^(UIViewController *viewController,
@@ -44,7 +45,7 @@
         if ([CCDirector sharedDirector].isPaused)
             [[CCDirector sharedDirector] resume];
         
-        if (localPlayer.authenticated) {
+        if (blockLocalPlayer.authenticated) {
             _gameCenterFeaturesEnabled = YES;
         } else if(viewController) {
             [[CCDirector sharedDirector] pause];

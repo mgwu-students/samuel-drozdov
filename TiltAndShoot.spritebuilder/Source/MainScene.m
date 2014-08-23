@@ -40,6 +40,7 @@
     bool start;
     CCLabelTTF *_startLabel;
     bool starActive;
+    CCLabelTTF *_rank;
     
     CCSprite *_endGameButton;
     CCNodeColor *_stupidEndCover;
@@ -58,6 +59,7 @@
 
 - (void)onEnter {
     [super onEnter];
+    [self getLeaderboardScore];
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:0] forKey:@"Start"];
     [_motionManager startAccelerometerUpdates];
 }
@@ -402,9 +404,25 @@
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:gcViewController animated:YES completion:nil];
     
 }
+
 -(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
     [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)getLeaderboardScore
+{
+    GKLeaderboard *leaderboardRequest = [[GKLeaderboard alloc] init];
+    leaderboardRequest.identifier = gkLeaderboard;
+    [leaderboardRequest loadScoresWithCompletionHandler:^(NSArray *scores, NSError *error) {
+        if (error) {
+            NSLog(@"%@", error);
+        } else if (scores) {
+            GKScore *localPlayerScore = leaderboardRequest.localPlayerScore;
+            _rank.string = [NSString stringWithFormat:@"Global Rank:%d",localPlayerScore.rank];
+            _rank.visible = true;
+        }
+    }];
 }
 
 
